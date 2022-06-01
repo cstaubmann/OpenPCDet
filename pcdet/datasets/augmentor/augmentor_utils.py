@@ -17,10 +17,10 @@ def random_flip_along_x(gt_boxes, points):
         gt_boxes[:, 1] = -gt_boxes[:, 1]
         gt_boxes[:, 6] = -gt_boxes[:, 6]
         points[:, 1] = -points[:, 1]
-        
+
         if gt_boxes.shape[1] > 7:
             gt_boxes[:, 8] = -gt_boxes[:, 8]
-    
+
     return gt_boxes, points
 
 
@@ -81,6 +81,35 @@ def global_scaling(gt_boxes, points, scale_range):
     return gt_boxes, points
 
 
+def global_translation(gt_boxes, points, noise_translate_std):
+    """
+    Apply global translation to gt_boxes and points.
+    Args:
+        gt_boxes: (N, 7), [x, y, z, dx, dy, dz, heading]
+        points: (M, 3 + C),
+        noise_translate_std: [std_x, std_y, std_z]
+    Returns:
+    """
+    if not isinstance(noise_translate_std, (list, tuple, np.ndarray)):
+        noise_translate_std = np.array(
+            [noise_translate_std, noise_translate_std, noise_translate_std]
+        )
+    if all([e == 0 for e in noise_translate_std]):
+        return gt_boxes, points
+    noise_translate = np.array(
+        [
+            np.random.normal(0, noise_translate_std[0], 1),
+            np.random.normal(0, noise_translate_std[1], 1),
+            np.random.normal(0, noise_translate_std[2], 1),
+        ]
+    ).T
+
+    points[:, :3] += noise_translate
+    gt_boxes[:, :3] += noise_translate
+
+    return gt_boxes, points
+
+
 def random_image_flip_horizontal(image, depth_map, gt_boxes, calib):
     """
     Performs random horizontal flip augmentation
@@ -101,7 +130,7 @@ def random_image_flip_horizontal(image, depth_map, gt_boxes, calib):
         # Flip images
         aug_image = np.fliplr(image)
         aug_depth_map = np.fliplr(depth_map)
-        
+
         # Flip 3D gt_boxes by flipping the centroids in image space
         aug_gt_boxes = copy.copy(gt_boxes)
         locations = aug_gt_boxes[:, :3]
@@ -133,10 +162,10 @@ def random_translation_along_x(gt_boxes, points, offset_std):
 
     points[:, 0] += offset
     gt_boxes[:, 0] += offset
-    
+
     # if gt_boxes.shape[1] > 7:
     #     gt_boxes[:, 7] += offset
-    
+
     return gt_boxes, points
 
 
@@ -152,10 +181,10 @@ def random_translation_along_y(gt_boxes, points, offset_std):
 
     points[:, 1] += offset
     gt_boxes[:, 1] += offset
-    
+
     # if gt_boxes.shape[1] > 8:
     #     gt_boxes[:, 8] += offset
-    
+
     return gt_boxes, points
 
 
@@ -168,7 +197,7 @@ def random_translation_along_z(gt_boxes, points, offset_std):
     Returns:
     """
     offset = np.random.normal(0, offset_std, 1)
-    
+
     points[:, 2] += offset
     gt_boxes[:, 2] += offset
 
@@ -189,12 +218,12 @@ def random_local_translation_along_x(gt_boxes, points, offset_range):
         # augs[f'object_{idx}'] = offset
         points_in_box, mask = get_points_in_box(points, box)
         points[mask, 0] += offset
-        
+
         gt_boxes[idx, 0] += offset
-    
+
         # if gt_boxes.shape[1] > 7:
         #     gt_boxes[idx, 7] += offset
-    
+
     return gt_boxes, points
 
 
@@ -212,12 +241,12 @@ def random_local_translation_along_y(gt_boxes, points, offset_range):
         # augs[f'object_{idx}'] = offset
         points_in_box, mask = get_points_in_box(points, box)
         points[mask, 1] += offset
-        
+
         gt_boxes[idx, 1] += offset
-    
+
         # if gt_boxes.shape[1] > 8:
         #     gt_boxes[idx, 8] += offset
-    
+
     return gt_boxes, points
 
 
@@ -235,9 +264,9 @@ def random_local_translation_along_z(gt_boxes, points, offset_range):
         # augs[f'object_{idx}'] = offset
         points_in_box, mask = get_points_in_box(points, box)
         points[mask, 2] += offset
-        
+
         gt_boxes[idx, 2] += offset
-    
+
     return gt_boxes, points
 
 
@@ -252,7 +281,7 @@ def global_frustum_dropout_top(gt_boxes, points, intensity_range):
     intensity = np.random.uniform(intensity_range[0], intensity_range[1])
     # threshold = max - length * uniform(0 ~ 0.2)
     threshold = np.max(points[:, 2]) - intensity * (np.max(points[:, 2]) - np.min(points[:, 2]))
-    
+
     points = points[points[:, 2] < threshold]
     gt_boxes = gt_boxes[gt_boxes[:, 2] < threshold]
     return gt_boxes, points
@@ -267,11 +296,11 @@ def global_frustum_dropout_bottom(gt_boxes, points, intensity_range):
     Returns:
     """
     intensity = np.random.uniform(intensity_range[0], intensity_range[1])
-    
+
     threshold = np.min(points[:, 2]) + intensity * (np.max(points[:, 2]) - np.min(points[:, 2]))
     points = points[points[:, 2] > threshold]
     gt_boxes = gt_boxes[gt_boxes[:, 2] > threshold]
-    
+
     return gt_boxes, points
 
 
@@ -284,11 +313,11 @@ def global_frustum_dropout_left(gt_boxes, points, intensity_range):
     Returns:
     """
     intensity = np.random.uniform(intensity_range[0], intensity_range[1])
-    
+
     threshold = np.max(points[:, 1]) - intensity * (np.max(points[:, 1]) - np.min(points[:, 1]))
     points = points[points[:, 1] < threshold]
     gt_boxes = gt_boxes[gt_boxes[:, 1] < threshold]
-    
+
     return gt_boxes, points
 
 
@@ -301,11 +330,11 @@ def global_frustum_dropout_right(gt_boxes, points, intensity_range):
     Returns:
     """
     intensity = np.random.uniform(intensity_range[0], intensity_range[1])
-    
+
     threshold = np.min(points[:, 1]) + intensity * (np.max(points[:, 1]) - np.min(points[:, 1]))
     points = points[points[:, 1] > threshold]
     gt_boxes = gt_boxes[gt_boxes[:, 1] > threshold]
-    
+
     return gt_boxes, points
 
 
@@ -319,26 +348,26 @@ def local_scaling(gt_boxes, points, scale_range):
     """
     if scale_range[1] - scale_range[0] < 1e-3:
         return gt_boxes, points
-    
+
     # augs = {}
     for idx, box in enumerate(gt_boxes):
         noise_scale = np.random.uniform(scale_range[0], scale_range[1])
         # augs[f'object_{idx}'] = noise_scale
         points_in_box, mask = get_points_in_box(points, box)
-        
+
         # tranlation to axis center
         points[mask, 0] -= box[0]
         points[mask, 1] -= box[1]
         points[mask, 2] -= box[2]
-        
+
         # apply scaling
         points[mask, :3] *= noise_scale
-        
+
         # tranlation back to original position
         points[mask, 0] += box[0]
         points[mask, 1] += box[1]
         points[mask, 2] += box[2]
-        
+
         gt_boxes[idx, 3:6] *= noise_scale
     return gt_boxes, points
 
@@ -356,11 +385,11 @@ def local_rotation(gt_boxes, points, rot_range):
         noise_rotation = np.random.uniform(rot_range[0], rot_range[1])
         # augs[f'object_{idx}'] = noise_rotation
         points_in_box, mask = get_points_in_box(points, box)
-        
+
         centroid_x = box[0]
         centroid_y = box[1]
         centroid_z = box[2]
-        
+
         # tranlation to axis center
         points[mask, 0] -= centroid_x
         points[mask, 1] -= centroid_y
@@ -368,11 +397,11 @@ def local_rotation(gt_boxes, points, rot_range):
         box[0] -= centroid_x
         box[1] -= centroid_y
         box[2] -= centroid_z
-        
+
         # apply rotation
         points[mask, :] = common_utils.rotate_points_along_z(points[np.newaxis, mask, :], np.array([noise_rotation]))[0]
         box[0:3] = common_utils.rotate_points_along_z(box[np.newaxis, np.newaxis, 0:3], np.array([noise_rotation]))[0][0]
-        
+
         # tranlation back to original position
         points[mask, 0] += centroid_x
         points[mask, 1] += centroid_y
@@ -380,14 +409,14 @@ def local_rotation(gt_boxes, points, rot_range):
         box[0] += centroid_x
         box[1] += centroid_y
         box[2] += centroid_z
-        
+
         gt_boxes[idx, 6] += noise_rotation
         if gt_boxes.shape[1] > 8:
             gt_boxes[idx, 7:9] = common_utils.rotate_points_along_z(
                 np.hstack((gt_boxes[idx, 7:9], np.zeros((gt_boxes.shape[0], 1))))[np.newaxis, :, :],
                 np.array([noise_rotation])
             )[0][:, 0:2]
-    
+
     return gt_boxes, points
 
 
@@ -401,13 +430,13 @@ def local_frustum_dropout_top(gt_boxes, points, intensity_range):
     """
     for idx, box in enumerate(gt_boxes):
         x, y, z, dx, dy, dz = box[0], box[1], box[2], box[3], box[4], box[5]
-        
+
         intensity = np.random.uniform(intensity_range[0], intensity_range[1])
         points_in_box, mask = get_points_in_box(points, box)
         threshold = (z + dz / 2) - intensity * dz
-        
+
         points = points[np.logical_not(np.logical_and(mask, points[:, 2] >= threshold))]
-    
+
     return gt_boxes, points
 
 
@@ -421,13 +450,13 @@ def local_frustum_dropout_bottom(gt_boxes, points, intensity_range):
     """
     for idx, box in enumerate(gt_boxes):
         x, y, z, dx, dy, dz = box[0], box[1], box[2], box[3], box[4], box[5]
-        
+
         intensity = np.random.uniform(intensity_range[0], intensity_range[1])
         points_in_box, mask = get_points_in_box(points, box)
         threshold = (z - dz / 2) + intensity * dz
-        
+
         points = points[np.logical_not(np.logical_and(mask, points[:, 2] <= threshold))]
-    
+
     return gt_boxes, points
 
 
@@ -441,13 +470,13 @@ def local_frustum_dropout_left(gt_boxes, points, intensity_range):
     """
     for idx, box in enumerate(gt_boxes):
         x, y, z, dx, dy, dz = box[0], box[1], box[2], box[3], box[4], box[5]
-        
+
         intensity = np.random.uniform(intensity_range[0], intensity_range[1])
         points_in_box, mask = get_points_in_box(points, box)
         threshold = (y + dy / 2) - intensity * dy
-        
+
         points = points[np.logical_not(np.logical_and(mask, points[:, 1] >= threshold))]
-    
+
     return gt_boxes, points
 
 
@@ -461,13 +490,13 @@ def local_frustum_dropout_right(gt_boxes, points, intensity_range):
     """
     for idx, box in enumerate(gt_boxes):
         x, y, z, dx, dy, dz = box[0], box[1], box[2], box[3], box[4], box[5]
-        
+
         intensity = np.random.uniform(intensity_range[0], intensity_range[1])
         points_in_box, mask = get_points_in_box(points, box)
         threshold = (y - dy / 2) + intensity * dy
-        
+
         points = points[np.logical_not(np.logical_and(mask, points[:, 1] <= threshold))]
-    
+
     return gt_boxes, points
 
 
@@ -476,18 +505,18 @@ def get_points_in_box(points, gt_box):
     cx, cy, cz = gt_box[0], gt_box[1], gt_box[2]
     dx, dy, dz, rz = gt_box[3], gt_box[4], gt_box[5], gt_box[6]
     shift_x, shift_y, shift_z = x - cx, y - cy, z - cz
-    
+
     MARGIN = 1e-1
     cosa, sina = math.cos(-rz), math.sin(-rz)
     local_x = shift_x * cosa + shift_y * (-sina)
     local_y = shift_x * sina + shift_y * cosa
-    
-    mask = np.logical_and(abs(shift_z) <= dz / 2.0, 
-                          np.logical_and(abs(local_x) <= dx / 2.0 + MARGIN, 
+
+    mask = np.logical_and(abs(shift_z) <= dz / 2.0,
+                          np.logical_and(abs(local_x) <= dx / 2.0 + MARGIN,
                                          abs(local_y) <= dy / 2.0 + MARGIN))
-    
+
     points = points[mask]
-    
+
     return points, mask
 
 
@@ -501,7 +530,7 @@ def get_pyramids(boxes):
         [0, 4, 7, 3]
     ])
     boxes_corners = box_utils.boxes_to_corners_3d(boxes).reshape(-1, 24)
-    
+
     pyramid_list = []
     for order in pyramid_orders:
         # frustum polygon: 5 corners, 5 surfaces
@@ -558,20 +587,20 @@ def local_pyramid_sparsify(gt_boxes, points, prob, max_num_pts, pyramids=None):
         sparsify_box_mask = np.random.uniform(0, 1, (pyramids.shape[0])) <= sparsity_prob
         sparsify_pyramid_mask = (np.tile(sparsify_box_mask[:, None], [1, 6]) * sparsify_pyramid_one_hot) > 0
         # print(sparsify_box_mask)
-        
+
         pyramid_sampled = pyramids[sparsify_pyramid_mask]  # (-1,6,5,3)[(num_sample,6)]
         # print(pyramid_sampled.shape)
         pyramid_sampled_point_masks = points_in_pyramids_mask(points, pyramid_sampled)
         pyramid_sampled_points_num = pyramid_sampled_point_masks.sum(0)  # the number of points in each surface pyramid
         valid_pyramid_sampled_mask = pyramid_sampled_points_num > sparsity_num  # only much than sparsity_num should be sparse
-        
+
         sparsify_pyramids = pyramid_sampled[valid_pyramid_sampled_mask]
         if sparsify_pyramids.shape[0] > 0:
             point_masks = pyramid_sampled_point_masks[:, valid_pyramid_sampled_mask]
             remain_points = points[
                 np.logical_not(point_masks.any(-1))]  # points which outside the down sampling pyramid
             to_sparsify_points = [points[point_masks[:, i]] for i in range(point_masks.shape[1])]
-            
+
             sparsified_points = []
             for sample in to_sparsify_points:
                 sampled_indices = np.random.choice(sample.shape[0], size=sparsity_num, replace=False)
@@ -590,23 +619,23 @@ def local_pyramid_swap(gt_boxes, points, prob, max_num_pts, pyramids=None):
         betas = ((points[:, 0:3] - pyramid[3:6]) * vector_1).sum(-1) / np.power(vector_1, 2).sum()
         gammas = ((points[:, 0:3] - surface_center) * vector_2).sum(-1) / np.power(vector_2, 2).sum()
         return [alphas, betas, gammas]
-    
+
     def recover_points_by_ratio(points_ratio, pyramid):
         alphas, betas, gammas = points_ratio
         surface_center = (pyramid[3:6] + pyramid[6:9] + pyramid[9:12] + pyramid[12:]) / 4.0
         vector_0, vector_1, vector_2 = pyramid[6:9] - pyramid[3:6], pyramid[12:] - pyramid[3:6], pyramid[0:3] - surface_center
         points = (alphas[:, None] * vector_0 + betas[:, None] * vector_1) + pyramid[3:6] + gammas[:, None] * vector_2
         return points
-    
+
     def recover_points_intensity_by_ratio(points_intensity_ratio, max_intensity, min_intensity):
         return points_intensity_ratio * (max_intensity - min_intensity) + min_intensity
-    
+
     # swap partition
     if pyramids is None:
         pyramids = get_pyramids(gt_boxes).reshape([-1, 6, 5, 3])  # each six surface of boxes: [num_boxes, 6, 15=3*5]
     swap_prob, num_thres = prob, max_num_pts
     swap_pyramid_mask = np.random.uniform(0, 1, (pyramids.shape[0])) <= swap_prob
-    
+
     if swap_pyramid_mask.sum() > 0:
         point_masks = points_in_pyramids_mask(points, pyramids)
         point_nums = point_masks.sum(0).reshape(pyramids.shape[0], -1)  # [N, 6]
@@ -622,7 +651,7 @@ def local_pyramid_swap(gt_boxes, points, prob, max_num_pts, pyramids=None):
                                         enumerate(swap_pyramid_mask)]
             selected_pyramids_mask = selected_pyramids * one_hot(selected_pyramid_indices, num_class=6) == 1
             to_swap_pyramids = pyramids[selected_pyramids_mask]
-            
+
             # get swapped pyramids
             index_i, index_j = np.nonzero(selected_pyramids_mask)
             non_zero_pyramids_mask[selected_pyramids_mask] = False
@@ -632,19 +661,19 @@ def local_pyramid_swap(gt_boxes, points, prob, max_num_pts, pyramids=None):
             swapped_indicies = np.concatenate([swapped_index_i[:, None], index_j[:, None]], axis=1)
             swapped_pyramids = pyramids[
                 swapped_indicies[:, 0].astype(np.int32), swapped_indicies[:, 1].astype(np.int32)]
-            
+
             # concat to_swap&swapped pyramids
             swap_pyramids = np.concatenate([to_swap_pyramids, swapped_pyramids], axis=0)
             swap_point_masks = points_in_pyramids_mask(points, swap_pyramids)
             remain_points = points[np.logical_not(swap_point_masks.any(-1))]
-            
+
             # swap pyramids
             points_res = []
             num_swapped_pyramids = swapped_pyramids.shape[0]
             for i in range(num_swapped_pyramids):
                 to_swap_pyramid = to_swap_pyramids[i]
                 swapped_pyramid = swapped_pyramids[i]
-                
+
                 to_swap_points = points[swap_point_masks[:, i]]
                 swapped_points = points[swap_point_masks[:, i + num_swapped_pyramids]]
                 # for intensity transform
@@ -656,7 +685,7 @@ def local_pyramid_swap(gt_boxes, points, prob, max_num_pts, pyramids=None):
                                                  np.clip(
                                                      (swapped_points[:, -1:].max() - swapped_points[:, -1:].min()),
                                                      1e-6, 1)
-                
+
                 to_swap_points_ratio = get_points_ratio(to_swap_points, to_swap_pyramid.reshape(15))
                 swapped_points_ratio = get_points_ratio(swapped_points, swapped_pyramid.reshape(15))
                 new_to_swap_points = recover_points_by_ratio(swapped_points_ratio, to_swap_pyramid.reshape(15))
@@ -668,16 +697,16 @@ def local_pyramid_swap(gt_boxes, points, prob, max_num_pts, pyramids=None):
                 new_swapped_points_intensity = recover_points_intensity_by_ratio(
                     to_swap_points_intensity_ratio, swapped_points[:, -1:].max(),
                     swapped_points[:, -1:].min())
-                
+
                 # new_to_swap_points = np.concatenate([new_to_swap_points, swapped_points[:, -1:]], axis=1)
                 # new_swapped_points = np.concatenate([new_swapped_points, to_swap_points[:, -1:]], axis=1)
-                
+
                 new_to_swap_points = np.concatenate([new_to_swap_points, new_to_swap_points_intensity], axis=1)
                 new_swapped_points = np.concatenate([new_swapped_points, new_swapped_points_intensity], axis=1)
-                
+
                 points_res.append(new_to_swap_points)
                 points_res.append(new_swapped_points)
-            
+
             points_res = np.concatenate(points_res, axis=0)
             points = np.concatenate([remain_points, points_res], axis=0)
     return gt_boxes, points

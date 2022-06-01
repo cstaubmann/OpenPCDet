@@ -48,3 +48,18 @@ class CenterPoint(Detector3DTemplate):
             )
 
         return final_pred_dict, recall_dict
+
+
+class CenterPoints(CenterPoint):
+    def post_processing(self, batch_dict):
+        pred_dicts = batch_dict['pred_dicts']
+
+        recall_dict = {}
+        batch_size = batch_dict['batch_size']
+        for index in range(batch_size):
+            recall_dict = self.generate_recall_record(
+                box_preds=pred_dicts[index]['pred_boxes'] ,
+                recall_dict=recall_dict, batch_index=index, data_dict=batch_dict,
+                thresh_list= [0.3, 0.5, 0.7]
+            )
+        return pred_dicts, recall_dict

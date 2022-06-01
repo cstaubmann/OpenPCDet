@@ -122,7 +122,7 @@ class PointRCNNHead(RoIHeadTemplate):
             roi_center = rois[:, :, 0:3]
             pooled_features[:, :, :, 0:3] -= roi_center.unsqueeze(dim=2)
 
-            pooled_features = pooled_features.view(-1, pooled_features.shape[-2], pooled_features.shape[-1])
+            pooled_features = pooled_features.view(-1, pooled_features.shape[-2], pooled_features.shape[-1]).contiguous()
             pooled_features[:, :, 0:3] = common_utils.rotate_points_along_z(
                 pooled_features[:, :, 0:3], -rois.view(-1, rois.shape[-1])[:, 6]
             )

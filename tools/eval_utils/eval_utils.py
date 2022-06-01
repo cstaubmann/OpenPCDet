@@ -52,6 +52,11 @@ def eval_one_epoch(cfg, model, dataloader, epoch_id, logger, dist_test=False, sa
         progress_bar = tqdm.tqdm(total=len(dataloader), leave=True, desc='eval', dynamic_ncols=True)
     start_time = time.time()
     for i, batch_dict in enumerate(dataloader):
+
+        # add temperature for adpative radius learning
+        if cfg.OPTIMIZATION.get('USE_TEMPERATURE', False):
+            batch_dict.update({'temperature': cfg.OPTIMIZATION.DECAY_TEMPERATURE[-1]})
+
         load_data_to_gpu(batch_dict)
         with torch.no_grad():
             pred_dicts, ret_dict = model(batch_dict)

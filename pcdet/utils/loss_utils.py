@@ -384,3 +384,52 @@ class RegLossCenterNet(nn.Module):
             pred = _transpose_and_gather_feat(output, ind)
         loss = _reg_loss(pred, target, mask)
         return loss
+
+
+class CenterNetSmoothRegLoss(nn.Module):
+    """Regression loss for an output tensor
+      Arguments:
+        output (batch x dim x h x w)
+        mask (batch x max_objects)
+        ind (batch x max_objects)
+        target (batch x max_objects x dim)
+    """
+
+    def __init__(self):
+        super(CenterNetSmoothRegLoss, self).__init__()
+
+    def _smooth_reg_loss(self, regr, gt_regr, mask, sigma=3):
+        """ L1 regression loss
+          Arguments:
+            regr (batch x max_objects x dim)
+            gt_regr (batch x max_objects x dim)
+            mask (batch x max_objects)
+        """
+        num = mask.float().sum()
+        mask = mask.unsqueeze(2).expand_as(gt_regr).float()
+        isnotnan = (~ torch.isnan(gt_regr)).float()
+        mask *= isnotnan
+        regr = regr * mask
+        gt_regr = gt_regr * mask
+
+        abs_diff = torch.abs(regr - gt_regr)
+
+        abs_diff_lt_1 = torch.le(abs_diff, 1 / (sigma ** 2)).type_as(abs_diff)
+
+        loss = abs_diff_lt_1 * 0.5 * torch.pow(abs_diff * sigma, 2) + (
+                abs_diff - 0.5 / (sigma ** 2)
+        ) * (1.0 - abs_diff_lt_1)
+
+        loss = loss.transpose(2, 0).contiguous()
+
+        loss = torch.sum(loss, dim=2)
+        loss = torch.sum(loss, dim=1)
+
+        loss = loss / (num + 1e-4)
+        return loss
+
+    def forward(self, output, mask, ind, target, sin_loss):
+        assert sin_loss is False
+        pred = _transpose_and_gather_feat(output, ind)
+        loss = self._smooth_reg_loss(pred, target, mask)
+        return loss

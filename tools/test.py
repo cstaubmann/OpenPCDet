@@ -39,13 +39,22 @@ def parse_config():
     parser.add_argument('--ckpt_dir', type=str, default=None, help='specify a ckpt directory to be evaluated if needed')
     parser.add_argument('--save_to_file', action='store_true', default=False, help='')
 
+    parser.add_argument('--runs_on', type=str, default='server', choices=['server', 'cloud'],
+                        help='runs on server or cloud')
+    parser.add_argument('--for_test', action='store_true', default=False, help='test for the test split')
+
+    parser.add_argument('--random_seed', type=int, default=None, help='set fixed random seed')
+
     args = parser.parse_args()
 
     cfg_from_yaml_file(args.cfg_file, cfg)
     cfg.TAG = Path(args.cfg_file).stem
     cfg.EXP_GROUP_PATH = '/'.join(args.cfg_file.split('/')[1:-1])  # remove 'cfgs' and 'xxxx.yaml'
 
-    np.random.seed(1024)
+    if args.random_seed is not None:
+        np.random.seed(args.random_seed)
+    else:
+        np.random.seed(1024)
 
     if args.set_cfgs is not None:
         cfg_from_list(args.set_cfgs, cfg)
@@ -134,6 +143,13 @@ def repeat_eval_ckpt(model, test_loader, args, eval_output_dir, logger, ckpt_dir
 
 def main():
     args, cfg = parse_config()
+
+    if args.runs_on == 'cloud':
+        cfg.DATA_CONFIG.DATA_PATH = cfg.DATA_CONFIG.CLOUD_DATA_PATH
+
+    if args.for_test:
+        cfg.DATA_CONFIG.DATA_SPLIT['test'] = 'test'
+
     if args.launcher == 'none':
         dist_test = False
         total_gpus = 1
@@ -150,6 +166,10 @@ def main():
         args.batch_size = args.batch_size // total_gpus
 
     output_dir = cfg.ROOT_DIR / 'output' / cfg.EXP_GROUP_PATH / cfg.TAG / args.extra_tag
+
+    if args.runs_on == 'cloud':
+        output_dir = Path('/cache/output/') / cfg.TAG
+
     output_dir.mkdir(parents=True, exist_ok=True)
 
     eval_output_dir = output_dir / 'eval'
@@ -188,9 +208,16 @@ def main():
         dist=dist_test, workers=args.workers, logger=logger, training=False
     )
 
+    if args.runs_on == 'cloud':
+        cfg.MODEL.PRE_PATH = '/home/work/user-job-dir/PCDet/checkpoints/checkpoint_epoch_20.pth'
+    else:
+        cfg.MODEL.PRE_PATH = '.'
+
     model = build_network(model_cfg=cfg.MODEL, num_class=len(cfg.CLASS_NAMES), dataset=test_set)
     with torch.no_grad():
         if args.eval_all:
+            # extra added
+            # args.start_epoch = max(cfg.OPTIMIZATION.NUM_EPOCHS - 10, 0)  # Only evaluate the last 10 epochs
             repeat_eval_ckpt(model, test_loader, args, eval_output_dir, logger, ckpt_dir, dist_test=dist_test)
         else:
             eval_single_ckpt(model, test_loader, args, eval_output_dir, logger, epoch_id, dist_test=dist_test)

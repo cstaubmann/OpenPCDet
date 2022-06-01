@@ -268,6 +268,9 @@ class VoxelSetAbstraction(nn.Module):
                 )
                 bs_idxs = cur_keypoints.new_ones(cur_keypoints.shape[0]) * bs_idx
                 keypoints = torch.cat((bs_idxs[:, None], cur_keypoints), dim=1)
+
+            elif self.model_cfg.SAMPLE_METHOD == 'FastFPS':
+                raise NotImplementedError
             else:
                 raise NotImplementedError
 

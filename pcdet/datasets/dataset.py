@@ -130,6 +130,9 @@ class DatasetTemplate(torch_data.Dataset):
                     'gt_boxes_mask': gt_boxes_mask
                 }
             )
+            if len(data_dict['gt_boxes']) == 0:
+                new_index = np.random.randint(self.__len__())
+                return self.__getitem__(new_index)
 
         if data_dict.get('gt_boxes', None) is not None:
             selected = common_utils.keep_arrays_by_name(data_dict['gt_names'], self.class_names)
@@ -160,9 +163,27 @@ class DatasetTemplate(torch_data.Dataset):
     @staticmethod
     def collate_batch(batch_list, _unused=False):
         data_dict = defaultdict(list)
+        use_double_flip_test = False
         for cur_sample in batch_list:
-            for key, val in cur_sample.items():
-                data_dict[key].append(val)
+            # common batch dict
+            if isinstance(cur_sample, dict):
+                for key, val in cur_sample.items():
+                    data_dict[key].append(val)
+            # double flip test
+            elif isinstance(cur_sample, tuple):
+                use_double_flip_test = True
+                i_dict, y_dict, x_dict, d_dict = cur_sample
+                for key in i_dict.keys():
+                    # save only one copy of annotations
+                    if key not in ['gt_boxes', 'frame_id', 'metadata']:
+                        data_dict[key].append(i_dict[key])
+                        data_dict[key].append(y_dict[key])
+                        data_dict[key].append(x_dict[key])
+                        data_dict[key].append(d_dict[key])
+                    else:
+                        data_dict[key].append(i_dict[key])
+            else:
+                raise Exception('batch samples must be dict or tuple (for double flip test)')
         batch_size = len(batch_list)
         ret = {}
 
@@ -225,5 +246,5 @@ class DatasetTemplate(torch_data.Dataset):
                 print('Error in collate_batch: key=%s' % key)
                 raise TypeError
 
-        ret['batch_size'] = batch_size
+        ret['batch_size'] = batch_size * 4 if use_double_flip_test else batch_size
         return ret

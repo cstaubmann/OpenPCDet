@@ -8,7 +8,9 @@ from .second_net_iou import SECONDNetIoU
 from .caddn import CaDDN
 from .voxel_rcnn import VoxelRCNN
 from .centerpoint import CenterPoint
+from .centerpoint import CenterPoints
 from .pv_rcnn_plusplus import PVRCNNPlusPlus
+from .semi_second import SemiSECOND, SemiSECONDIoU
 
 __all__ = {
     'Detector3DTemplate': Detector3DTemplate,
@@ -21,7 +23,10 @@ __all__ = {
     'CaDDN': CaDDN,
     'VoxelRCNN': VoxelRCNN,
     'CenterPoint': CenterPoint,
-    'PVRCNNPlusPlus': PVRCNNPlusPlus
+    'CenterPoints': CenterPoints,
+    'PVRCNNPlusPlus': PVRCNNPlusPlus,
+    'SemiSECOND': SemiSECOND,
+    'SemiSECONDIoU': SemiSECONDIoU,
 }
 
 

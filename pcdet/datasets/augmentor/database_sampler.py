@@ -19,9 +19,9 @@ class DataBaseSampler(object):
         self.db_infos = {}
         for class_name in class_names:
             self.db_infos[class_name] = []
-            
+
         self.use_shared_memory = sampler_cfg.get('USE_SHARED_MEMORY', False)
-        
+
         for db_info_path in sampler_cfg.DB_INFO_PATH:
             db_info_path = self.root_path.resolve() / db_info_path
             with open(str(db_info_path), 'rb') as f:
@@ -30,7 +30,7 @@ class DataBaseSampler(object):
 
         for func_name, val in sampler_cfg.PREPARE.items():
             self.db_infos = getattr(self, func_name)(self.db_infos, val)
-        
+
         self.gt_database_data_key = self.load_db_to_shared_memory() if self.use_shared_memory else None
 
         self.sample_groups = {}
@@ -79,7 +79,7 @@ class DataBaseSampler(object):
         if cur_rank % num_gpus == 0 and not os.path.exists(f"/dev/shm/{sa_key}"):
             gt_database_data = np.load(db_data_path)
             common_utils.sa_create(f"shm://{sa_key}", gt_database_data)
-            
+
         if num_gpus > 1:
             dist.barrier()
         self.logger.info('GT database has been saved to shared memory')
@@ -170,7 +170,7 @@ class DataBaseSampler(object):
             gt_database_data = SharedArray.attach(f"shm://{self.gt_database_data_key}")
             gt_database_data.setflags(write=0)
         else:
-            gt_database_data = None 
+            gt_database_data = None
 
         for idx, info in enumerate(total_valid_sampled_dict):
             if self.use_shared_memory:
@@ -186,6 +186,19 @@ class DataBaseSampler(object):
             if self.sampler_cfg.get('USE_ROAD_PLANE', False):
                 # mv height
                 obj_points[:, 2] -= mv_height[idx]
+
+            """
+            We add this for point painting
+            """
+            if points.shape[1] > obj_points.shape[1]:
+                append_dim = points.shape[1] - obj_points.shape[1]
+                obj_label = self.class_names.index(info['name']) + 1 # +1 for bg
+                one_hot_feature = np.zeros((obj_points.shape[0], append_dim))
+                one_hot_feature[:, obj_label] = 1
+                obj_points = np.concatenate([obj_points, one_hot_feature], axis = 1)
+            """
+            end
+            """
 
             obj_points_list.append(obj_points)
 

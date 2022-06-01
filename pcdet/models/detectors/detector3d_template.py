@@ -268,6 +268,12 @@ class Detector3DTemplate(nn.Module):
                 final_labels = label_preds[selected]
                 final_boxes = box_preds[selected]
 
+                # added filtering boxes with size 0
+                zero_mask = (final_boxes[:, 3:6] != 0).all(1)
+                final_boxes = final_boxes[zero_mask]
+                final_labels = final_labels[zero_mask]
+                final_scores = final_scores[zero_mask]
+
             recall_dict = self.generate_recall_record(
                 box_preds=final_boxes if 'rois' not in batch_dict else src_box_preds,
                 recall_dict=recall_dict, batch_index=index, data_dict=batch_dict,
