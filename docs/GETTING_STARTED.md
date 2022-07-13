@@ -99,6 +99,44 @@ python -m pcdet.datasets.waymo.waymo_dataset --func create_waymo_infos \
 Note that you do not need to install `waymo-open-dataset` if you have already processed the data before and do not need to evaluate with official Waymo Metrics. 
 
 
+### CADC Dataset
+* Please download the official [CADC Dataset Devkit](https://github.com/mpitropov/cadc_devkit) dataset and run the download script. Make sure `labeled = True` in the download script to download labels as well. Add symlinks to the date folders within the data/cadc folder.
+
+```
+PCDet
+├── data
+│   ├── cadc
+│   │   │──ImageSets
+│   │   │──2018_03_06 & 2018_03_07 & 2019_02_27
+├── pcdet
+├── tools
+```
+
+* Generate the data infos by running the following command: 
+```python 
+python -m pcdet.datasets.cadc.cadc_dataset create_cadc_infos tools/cfgs/dataset_configs/cadc_dataset.yaml
+```
+
+* Train with a single GPU:
+```shell script
+python train.py --cfg_file cfgs/cadc_models/pointpillar.yaml --batch_size 6 --epochs 50
+```
+
+* View training results
+```
+tensorboard --logdir output/cadc_models/pointpillar/default/
+```
+
+
+* Test with a pretrained model: 
+```shell script
+python test.py --cfg_file cfgs/cadc_models/pointpillar.yaml --batch_size 4 --ckpt ../output/kitti_models/pointpillar_7728.pth
+```
+
+```
+python test.py --cfg_file cfgs/cadc_models/pointpillar.yaml --batch_size 6 --ckpt ../output/cadc_models/pointpillar/default/ckpt/checkpoint_epoch_50.pth
+```
+
 ### Lyft Dataset
 * Please download the official [Lyft Level5 perception dataset](https://level-5.global/data/perception) and 
 organize the downloaded files as follows: 
