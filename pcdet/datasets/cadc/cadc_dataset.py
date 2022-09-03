@@ -414,6 +414,22 @@ class CadcDataset(DatasetTemplate):
 
         eval_det_annos = copy.deepcopy(det_annos)
         eval_gt_annos = [copy.deepcopy(info['annos']) for info in self.cadc_infos]
+        eval_class_names = copy.deepcopy(class_names)
+
+        da_parameters = kwargs.pop('domain_adaptation', False)
+        if da_parameters:
+            self.logger.info("Mapping class names for CADC evaluation...")
+            # ? Mapping of predicted class names for DA
+            da_class_mapping = da_parameters.TARGET_CLASS_MAPPING
+            for det_anno in eval_det_annos[:]:
+                anno = det_anno['name']
+                if len(anno) != 0:
+                    for source_class, target_class in da_class_mapping.items():
+                        anno[anno == source_class] = target_class
+            # ? Corresponding class names for ONCE evaluation
+            eval_class_names = da_parameters.TARGET_CLASS_NAMES
+
+        print(f"Getting evaluation results for classes {eval_class_names}...\n")
 
         for i in range(len(eval_gt_annos)):
             boxes3d_lidar = np.array(eval_gt_annos[i]['gt_boxes_lidar'])
@@ -444,7 +460,7 @@ class CadcDataset(DatasetTemplate):
                 bbox.append(np.array([0,0,50,50]))
             eval_det_annos[i]['bbox'] = np.array(bbox)
 
-        ap_result_str, ap_dict = kitti_eval.get_official_eval_result(eval_gt_annos, eval_det_annos, class_names, 
+        ap_result_str, ap_dict = kitti_eval.get_official_eval_result(eval_gt_annos, eval_det_annos, eval_class_names,
             z_axis=2, z_center=0.5)
 
         return ap_result_str, ap_dict

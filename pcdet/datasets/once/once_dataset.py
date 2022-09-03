@@ -381,7 +381,23 @@ class ONCEDataset(DatasetTemplate):
 
         eval_det_annos = copy.deepcopy(det_annos)
         eval_gt_annos = [copy.deepcopy(info['annos']) for info in self.once_infos]
-        ap_result_str, ap_dict = get_evaluation_results(eval_gt_annos, eval_det_annos, class_names)
+        eval_class_names = copy.deepcopy(class_names)
+
+        da_parameters = kwargs.pop('domain_adaptation', False)
+        if da_parameters:
+            self.logger.info("Mapping class names for ONCE evaluation...")
+            # ? Mapping of predicted class names for DA
+            da_class_mapping = da_parameters.TARGET_CLASS_MAPPING
+            for det_anno in eval_det_annos[:]:
+                anno = det_anno['name']
+                if len(anno) != 0:
+                    for source_class, target_class in da_class_mapping.items():
+                        anno[anno == source_class] = target_class
+            # ? Corresponding class names for ONCE evaluation
+            eval_class_names = da_parameters.TARGET_CLASS_NAMES
+
+        self.logger.info(f"Getting evaluation results for classes {eval_class_names}...\n")
+        ap_result_str, ap_dict = get_evaluation_results(eval_gt_annos, eval_det_annos, eval_class_names)
 
         return ap_result_str, ap_dict
 

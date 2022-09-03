@@ -115,7 +115,9 @@ def eval_one_epoch(cfg, model, dataloader, epoch_id, logger, dist_test=False, sa
     result_str, result_dict = dataset.evaluation(
         det_annos, class_names,
         eval_metric=cfg.MODEL.POST_PROCESSING.EVAL_METRIC,
-        output_path=final_output_dir
+        output_path=final_output_dir,
+        # optional config parameters for DA
+        domain_adaptation=cfg.get('DOMAIN_ADAPTATION', False)
     )
 
     logger.info(result_str)
