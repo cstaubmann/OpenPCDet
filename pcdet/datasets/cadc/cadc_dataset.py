@@ -429,7 +429,7 @@ class CadcDataset(DatasetTemplate):
             # ? Corresponding class names for ONCE evaluation
             eval_class_names = da_parameters.TARGET_CLASS_NAMES
 
-        print(f"Getting evaluation results for classes {eval_class_names}...\n")
+        self.logger.info(f"Getting evaluation results for classes {eval_class_names}...\n")
 
         for i in range(len(eval_gt_annos)):
             boxes3d_lidar = np.array(eval_gt_annos[i]['gt_boxes_lidar'])
