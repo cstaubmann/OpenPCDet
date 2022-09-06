@@ -40,6 +40,8 @@ class CadcDataset(DatasetTemplate):
         split_dir = self.imagesets_path / 'ImageSets' / (self.split + '.txt')
         self.sample_id_list = [x.strip().split(' ') for x in open(split_dir).readlines()] if split_dir.exists() else None
 
+        self.da_parameters = dataset_cfg.get('DOMAIN_ADAPTATION', None)
+
         self.cadc_infos = []
         self.include_cadc_data(self.mode)
 
@@ -416,18 +418,16 @@ class CadcDataset(DatasetTemplate):
         eval_gt_annos = [copy.deepcopy(info['annos']) for info in self.cadc_infos]
         eval_class_names = copy.deepcopy(class_names)
 
-        da_parameters = kwargs.pop('domain_adaptation', False)
-        if da_parameters:
+        if self.da_parameters:
             self.logger.info("Mapping class names for CADC evaluation...")
             # ? Mapping of predicted class names for DA
-            da_class_mapping = da_parameters.TARGET_CLASS_MAPPING
             for det_anno in eval_det_annos[:]:
                 anno = det_anno['name']
                 if len(anno) != 0:
-                    for source_class, target_class in da_class_mapping.items():
+                    for source_class, target_class in self.da_parameters.TARGET_CLASS_MAPPING.items():
                         anno[anno == source_class] = target_class
-            # ? Corresponding class names for ONCE evaluation
-            eval_class_names = da_parameters.TARGET_CLASS_NAMES
+            # ? Corresponding class names for CADC evaluation
+            eval_class_names = self.da_parameters.TARGET_CLASS_NAMES
 
         self.logger.info(f"Getting evaluation results for classes {eval_class_names}...\n")
 

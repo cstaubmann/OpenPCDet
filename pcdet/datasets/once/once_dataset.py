@@ -34,6 +34,8 @@ class ONCEDataset(DatasetTemplate):
         self.cam_tags = ['top', 'top2', 'left_back', 'left_front', 'right_front', 'right_back', 'back']
         self.toolkits = Octopus(self.root_path)
 
+        self.da_parameters = dataset_cfg.get('DOMAIN_ADAPTATION', None)
+
         self.once_infos = []
         self.include_once_data(self.split)
 
@@ -383,18 +385,16 @@ class ONCEDataset(DatasetTemplate):
         eval_gt_annos = [copy.deepcopy(info['annos']) for info in self.once_infos]
         eval_class_names = copy.deepcopy(class_names)
 
-        da_parameters = kwargs.pop('domain_adaptation', False)
-        if da_parameters:
+        if self.da_parameters:
             self.logger.info("Mapping class names for ONCE evaluation...")
             # ? Mapping of predicted class names for DA
-            da_class_mapping = da_parameters.TARGET_CLASS_MAPPING
             for det_anno in eval_det_annos[:]:
                 anno = det_anno['name']
                 if len(anno) != 0:
-                    for source_class, target_class in da_class_mapping.items():
+                    for source_class, target_class in self.da_parameters.TARGET_CLASS_MAPPING.items():
                         anno[anno == source_class] = target_class
             # ? Corresponding class names for ONCE evaluation
-            eval_class_names = da_parameters.TARGET_CLASS_NAMES
+            eval_class_names = self.da_parameters.TARGET_CLASS_NAMES
 
         self.logger.info(f"Getting evaluation results for classes {eval_class_names}...\n")
         ap_result_str, ap_dict = get_evaluation_results(eval_gt_annos, eval_det_annos, eval_class_names)

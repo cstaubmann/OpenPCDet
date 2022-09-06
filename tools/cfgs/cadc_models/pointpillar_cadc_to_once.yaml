@@ -1,18 +1,17 @@
 CLASS_NAMES: ['Car', 'Pedestrian', 'Pickup_Truck']  # CADC classes
 
 
-DOMAIN_ADAPTATION:
-    TARGET_CLASS_NAMES: ['Car', 'Bus', 'Truck', 'Pedestrian', 'Cyclist']  # ONCE classes
-    TARGET_CLASS_MAPPING: {
-      Car: Vehicle,
-      Pedestrian: Pedestrian,
-      Pickup_Truck: Vehicle,
-    }
-
-
 DATA_CONFIG: 
     _BASE_CONFIG_: cfgs/dataset_configs/once_dataset.yaml
     POINT_CLOUD_RANGE: [-51.2, -51.2, -3, 51.2, 51.2, 3]  # Trained CADC point cloud range
+
+    DOMAIN_ADAPTATION:
+        TARGET_CLASS_NAMES: [ 'Car', 'Bus', 'Truck', 'Pedestrian', 'Cyclist' ]  # ONCE classes
+        TARGET_CLASS_MAPPING: {
+          Car: Vehicle,
+          Pedestrian: Pedestrian,
+          Pickup_Truck: Vehicle,
+        }
 
     DATA_PROCESSOR:
         - NAME: mask_points_and_boxes_outside_range
