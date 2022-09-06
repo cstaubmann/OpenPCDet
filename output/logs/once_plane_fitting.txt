@@ -1,0 +1,679 @@
+2022-09-05 17:46:49,595   INFO  -----------------Quick Demo of OpenPCDet-------------------------
+2022-09-05 17:46:49,597   INFO  Loading ONCE dataset
+2022-09-05 17:46:49,951   INFO  Total samples for ONCE dataset: 3321
+2022-09-05 17:46:49,961   INFO  Total number of samples: 	3321
+2022-09-05 17:46:51,639   INFO  ==> Loading parameters from checkpoint ../output/cfgs/once_models/sup_models/second/default/ckpt/checkpoint_epoch_80.pth to CPU
+2022-09-05 17:46:51,667   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+pya764bf9
+2022-09-05 17:46:51,674   INFO  ==> Done (loaded 163/163)
+2022-09-05 17:46:51,851   INFO  Dataset sample index:	0:	1616100800400
+2022-09-05 17:46:52,715   INFO  Plane equation: 0.0008x + -0.0058y + 1.0000z + 1.7322 = 0
+2022-09-05 17:46:52,773   INFO  Dataset sample index:	10:	1616100810399
+2022-09-05 17:46:53,537   INFO  Plane equation: 0.0059x + -0.0101y + 0.9999z + 1.7386 = 0
+2022-09-05 17:46:53,599   INFO  Dataset sample index:	20:	1616100820399
+2022-09-05 17:46:54,381   INFO  Plane equation: 0.0099x + 0.0019y + 0.9999z + 1.7460 = 0
+2022-09-05 17:46:54,475   INFO  Dataset sample index:	30:	1616100830400
+2022-09-05 17:46:55,316   INFO  Plane equation: 0.0037x + 0.0002y + 1.0000z + 1.7530 = 0
+2022-09-05 17:46:55,393   INFO  Dataset sample index:	40:	1616100840900
+2022-09-05 17:46:56,127   INFO  Plane equation: 0.0115x + -0.0081y + 0.9999z + 1.7421 = 0
+2022-09-05 17:46:56,195   INFO  Dataset sample index:	50:	1616100850899
+2022-09-05 17:46:56,992   INFO  Plane equation: 0.0070x + 0.0029y + 1.0000z + 1.7451 = 0
+2022-09-05 17:46:57,066   INFO  Dataset sample index:	60:	1616100861399
+2022-09-05 17:46:57,854   INFO  Plane equation: 0.0082x + -0.0080y + 0.9999z + 1.7436 = 0
+2022-09-05 17:46:57,931   INFO  Dataset sample index:	70:	1616100871401
+2022-09-05 17:46:58,715   INFO  Plane equation: 0.0082x + 0.0016y + 1.0000z + 1.7412 = 0
+2022-09-05 17:46:58,779   INFO  Dataset sample index:	80:	1616100881398
+2022-09-05 17:46:59,567   INFO  Plane equation: 0.0075x + -0.0001y + 1.0000z + 1.7365 = 0
+2022-09-05 17:46:59,640   INFO  Dataset sample index:	90:	1616100891400
+2022-09-05 17:47:00,417   INFO  Plane equation: 0.0083x + -0.0004y + 1.0000z + 1.7386 = 0
+2022-09-05 17:47:00,481   INFO  Dataset sample index:	100:	1616100901400
+2022-09-05 17:47:01,261   INFO  Plane equation: 0.0068x + -0.0005y + 1.0000z + 1.7339 = 0
+2022-09-05 17:47:01,332   INFO  Dataset sample index:	110:	1616100911899
+2022-09-05 17:47:02,110   INFO  Plane equation: 0.0094x + -0.0009y + 1.0000z + 1.7416 = 0
+2022-09-05 17:47:02,175   INFO  Dataset sample index:	120:	1616100922900
+2022-09-05 17:47:02,856   INFO  Plane equation: 0.0098x + -0.0033y + 0.9999z + 1.7567 = 0
+2022-09-05 17:47:02,922   INFO  Dataset sample index:	130:	1616100933400
+2022-09-05 17:47:03,673   INFO  Plane equation: 0.0115x + -0.0051y + 0.9999z + 1.7436 = 0
+2022-09-05 17:47:03,746   INFO  Dataset sample index:	140:	1616100944400
+2022-09-05 17:47:04,538   INFO  Plane equation: 0.0150x + -0.0037y + 0.9999z + 1.7426 = 0
+2022-09-05 17:47:04,610   INFO  Dataset sample index:	150:	1616100954901
+2022-09-05 17:47:05,410   INFO  Plane equation: 0.0101x + -0.0066y + 0.9999z + 1.7691 = 0
+2022-09-05 17:47:05,481   INFO  Dataset sample index:	160:	1616100964900
+2022-09-05 17:47:06,255   INFO  Plane equation: 0.0060x + -0.0001y + 1.0000z + 1.7473 = 0
+2022-09-05 17:47:06,336   INFO  Dataset sample index:	170:	1616100974900
+2022-09-05 17:47:07,107   INFO  Plane equation: -0.0067x + -0.0028y + 1.0000z + 1.7456 = 0
+2022-09-05 17:47:07,175   INFO  Dataset sample index:	180:	1616100997899
+2022-09-05 17:47:07,817   INFO  Plane equation: 0.9967x + -0.0098y + 0.0808z + 2.1580 = 0
+2022-09-05 17:47:07,871   INFO  Dataset sample index:	190:	1616101007899
+2022-09-05 17:47:08,488   INFO  Plane equation: 0.0072x + -0.0030y + 1.0000z + 1.7603 = 0
+2022-09-05 17:47:08,555   INFO  Dataset sample index:	200:	1616101017900
+2022-09-05 17:47:09,284   INFO  Plane equation: 0.0080x + -0.0008y + 1.0000z + 1.7568 = 0
+2022-09-05 17:47:09,355   INFO  Dataset sample index:	210:	1616101027900
+2022-09-05 17:47:10,088   INFO  Plane equation: 0.0063x + -0.0018y + 1.0000z + 1.7641 = 0
+2022-09-05 17:47:10,160   INFO  Dataset sample index:	220:	1616101037899
+2022-09-05 17:47:10,930   INFO  Plane equation: 0.0201x + 0.0027y + 0.9998z + 1.7773 = 0
+2022-09-05 17:47:11,008   INFO  Dataset sample index:	230:	1616101047900
+2022-09-05 17:47:11,744   INFO  Plane equation: 0.0329x + -0.0049y + 0.9994z + 1.6922 = 0
+2022-09-05 17:47:11,813   INFO  Dataset sample index:	240:	1616101057899
+2022-09-05 17:47:12,573   INFO  Plane equation: 0.0003x + -0.0034y + 1.0000z + 1.7594 = 0
+2022-09-05 17:47:12,655   INFO  Dataset sample index:	250:	1616101067899
+2022-09-05 17:47:13,424   INFO  Plane equation: 0.0071x + -0.0000y + 1.0000z + 1.7423 = 0
+2022-09-05 17:47:13,513   INFO  Dataset sample index:	260:	1616101078400
+2022-09-05 17:47:14,277   INFO  Plane equation: 0.0127x + -0.0018y + 0.9999z + 1.7503 = 0
+2022-09-05 17:47:14,350   INFO  Dataset sample index:	270:	1616101088400
+2022-09-05 17:47:15,129   INFO  Plane equation: 0.0146x + -0.0019y + 0.9999z + 1.7615 = 0
+2022-09-05 17:47:15,207   INFO  Dataset sample index:	280:	1616101098400
+2022-09-05 17:47:15,966   INFO  Plane equation: 0.0096x + 0.0042y + 0.9999z + 1.7425 = 0
+2022-09-05 17:47:16,046   INFO  Dataset sample index:	290:	1616101108400
+2022-09-05 17:47:16,803   INFO  Plane equation: 0.0128x + 0.0067y + 0.9999z + 1.7401 = 0
+2022-09-05 17:47:16,889   INFO  Dataset sample index:	300:	1616101118400
+2022-09-05 17:47:17,643   INFO  Plane equation: 0.0153x + 0.0059y + 0.9999z + 1.7399 = 0
+2022-09-05 17:47:17,732   INFO  Dataset sample index:	310:	1616101128400
+2022-09-05 17:47:18,528   INFO  Plane equation: 0.0150x + 0.0060y + 0.9999z + 1.7448 = 0
+2022-09-05 17:47:18,600   INFO  Dataset sample index:	320:	1616101138400
+2022-09-05 17:47:19,370   INFO  Plane equation: 0.0159x + 0.0059y + 0.9999z + 1.7381 = 0
+2022-09-05 17:47:19,447   INFO  Dataset sample index:	330:	1616101148400
+2022-09-05 17:47:20,214   INFO  Plane equation: 0.0145x + 0.0072y + 0.9999z + 1.7439 = 0
+2022-09-05 17:47:20,293   INFO  Dataset sample index:	340:	1616101158400
+2022-09-05 17:47:21,062   INFO  Plane equation: 0.0171x + -0.0128y + 0.9998z + 1.7370 = 0
+2022-09-05 17:47:21,138   INFO  Dataset sample index:	350:	1616101168400
+2022-09-05 17:47:21,857   INFO  Plane equation: 0.0150x + -0.0086y + 0.9998z + 1.7264 = 0
+2022-09-05 17:47:21,930   INFO  Dataset sample index:	360:	1616101178400
+2022-09-05 17:47:22,713   INFO  Plane equation: 0.0078x + 0.0002y + 1.0000z + 1.7340 = 0
+2022-09-05 17:47:22,793   INFO  Dataset sample index:	370:	1616101189400
+2022-09-05 17:47:23,512   INFO  Plane equation: -0.0021x + -0.0221y + 0.9998z + 1.6960 = 0
+2022-09-05 17:47:23,590   INFO  Dataset sample index:	380:	1616101199399
+2022-09-05 17:47:24,372   INFO  Plane equation: 0.9999x + 0.0007y + -0.0134z + -2.9516 = 0
+2022-09-05 17:47:24,456   INFO  Dataset sample index:	390:	1616101209401
+2022-09-05 17:47:25,252   INFO  Plane equation: 0.9921x + 0.0497y + -0.1149z + -4.1886 = 0
+2022-09-05 17:47:25,334   INFO  Dataset sample index:	400:	1616101220400
+2022-09-05 17:47:26,089   INFO  Plane equation: 0.0006x + -0.0008y + 1.0000z + 1.7287 = 0
+2022-09-05 17:47:26,157   INFO  Dataset sample index:	410:	1616101230399
+2022-09-05 17:47:26,910   INFO  Plane equation: -0.0063x + 0.0509y + 0.9987z + 0.2575 = 0
+2022-09-05 17:47:26,979   INFO  Dataset sample index:	420:	1616101240400
+2022-09-05 17:47:27,730   INFO  Plane equation: 0.0064x + 0.0042y + 1.0000z + 1.7613 = 0
+2022-09-05 17:47:27,800   INFO  Dataset sample index:	430:	1616101250400
+2022-09-05 17:47:28,551   INFO  Plane equation: 0.1015x + 0.0059y + 0.9948z + 2.0521 = 0
+2022-09-05 17:47:28,616   INFO  Dataset sample index:	440:	1616101260899
+2022-09-05 17:47:29,363   INFO  Plane equation: 0.0149x + 0.0033y + 0.9999z + 1.5356 = 0
+2022-09-05 17:47:29,431   INFO  Dataset sample index:	450:	1616101270900
+2022-09-05 17:47:30,175   INFO  Plane equation: 0.0090x + -0.0082y + 0.9999z + 1.6971 = 0
+2022-09-05 17:47:30,245   INFO  Dataset sample index:	460:	1616101280900
+2022-09-05 17:47:30,989   INFO  Plane equation: 0.0258x + -0.0002y + 0.9997z + 1.6045 = 0
+2022-09-05 17:47:31,054   INFO  Dataset sample index:	470:	1616101290900
+2022-09-05 17:47:31,798   INFO  Plane equation: 0.0090x + 0.0006y + 1.0000z + 1.7332 = 0
+2022-09-05 17:47:31,864   INFO  Dataset sample index:	480:	1616101300901
+2022-09-05 17:47:32,525   INFO  Plane equation: 0.0001x + -0.0072y + 1.0000z + 1.7304 = 0
+2022-09-05 17:47:32,593   INFO  Dataset sample index:	490:	1616101310900
+2022-09-05 17:47:33,344   INFO  Plane equation: 0.9994x + -0.0329y + 0.0100z + -3.6330 = 0
+2022-09-05 17:47:33,410   INFO  Dataset sample index:	500:	1616101320899
+2022-09-05 17:47:34,190   INFO  Plane equation: 0.0037x + -0.0055y + 1.0000z + 1.7344 = 0
+2022-09-05 17:47:34,263   INFO  Dataset sample index:	510:	1616101330900
+2022-09-05 17:47:35,031   INFO  Plane equation: 0.0060x + -0.0014y + 1.0000z + 1.7515 = 0
+2022-09-05 17:47:35,106   INFO  Dataset sample index:	520:	1616101340900
+2022-09-05 17:47:35,865   INFO  Plane equation: 0.0045x + 0.0035y + 1.0000z + 1.7476 = 0
+2022-09-05 17:47:35,938   INFO  Dataset sample index:	530:	1616101363399
+2022-09-05 17:47:36,707   INFO  Plane equation: 0.0018x + -0.0012y + 1.0000z + 1.7539 = 0
+2022-09-05 17:47:36,779   INFO  Dataset sample index:	540:	1616101374399
+2022-09-05 17:47:37,520   INFO  Plane equation: 0.0033x + -0.0045y + 1.0000z + 1.7536 = 0
+2022-09-05 17:47:37,597   INFO  Dataset sample index:	550:	1616101384399
+2022-09-05 17:47:38,335   INFO  Plane equation: 0.0052x + -0.0067y + 1.0000z + 1.7410 = 0
+2022-09-05 17:47:38,422   INFO  Dataset sample index:	560:	1616101394399
+2022-09-05 17:47:39,168   INFO  Plane equation: 0.0049x + 0.0019y + 1.0000z + 1.7480 = 0
+2022-09-05 17:47:39,240   INFO  Dataset sample index:	570:	1616101404400
+2022-09-05 17:47:39,990   INFO  Plane equation: 0.9998x + -0.0041y + -0.0196z + 5.2909 = 0
+2022-09-05 17:47:40,055   INFO  Dataset sample index:	580:	1616101414900
+2022-09-05 17:47:40,814   INFO  Plane equation: 0.0053x + -0.0006y + 1.0000z + 1.7425 = 0
+2022-09-05 17:47:40,879   INFO  Dataset sample index:	590:	1616101425399
+2022-09-05 17:47:41,642   INFO  Plane equation: 0.9773x + -0.0081y + 0.2118z + 2.4929 = 0
+2022-09-05 17:47:41,708   INFO  Dataset sample index:	600:	1616101435399
+2022-09-05 17:47:42,472   INFO  Plane equation: 0.9996x + -0.0130y + -0.0254z + 5.2859 = 0
+2022-09-05 17:47:42,540   INFO  Dataset sample index:	610:	1616101446400
+2022-09-05 17:47:43,314   INFO  Plane equation: 0.9999x + -0.0079y + 0.0081z + 5.2929 = 0
+2022-09-05 17:47:43,379   INFO  Dataset sample index:	620:	1616101457399
+2022-09-05 17:47:44,135   INFO  Plane equation: 0.9899x + -0.0026y + 0.1419z + 2.5481 = 0
+2022-09-05 17:47:44,198   INFO  Dataset sample index:	630:	1616101467900
+2022-09-05 17:47:44,931   INFO  Plane equation: 0.9983x + -0.0427y + -0.0409z + 3.8799 = 0
+2022-09-05 17:47:44,999   INFO  Dataset sample index:	640:	1616101477899
+2022-09-05 17:47:45,668   INFO  Plane equation: 0.0168x + -0.0017y + 0.9999z + 1.7685 = 0
+2022-09-05 17:47:45,744   INFO  Dataset sample index:	650:	1616101488400
+2022-09-05 17:47:46,495   INFO  Plane equation: 0.0101x + 0.0022y + 0.9999z + 1.7490 = 0
+2022-09-05 17:47:46,581   INFO  Dataset sample index:	660:	1616101498399
+2022-09-05 17:47:47,295   INFO  Plane equation: 0.0020x + -0.0039y + 1.0000z + 1.7141 = 0
+2022-09-05 17:47:47,363   INFO  Dataset sample index:	670:	1616101508899
+2022-09-05 17:47:48,085   INFO  Plane equation: 0.0015x + -0.0004y + 1.0000z + 1.7442 = 0
+2022-09-05 17:47:48,156   INFO  Dataset sample index:	680:	1616101518900
+2022-09-05 17:47:48,882   INFO  Plane equation: 0.0017x + -0.0008y + 1.0000z + 1.7352 = 0
+2022-09-05 17:47:48,956   INFO  Dataset sample index:	690:	1616101528899
+2022-09-05 17:47:49,705   INFO  Plane equation: 0.0188x + 0.0005y + 0.9998z + 1.7296 = 0
+2022-09-05 17:47:49,768   INFO  Dataset sample index:	700:	1616101541899
+2022-09-05 17:47:50,478   INFO  Plane equation: 0.0076x + -0.0002y + 1.0000z + 1.7209 = 0
+2022-09-05 17:47:50,562   INFO  Dataset sample index:	710:	1616101563899
+2022-09-05 17:47:51,303   INFO  Plane equation: 0.0072x + -0.0016y + 1.0000z + 1.7591 = 0
+2022-09-05 17:47:51,387   INFO  Dataset sample index:	720:	1616101575400
+2022-09-05 17:47:52,144   INFO  Plane equation: 0.0081x + 0.0032y + 1.0000z + 1.7495 = 0
+2022-09-05 17:47:52,221   INFO  Dataset sample index:	730:	1616101591899
+2022-09-05 17:47:52,973   INFO  Plane equation: 0.9998x + 0.0182y + 0.0023z + 4.5518 = 0
+2022-09-05 17:47:53,055   INFO  Dataset sample index:	740:	1616101601900
+2022-09-05 17:47:53,814   INFO  Plane equation: 0.0065x + -0.0007y + 1.0000z + 1.7428 = 0
+2022-09-05 17:47:53,905   INFO  Dataset sample index:	750:	1616101611900
+2022-09-05 17:47:54,653   INFO  Plane equation: 0.0078x + -0.0026y + 1.0000z + 1.7487 = 0
+2022-09-05 17:47:54,724   INFO  Dataset sample index:	760:	1616101621899
+2022-09-05 17:47:55,442   INFO  Plane equation: 0.0083x + -0.0037y + 1.0000z + 1.7629 = 0
+2022-09-05 17:47:55,514   INFO  Dataset sample index:	770:	1616101632399
+2022-09-05 17:47:56,216   INFO  Plane equation: 0.0003x + -0.0109y + 0.9999z + 1.7613 = 0
+2022-09-05 17:47:56,289   INFO  Dataset sample index:	780:	1616101642400
+2022-09-05 17:47:56,974   INFO  Plane equation: 0.0061x + -0.0132y + 0.9999z + 1.7541 = 0
+2022-09-05 17:47:57,045   INFO  Dataset sample index:	790:	1616101652400
+2022-09-05 17:47:57,799   INFO  Plane equation: -0.0011x + -0.0045y + 1.0000z + 1.7368 = 0
+2022-09-05 17:47:57,867   INFO  Dataset sample index:	800:	1616101674900
+2022-09-05 17:47:58,665   INFO  Plane equation: 0.0029x + -0.0040y + 1.0000z + 1.7542 = 0
+2022-09-05 17:47:58,736   INFO  Dataset sample index:	810:	1616101684900
+2022-09-05 17:47:59,537   INFO  Plane equation: 0.0020x + -0.0019y + 1.0000z + 1.7500 = 0
+2022-09-05 17:47:59,618   INFO  Dataset sample index:	820:	1616101694900
+2022-09-05 17:48:00,391   INFO  Plane equation: -0.0062x + 0.0047y + 1.0000z + 1.7461 = 0
+2022-09-05 17:48:00,464   INFO  Dataset sample index:	830:	1616101704899
+2022-09-05 17:48:01,221   INFO  Plane equation: 0.0279x + 0.0046y + 0.9996z + 1.6136 = 0
+2022-09-05 17:48:01,295   INFO  Dataset sample index:	840:	1616101714900
+2022-09-05 17:48:02,054   INFO  Plane equation: 0.0118x + 0.0056y + 0.9999z + 1.7096 = 0
+2022-09-05 17:48:02,126   INFO  Dataset sample index:	850:	1616101726400
+2022-09-05 17:48:02,862   INFO  Plane equation: 0.0109x + 0.0043y + 0.9999z + 1.7599 = 0
+2022-09-05 17:48:02,931   INFO  Dataset sample index:	860:	1616101736400
+2022-09-05 17:48:03,686   INFO  Plane equation: 0.0143x + -0.0029y + 0.9999z + 1.7393 = 0
+2022-09-05 17:48:03,762   INFO  Dataset sample index:	870:	1616101746400
+2022-09-05 17:48:04,561   INFO  Plane equation: 0.0105x + 0.0004y + 0.9999z + 1.7512 = 0
+2022-09-05 17:48:04,636   INFO  Dataset sample index:	880:	1616101756899
+2022-09-05 17:48:05,423   INFO  Plane equation: 0.0040x + -0.0063y + 1.0000z + 1.7221 = 0
+2022-09-05 17:48:05,500   INFO  Dataset sample index:	890:	1616101766899
+2022-09-05 17:48:06,233   INFO  Plane equation: 0.0028x + 0.0001y + 1.0000z + 1.7321 = 0
+2022-09-05 17:48:06,303   INFO  Dataset sample index:	900:	1616101777400
+2022-09-05 17:48:07,032   INFO  Plane equation: 0.0047x + -0.0109y + 0.9999z + 1.7290 = 0
+2022-09-05 17:48:07,108   INFO  Dataset sample index:	910:	1616101787900
+2022-09-05 17:48:07,892   INFO  Plane equation: 0.0052x + -0.0077y + 1.0000z + 1.7319 = 0
+2022-09-05 17:48:07,971   INFO  Dataset sample index:	920:	1616101797900
+2022-09-05 17:48:08,761   INFO  Plane equation: 0.0101x + -0.0017y + 0.9999z + 1.7396 = 0
+2022-09-05 17:48:08,840   INFO  Dataset sample index:	930:	1616101807900
+2022-09-05 17:48:09,563   INFO  Plane equation: 0.0158x + -0.0000y + 0.9999z + 1.7131 = 0
+2022-09-05 17:48:09,645   INFO  Dataset sample index:	940:	1616101818400
+2022-09-05 17:48:10,377   INFO  Plane equation: 0.0092x + -0.0071y + 0.9999z + 1.7320 = 0
+2022-09-05 17:48:10,445   INFO  Dataset sample index:	950:	1616101828400
+2022-09-05 17:48:11,172   INFO  Plane equation: 0.0106x + -0.0080y + 0.9999z + 1.7214 = 0
+2022-09-05 17:48:11,239   INFO  Dataset sample index:	960:	1616101838400
+2022-09-05 17:48:11,963   INFO  Plane equation: 0.0105x + -0.0085y + 0.9999z + 1.7207 = 0
+2022-09-05 17:48:12,029   INFO  Dataset sample index:	970:	1616101860400
+2022-09-05 17:48:12,760   INFO  Plane equation: 0.0072x + -0.0057y + 1.0000z + 1.7385 = 0
+2022-09-05 17:48:12,840   INFO  Dataset sample index:	980:	1616101870400
+2022-09-05 17:48:13,609   INFO  Plane equation: 0.0093x + -0.0055y + 0.9999z + 1.7429 = 0
+2022-09-05 17:48:13,682   INFO  Dataset sample index:	990:	1616101880900
+2022-09-05 17:48:14,421   INFO  Plane equation: 0.0098x + -0.0163y + 0.9998z + 1.7292 = 0
+2022-09-05 17:48:14,499   INFO  Dataset sample index:	1000:	1616101891899
+2022-09-05 17:48:15,303   INFO  Plane equation: -0.0044x + -0.0058y + 1.0000z + 1.7400 = 0
+2022-09-05 17:48:15,378   INFO  Dataset sample index:	1010:	1616101904400
+2022-09-05 17:48:16,178   INFO  Plane equation: 0.0017x + -0.0054y + 1.0000z + 1.7323 = 0
+2022-09-05 17:48:16,247   INFO  Dataset sample index:	1020:	1616101914400
+2022-09-05 17:48:17,028   INFO  Plane equation: 0.0101x + -0.0026y + 0.9999z + 1.7738 = 0
+2022-09-05 17:48:17,112   INFO  Dataset sample index:	1030:	1616101924899
+2022-09-05 17:48:17,859   INFO  Plane equation: 0.0055x + 0.0041y + 1.0000z + 1.7504 = 0
+2022-09-05 17:48:17,960   INFO  Dataset sample index:	1040:	1616101934899
+2022-09-05 17:48:18,747   INFO  Plane equation: 0.0137x + -0.0005y + 0.9999z + 1.7489 = 0
+2022-09-05 17:48:18,822   INFO  Dataset sample index:	1050:	1616101945400
+2022-09-05 17:48:19,618   INFO  Plane equation: 0.0085x + -0.0039y + 1.0000z + 1.7567 = 0
+2022-09-05 17:48:19,695   INFO  Dataset sample index:	1060:	1616101955400
+2022-09-05 17:48:20,500   INFO  Plane equation: 0.0180x + 0.0002y + 0.9998z + 1.7462 = 0
+2022-09-05 17:48:20,575   INFO  Dataset sample index:	1070:	1616101965400
+2022-09-05 17:48:21,367   INFO  Plane equation: 0.0020x + -0.0007y + 1.0000z + 1.7541 = 0
+2022-09-05 17:48:21,455   INFO  Dataset sample index:	1080:	1616101975399
+2022-09-05 17:48:22,247   INFO  Plane equation: 0.0080x + -0.0003y + 1.0000z + 1.7458 = 0
+2022-09-05 17:48:22,325   INFO  Dataset sample index:	1090:	1616101985400
+2022-09-05 17:48:23,125   INFO  Plane equation: 0.0254x + -0.0054y + 0.9997z + 1.6800 = 0
+2022-09-05 17:48:23,199   INFO  Dataset sample index:	1100:	1616101995899
+2022-09-05 17:48:23,951   INFO  Plane equation: 0.0003x + -0.0064y + 1.0000z + 1.7539 = 0
+2022-09-05 17:48:24,022   INFO  Dataset sample index:	1110:	1616102006400
+2022-09-05 17:48:24,796   INFO  Plane equation: 0.0274x + -0.0041y + 0.9996z + 1.6978 = 0
+2022-09-05 17:48:24,884   INFO  Dataset sample index:	1120:	1616102016900
+2022-09-05 17:48:25,641   INFO  Plane equation: 0.0152x + -0.0051y + 0.9999z + 1.7893 = 0
+2022-09-05 17:48:25,713   INFO  Dataset sample index:	1130:	1616102026899
+2022-09-05 17:48:26,457   INFO  Plane equation: 0.0078x + -0.0087y + 0.9999z + 1.7671 = 0
+2022-09-05 17:48:26,526   INFO  Dataset sample index:	1140:	1616102036899
+2022-09-05 17:48:27,272   INFO  Plane equation: 0.0046x + 0.0037y + 1.0000z + 1.7592 = 0
+2022-09-05 17:48:27,341   INFO  Dataset sample index:	1150:	1616102051800
+2022-09-05 17:48:28,089   INFO  Plane equation: 0.0202x + -0.0000y + 0.9998z + 1.7799 = 0
+2022-09-05 17:48:28,165   INFO  Dataset sample index:	1160:	1616102061799
+2022-09-05 17:48:28,908   INFO  Plane equation: 0.0228x + 0.0021y + 0.9997z + 1.7432 = 0
+2022-09-05 17:48:28,978   INFO  Dataset sample index:	1170:	1616102071800
+2022-09-05 17:48:29,715   INFO  Plane equation: 0.0234x + -0.0052y + 0.9997z + 1.7793 = 0
+2022-09-05 17:48:29,782   INFO  Dataset sample index:	1180:	1616102081800
+2022-09-05 17:48:30,486   INFO  Plane equation: 0.0003x + 0.0014y + 1.0000z + 1.7769 = 0
+2022-09-05 17:48:30,553   INFO  Dataset sample index:	1190:	1616102092799
+2022-09-05 17:48:31,348   INFO  Plane equation: 0.0053x + -0.0055y + 1.0000z + 1.7612 = 0
+2022-09-05 17:48:31,423   INFO  Dataset sample index:	1200:	1616102103299
+2022-09-05 17:48:32,217   INFO  Plane equation: 0.0105x + -0.0020y + 0.9999z + 1.7407 = 0
+2022-09-05 17:48:32,287   INFO  Dataset sample index:	1210:	1616102113299
+2022-09-05 17:48:33,047   INFO  Plane equation: 0.0090x + -0.0029y + 1.0000z + 1.7466 = 0
+2022-09-05 17:48:33,118   INFO  Dataset sample index:	1220:	1616102123298
+2022-09-05 17:48:33,814   INFO  Plane equation: -0.0018x + -0.0010y + 1.0000z + 1.7325 = 0
+2022-09-05 17:48:33,882   INFO  Dataset sample index:	1230:	1616102134299
+2022-09-05 17:48:34,654   INFO  Plane equation: 0.0050x + -0.0035y + 1.0000z + 1.7593 = 0
+2022-09-05 17:48:34,724   INFO  Dataset sample index:	1240:	1616102144800
+2022-09-05 17:48:35,471   INFO  Plane equation: 0.0015x + -0.0034y + 1.0000z + 1.7551 = 0
+2022-09-05 17:48:35,541   INFO  Dataset sample index:	1250:	1616102154800
+2022-09-05 17:48:36,269   INFO  Plane equation: 0.0064x + 0.0028y + 1.0000z + 1.7496 = 0
+2022-09-05 17:48:36,334   INFO  Dataset sample index:	1260:	1616102164799
+2022-09-05 17:48:37,102   INFO  Plane equation: 0.0257x + 0.0028y + 0.9997z + 1.7294 = 0
+2022-09-05 17:48:37,166   INFO  Dataset sample index:	1270:	1616102174799
+2022-09-05 17:48:37,940   INFO  Plane equation: 0.0407x + 0.0040y + 0.9992z + 1.6288 = 0
+2022-09-05 17:48:38,007   INFO  Dataset sample index:	1280:	1616102185300
+2022-09-05 17:48:38,775   INFO  Plane equation: 0.0193x + -0.0012y + 0.9998z + 1.7524 = 0
+2022-09-05 17:48:38,841   INFO  Dataset sample index:	1290:	1616102195299
+2022-09-05 17:48:39,610   INFO  Plane equation: -0.0029x + -0.0015y + 1.0000z + 0.8505 = 0
+2022-09-05 17:48:39,674   INFO  Dataset sample index:	1300:	1616102205300
+2022-09-05 17:48:40,438   INFO  Plane equation: 0.0143x + 0.0009y + 0.9999z + 1.7386 = 0
+2022-09-05 17:48:40,502   INFO  Dataset sample index:	1310:	1616102215799
+2022-09-05 17:48:41,201   INFO  Plane equation: 0.0081x + -0.0012y + 1.0000z + 1.7558 = 0
+2022-09-05 17:48:41,264   INFO  Dataset sample index:	1320:	1616102226300
+2022-09-05 17:48:42,006   INFO  Plane equation: 0.9962x + -0.0082y + -0.0864z + 3.1120 = 0
+2022-09-05 17:48:42,068   INFO  Dataset sample index:	1330:	1616102236300
+2022-09-05 17:48:42,882   INFO  Plane equation: 0.9930x + -0.0275y + -0.1148z + 3.0480 = 0
+2022-09-05 17:48:42,951   INFO  Dataset sample index:	1340:	1616102247300
+2022-09-05 17:48:43,717   INFO  Plane equation: 0.9955x + 0.0006y + 0.0943z + 3.5360 = 0
+2022-09-05 17:48:43,782   INFO  Dataset sample index:	1350:	1616102257299
+2022-09-05 17:48:44,544   INFO  Plane equation: 0.0314x + 0.0175y + 0.9994z + 0.3247 = 0
+2022-09-05 17:48:44,608   INFO  Dataset sample index:	1360:	1616102269300
+2022-09-05 17:48:45,374   INFO  Plane equation: 0.0181x + -0.0017y + 0.9998z + 0.2846 = 0
+2022-09-05 17:48:45,437   INFO  Dataset sample index:	1370:	1616102279300
+2022-09-05 17:48:46,204   INFO  Plane equation: 0.0077x + 0.0329y + 0.9994z + 0.2571 = 0
+2022-09-05 17:48:46,271   INFO  Dataset sample index:	1380:	1616102289799
+2022-09-05 17:48:47,020   INFO  Plane equation: 0.0089x + -0.0032y + 1.0000z + 1.7578 = 0
+2022-09-05 17:48:47,084   INFO  Dataset sample index:	1390:	1616102299800
+2022-09-05 17:48:47,802   INFO  Plane equation: 0.0119x + -0.0052y + 0.9999z + 1.7272 = 0
+2022-09-05 17:48:47,865   INFO  Dataset sample index:	1400:	1616102310800
+2022-09-05 17:48:48,640   INFO  Plane equation: 0.0127x + 0.0041y + 0.9999z + 1.7405 = 0
+2022-09-05 17:48:48,705   INFO  Dataset sample index:	1410:	1616102320799
+2022-09-05 17:48:49,440   INFO  Plane equation: -0.0001x + -0.0007y + 1.0000z + 1.7358 = 0
+2022-09-05 17:48:49,509   INFO  Dataset sample index:	1420:	1616102330799
+2022-09-05 17:48:50,276   INFO  Plane equation: 0.0075x + -0.0019y + 1.0000z + 1.7455 = 0
+2022-09-05 17:48:50,341   INFO  Dataset sample index:	1430:	1616102340800
+2022-09-05 17:48:51,038   INFO  Plane equation: 0.0063x + 0.0004y + 1.0000z + 1.7425 = 0
+2022-09-05 17:48:51,101   INFO  Dataset sample index:	1440:	1616102350800
+2022-09-05 17:48:51,803   INFO  Plane equation: 0.0064x + 0.0007y + 1.0000z + 1.7436 = 0
+2022-09-05 17:48:51,867   INFO  Dataset sample index:	1450:	1616102360800
+2022-09-05 17:48:52,575   INFO  Plane equation: 0.0060x + 0.0007y + 1.0000z + 1.7450 = 0
+2022-09-05 17:48:52,639   INFO  Dataset sample index:	1460:	1616102372800
+2022-09-05 17:48:53,370   INFO  Plane equation: 0.0082x + -0.0048y + 1.0000z + 1.7560 = 0
+2022-09-05 17:48:53,447   INFO  Dataset sample index:	1470:	1616102382799
+2022-09-05 17:48:54,242   INFO  Plane equation: 0.0251x + -0.0023y + 0.9997z + 1.7906 = 0
+2022-09-05 17:48:54,315   INFO  Dataset sample index:	1480:	1616102392799
+2022-09-05 17:48:55,063   INFO  Plane equation: 0.0276x + 0.0057y + 0.9996z + 1.7158 = 0
+2022-09-05 17:48:55,134   INFO  Dataset sample index:	1490:	1616102402801
+2022-09-05 17:48:55,899   INFO  Plane equation: 0.0098x + 0.0029y + 0.9999z + 1.7735 = 0
+2022-09-05 17:48:55,970   INFO  Dataset sample index:	1500:	1616102412800
+2022-09-05 17:48:56,745   INFO  Plane equation: 0.0123x + -0.0019y + 0.9999z + 1.7484 = 0
+2022-09-05 17:48:56,817   INFO  Dataset sample index:	1510:	1616102427301
+2022-09-05 17:48:57,600   INFO  Plane equation: 0.0245x + -0.0048y + 0.9997z + 1.7461 = 0
+2022-09-05 17:48:57,672   INFO  Dataset sample index:	1520:	1616102437799
+2022-09-05 17:48:58,463   INFO  Plane equation: 0.0359x + -0.0001y + 0.9994z + 1.6511 = 0
+2022-09-05 17:48:58,534   INFO  Dataset sample index:	1530:	1616102448300
+2022-09-05 17:48:59,256   INFO  Plane equation: 0.0051x + -0.0085y + 1.0000z + 1.6974 = 0
+2022-09-05 17:48:59,320   INFO  Dataset sample index:	1540:	1616102458300
+2022-09-05 17:49:00,050   INFO  Plane equation: 0.0128x + -0.0046y + 0.9999z + 1.7538 = 0
+2022-09-05 17:49:00,117   INFO  Dataset sample index:	1550:	1616102471299
+2022-09-05 17:49:00,838   INFO  Plane equation: 0.0047x + 0.0002y + 1.0000z + 1.7257 = 0
+2022-09-05 17:49:00,915   INFO  Dataset sample index:	1560:	1616102481299
+2022-09-05 17:49:01,644   INFO  Plane equation: 0.0178x + -0.0064y + 0.9998z + 1.6697 = 0
+2022-09-05 17:49:01,713   INFO  Dataset sample index:	1570:	1616102491300
+2022-09-05 17:49:02,502   INFO  Plane equation: 0.0255x + -0.0028y + 0.9997z + 1.6964 = 0
+2022-09-05 17:49:02,573   INFO  Dataset sample index:	1580:	1616102501299
+2022-09-05 17:49:03,381   INFO  Plane equation: 0.0270x + 0.0082y + 0.9996z + 1.6942 = 0
+2022-09-05 17:49:03,449   INFO  Dataset sample index:	1590:	1616102511799
+2022-09-05 17:49:04,228   INFO  Plane equation: 0.0273x + -0.0004y + 0.9996z + 1.6612 = 0
+2022-09-05 17:49:04,298   INFO  Dataset sample index:	1600:	1616102521800
+2022-09-05 17:49:05,117   INFO  Plane equation: -0.0067x + -0.0007y + 1.0000z + 1.7285 = 0
+2022-09-05 17:49:05,192   INFO  Dataset sample index:	1610:	1616102531799
+2022-09-05 17:49:05,988   INFO  Plane equation: 0.0210x + -0.0016y + 0.9998z + 1.7850 = 0
+2022-09-05 17:49:06,060   INFO  Dataset sample index:	1620:	1616102542800
+2022-09-05 17:49:06,867   INFO  Plane equation: 0.0301x + 0.0021y + 0.9995z + 1.7267 = 0
+2022-09-05 17:49:06,936   INFO  Dataset sample index:	1630:	1616534735199
+2022-09-05 17:49:07,678   INFO  Plane equation: 0.0129x + 0.0009y + 0.9999z + 1.7418 = 0
+2022-09-05 17:49:07,750   INFO  Dataset sample index:	1640:	1616534745199
+2022-09-05 17:49:08,566   INFO  Plane equation: 0.0051x + -0.0002y + 1.0000z + 1.7552 = 0
+2022-09-05 17:49:08,638   INFO  Dataset sample index:	1650:	1616534755200
+2022-09-05 17:49:09,454   INFO  Plane equation: 0.0029x + -0.0060y + 1.0000z + 1.7566 = 0
+2022-09-05 17:49:09,526   INFO  Dataset sample index:	1660:	1616534765200
+2022-09-05 17:49:10,356   INFO  Plane equation: 0.0068x + -0.0036y + 1.0000z + 1.7547 = 0
+2022-09-05 17:49:10,439   INFO  Dataset sample index:	1670:	1616534775199
+2022-09-05 17:49:11,247   INFO  Plane equation: 0.0048x + 0.0245y + 0.9997z + 0.7255 = 0
+2022-09-05 17:49:11,321   INFO  Dataset sample index:	1680:	1616534785200
+2022-09-05 17:49:12,128   INFO  Plane equation: 0.0055x + -0.0037y + 1.0000z + 1.7438 = 0
+2022-09-05 17:49:12,204   INFO  Dataset sample index:	1690:	1616534796200
+2022-09-05 17:49:13,036   INFO  Plane equation: -0.0203x + 0.0048y + 0.9998z + 0.8939 = 0
+2022-09-05 17:49:13,117   INFO  Dataset sample index:	1700:	1616534806200
+2022-09-05 17:49:13,932   INFO  Plane equation: 0.0106x + -0.0114y + 0.9999z + 1.7387 = 0
+2022-09-05 17:49:14,011   INFO  Dataset sample index:	1710:	1616534816199
+2022-09-05 17:49:14,824   INFO  Plane equation: -0.0294x + -0.0050y + 0.9996z + 0.7800 = 0
+2022-09-05 17:49:14,896   INFO  Dataset sample index:	1720:	1616534826199
+2022-09-05 17:49:15,699   INFO  Plane equation: -0.0113x + -0.0033y + 0.9999z + 0.7714 = 0
+2022-09-05 17:49:15,783   INFO  Dataset sample index:	1730:	1616534836199
+2022-09-05 17:49:16,600   INFO  Plane equation: 0.0035x + 0.0038y + 1.0000z + 1.7492 = 0
+2022-09-05 17:49:16,679   INFO  Dataset sample index:	1740:	1616534846200
+2022-09-05 17:49:17,503   INFO  Plane equation: 0.9993x + 0.0068y + -0.0366z + 14.5751 = 0
+2022-09-05 17:49:17,578   INFO  Dataset sample index:	1750:	1616534856200
+2022-09-05 17:49:18,402   INFO  Plane equation: 0.0036x + 0.0003y + 1.0000z + 1.7464 = 0
+2022-09-05 17:49:18,475   INFO  Dataset sample index:	1760:	1616534866200
+2022-09-05 17:49:19,296   INFO  Plane equation: 0.0042x + 0.0014y + 1.0000z + 1.7508 = 0
+2022-09-05 17:49:19,373   INFO  Dataset sample index:	1770:	1616534876200
+2022-09-05 17:49:20,187   INFO  Plane equation: -0.0091x + -0.0126y + 0.9999z + 1.6865 = 0
+2022-09-05 17:49:20,259   INFO  Dataset sample index:	1780:	1616534886200
+2022-09-05 17:49:21,086   INFO  Plane equation: -0.0603x + -0.0116y + 0.9981z + 0.4669 = 0
+2022-09-05 17:49:21,167   INFO  Dataset sample index:	1790:	1616534896200
+2022-09-05 17:49:21,971   INFO  Plane equation: 0.0027x + -0.0007y + 1.0000z + 1.7320 = 0
+2022-09-05 17:49:22,044   INFO  Dataset sample index:	1800:	1616534906200
+2022-09-05 17:49:22,823   INFO  Plane equation: 0.0027x + 0.0024y + 1.0000z + 1.7438 = 0
+2022-09-05 17:49:22,891   INFO  Dataset sample index:	1810:	1616534916200
+2022-09-05 17:49:23,685   INFO  Plane equation: 0.0075x + -0.0009y + 1.0000z + 1.7527 = 0
+2022-09-05 17:49:23,756   INFO  Dataset sample index:	1820:	1616534926199
+2022-09-05 17:49:24,529   INFO  Plane equation: 0.0064x + 0.0000y + 1.0000z + 1.7442 = 0
+2022-09-05 17:49:24,597   INFO  Dataset sample index:	1830:	1616534936199
+2022-09-05 17:49:25,362   INFO  Plane equation: 0.0076x + -0.0008y + 1.0000z + 1.7539 = 0
+2022-09-05 17:49:25,431   INFO  Dataset sample index:	1840:	1616534946200
+2022-09-05 17:49:26,202   INFO  Plane equation: -0.0080x + -0.0062y + 0.9999z + 0.7644 = 0
+2022-09-05 17:49:26,270   INFO  Dataset sample index:	1850:	1616534956200
+2022-09-05 17:49:27,037   INFO  Plane equation: 0.0000x + 0.0064y + 1.0000z + 0.8426 = 0
+2022-09-05 17:49:27,106   INFO  Dataset sample index:	1860:	1616534966200
+2022-09-05 17:49:27,872   INFO  Plane equation: 0.0065x + 0.0014y + 1.0000z + 0.8507 = 0
+2022-09-05 17:49:27,953   INFO  Dataset sample index:	1870:	1616534976199
+2022-09-05 17:49:28,726   INFO  Plane equation: 0.0114x + -0.0004y + 0.9999z + 1.7531 = 0
+2022-09-05 17:49:28,799   INFO  Dataset sample index:	1880:	1616534986200
+2022-09-05 17:49:29,590   INFO  Plane equation: 0.0050x + -0.0001y + 1.0000z + 1.7613 = 0
+2022-09-05 17:49:29,673   INFO  Dataset sample index:	1890:	1616534996200
+2022-09-05 17:49:30,493   INFO  Plane equation: -0.0025x + -0.0034y + 1.0000z + 1.7412 = 0
+2022-09-05 17:49:30,569   INFO  Dataset sample index:	1900:	1616535006200
+2022-09-05 17:49:31,366   INFO  Plane equation: 0.0025x + 0.0042y + 1.0000z + 1.7397 = 0
+2022-09-05 17:49:31,449   INFO  Dataset sample index:	1910:	1616535016199
+2022-09-05 17:49:32,225   INFO  Plane equation: 0.0047x + -0.0044y + 1.0000z + 1.7546 = 0
+2022-09-05 17:49:32,294   INFO  Dataset sample index:	1920:	1616535026200
+2022-09-05 17:49:33,102   INFO  Plane equation: 0.0064x + 0.0004y + 1.0000z + 1.7420 = 0
+2022-09-05 17:49:33,168   INFO  Dataset sample index:	1930:	1616535036199
+2022-09-05 17:49:33,813   INFO  Plane equation: 0.0100x + 0.0050y + 0.9999z + 1.7601 = 0
+2022-09-05 17:49:33,880   INFO  Dataset sample index:	1940:	1616535046199
+2022-09-05 17:49:34,604   INFO  Plane equation: 0.0086x + 0.0016y + 1.0000z + 1.7616 = 0
+2022-09-05 17:49:34,674   INFO  Dataset sample index:	1950:	1616535056199
+2022-09-05 17:49:35,401   INFO  Plane equation: 0.0092x + 0.0019y + 1.0000z + 1.7598 = 0
+2022-09-05 17:49:35,468   INFO  Dataset sample index:	1960:	1616535066199
+2022-09-05 17:49:36,193   INFO  Plane equation: 0.0076x + 0.0037y + 1.0000z + 1.7651 = 0
+2022-09-05 17:49:36,259   INFO  Dataset sample index:	1970:	1616535076199
+2022-09-05 17:49:36,944   INFO  Plane equation: 0.0129x + 0.0045y + 0.9999z + 1.7929 = 0
+2022-09-05 17:49:37,003   INFO  Dataset sample index:	1980:	1616535086199
+2022-09-05 17:49:37,662   INFO  Plane equation: 0.0148x + 0.0046y + 0.9999z + 1.8143 = 0
+2022-09-05 17:49:37,720   INFO  Dataset sample index:	1990:	1616535096200
+2022-09-05 17:49:38,379   INFO  Plane equation: 0.0112x + 0.0027y + 0.9999z + 1.7732 = 0
+2022-09-05 17:49:38,437   INFO  Dataset sample index:	2000:	1616535106200
+2022-09-05 17:49:39,094   INFO  Plane equation: 0.0092x + 0.0019y + 1.0000z + 1.7628 = 0
+2022-09-05 17:49:39,152   INFO  Dataset sample index:	2010:	1616535116200
+2022-09-05 17:49:39,813   INFO  Plane equation: 0.0090x + 0.0021y + 1.0000z + 1.7648 = 0
+2022-09-05 17:49:39,874   INFO  Dataset sample index:	2020:	1616535126200
+2022-09-05 17:49:40,534   INFO  Plane equation: 0.0114x + 0.0047y + 0.9999z + 1.7920 = 0
+2022-09-05 17:49:40,598   INFO  Dataset sample index:	2030:	1616535136200
+2022-09-05 17:49:41,259   INFO  Plane equation: 0.0085x + -0.0002y + 1.0000z + 1.7626 = 0
+2022-09-05 17:49:41,327   INFO  Dataset sample index:	2040:	1616535146200
+2022-09-05 17:49:42,053   INFO  Plane equation: 0.0072x + -0.0051y + 1.0000z + 1.7642 = 0
+2022-09-05 17:49:42,128   INFO  Dataset sample index:	2050:	1616535156200
+2022-09-05 17:49:42,924   INFO  Plane equation: -0.0040x + -0.0008y + 1.0000z + 1.7425 = 0
+2022-09-05 17:49:42,999   INFO  Dataset sample index:	2060:	1616535166200
+2022-09-05 17:49:43,820   INFO  Plane equation: -0.0088x + -0.0000y + 1.0000z + 1.7378 = 0
+2022-09-05 17:49:43,889   INFO  Dataset sample index:	2070:	1616535176199
+2022-09-05 17:49:44,719   INFO  Plane equation: -0.0466x + -0.0076y + 0.9989z + 0.4928 = 0
+2022-09-05 17:49:44,790   INFO  Dataset sample index:	2080:	1616535186200
+2022-09-05 17:49:45,581   INFO  Plane equation: -0.0071x + -0.0040y + 1.0000z + 1.7485 = 0
+2022-09-05 17:49:45,673   INFO  Dataset sample index:	2090:	1616535196200
+2022-09-05 17:49:46,446   INFO  Plane equation: 0.0166x + -0.0086y + 0.9998z + 1.7226 = 0
+2022-09-05 17:49:46,532   INFO  Dataset sample index:	2100:	1616535206200
+2022-09-05 17:49:47,342   INFO  Plane equation: 0.0119x + -0.0031y + 0.9999z + 1.7501 = 0
+2022-09-05 17:49:47,413   INFO  Dataset sample index:	2110:	1616535216200
+2022-09-05 17:49:48,233   INFO  Plane equation: 0.0053x + 0.0026y + 1.0000z + 1.7523 = 0
+2022-09-05 17:49:48,311   INFO  Dataset sample index:	2120:	1616535226199
+2022-09-05 17:49:49,087   INFO  Plane equation: 0.0112x + 0.0022y + 0.9999z + 1.7552 = 0
+2022-09-05 17:49:49,166   INFO  Dataset sample index:	2130:	1616535236200
+2022-09-05 17:49:49,941   INFO  Plane equation: 0.0101x + -0.0051y + 0.9999z + 1.7777 = 0
+2022-09-05 17:49:50,015   INFO  Dataset sample index:	2140:	1616535246200
+2022-09-05 17:49:50,800   INFO  Plane equation: 0.0042x + -0.0002y + 1.0000z + 1.7590 = 0
+2022-09-05 17:49:50,873   INFO  Dataset sample index:	2150:	1616535256200
+2022-09-05 17:49:51,670   INFO  Plane equation: 0.0032x + -0.0002y + 1.0000z + 1.7521 = 0
+2022-09-05 17:49:51,741   INFO  Dataset sample index:	2160:	1616535266199
+2022-09-05 17:49:52,540   INFO  Plane equation: 0.0009x + -0.0016y + 1.0000z + 1.7540 = 0
+2022-09-05 17:49:52,615   INFO  Dataset sample index:	2170:	1616535276200
+2022-09-05 17:49:53,416   INFO  Plane equation: 0.0030x + -0.0015y + 1.0000z + 1.7561 = 0
+2022-09-05 17:49:53,487   INFO  Dataset sample index:	2180:	1616535286199
+2022-09-05 17:49:54,288   INFO  Plane equation: 0.0042x + -0.0015y + 1.0000z + 1.7514 = 0
+2022-09-05 17:49:54,362   INFO  Dataset sample index:	2190:	1616535296200
+2022-09-05 17:49:55,148   INFO  Plane equation: 0.0029x + 0.0005y + 1.0000z + 1.7623 = 0
+2022-09-05 17:49:55,221   INFO  Dataset sample index:	2200:	1616535306200
+2022-09-05 17:49:55,968   INFO  Plane equation: 0.0026x + -0.0086y + 1.0000z + 1.7307 = 0
+2022-09-05 17:49:56,042   INFO  Dataset sample index:	2210:	1616535316200
+2022-09-05 17:49:56,823   INFO  Plane equation: 0.0039x + 0.0022y + 1.0000z + 1.7579 = 0
+2022-09-05 17:49:56,889   INFO  Dataset sample index:	2220:	1616535326200
+2022-09-05 17:49:57,693   INFO  Plane equation: 0.0019x + 0.0018y + 1.0000z + 1.7372 = 0
+2022-09-05 17:49:57,766   INFO  Dataset sample index:	2230:	1616535336199
+2022-09-05 17:49:58,582   INFO  Plane equation: 0.0072x + -0.0038y + 1.0000z + 1.7548 = 0
+2022-09-05 17:49:58,652   INFO  Dataset sample index:	2240:	1616535346200
+2022-09-05 17:49:59,474   INFO  Plane equation: 0.0019x + 0.0047y + 1.0000z + 1.7601 = 0
+2022-09-05 17:49:59,542   INFO  Dataset sample index:	2250:	1616535356200
+2022-09-05 17:50:00,367   INFO  Plane equation: 0.0430x + -0.0053y + 0.9991z + 0.1405 = 0
+2022-09-05 17:50:00,437   INFO  Dataset sample index:	2260:	1616535366200
+2022-09-05 17:50:01,244   INFO  Plane equation: 0.0013x + -0.0030y + 1.0000z + 1.7531 = 0
+2022-09-05 17:50:01,329   INFO  Dataset sample index:	2270:	1616535376199
+2022-09-05 17:50:02,128   INFO  Plane equation: 0.0058x + -0.0030y + 1.0000z + 1.7444 = 0
+2022-09-05 17:50:02,202   INFO  Dataset sample index:	2280:	1616535386199
+2022-09-05 17:50:02,985   INFO  Plane equation: 0.0081x + -0.0021y + 1.0000z + 1.7550 = 0
+2022-09-05 17:50:03,060   INFO  Dataset sample index:	2290:	1616535396199
+2022-09-05 17:50:03,892   INFO  Plane equation: 0.0062x + -0.0041y + 1.0000z + 1.7536 = 0
+2022-09-05 17:50:03,968   INFO  Dataset sample index:	2300:	1616535406200
+2022-09-05 17:50:04,775   INFO  Plane equation: -0.0010x + 0.0003y + 1.0000z + 1.7350 = 0
+2022-09-05 17:50:04,848   INFO  Dataset sample index:	2310:	1616535416200
+2022-09-05 17:50:05,660   INFO  Plane equation: 0.0037x + -0.0074y + 1.0000z + 1.7604 = 0
+2022-09-05 17:50:05,734   INFO  Dataset sample index:	2320:	1616535426200
+2022-09-05 17:50:06,552   INFO  Plane equation: -0.0318x + -0.0028y + 0.9995z + 0.7274 = 0
+2022-09-05 17:50:06,626   INFO  Dataset sample index:	2330:	1616535436199
+2022-09-05 17:50:07,447   INFO  Plane equation: -0.0015x + -0.0103y + 0.9999z + 1.7393 = 0
+2022-09-05 17:50:07,514   INFO  Dataset sample index:	2340:	1616535446200
+2022-09-05 17:50:08,336   INFO  Plane equation: 0.0039x + -0.0045y + 1.0000z + 1.7556 = 0
+2022-09-05 17:50:08,407   INFO  Dataset sample index:	2350:	1616535456200
+2022-09-05 17:50:09,221   INFO  Plane equation: -0.0378x + -0.0082y + 0.9993z + 0.4027 = 0
+2022-09-05 17:50:09,291   INFO  Dataset sample index:	2360:	1616535466200
+2022-09-05 17:50:10,116   INFO  Plane equation: -0.0003x + 0.0037y + 1.0000z + 1.7292 = 0
+2022-09-05 17:50:10,183   INFO  Dataset sample index:	2370:	1616535476200
+2022-09-05 17:50:10,996   INFO  Plane equation: 0.0137x + 0.0003y + 0.9999z + 1.7436 = 0
+2022-09-05 17:50:11,063   INFO  Dataset sample index:	2380:	1616535486200
+2022-09-05 17:50:11,881   INFO  Plane equation: -0.0574x + 0.0182y + 0.9982z + 0.7390 = 0
+2022-09-05 17:50:11,954   INFO  Dataset sample index:	2390:	1616535496200
+2022-09-05 17:50:12,779   INFO  Plane equation: 0.0364x + -0.0336y + 0.9988z + 0.2558 = 0
+2022-09-05 17:50:12,847   INFO  Dataset sample index:	2400:	1616535506199
+2022-09-05 17:50:13,675   INFO  Plane equation: 0.0019x + -0.0098y + 0.9999z + 1.7669 = 0
+2022-09-05 17:50:13,749   INFO  Dataset sample index:	2410:	1616535516200
+2022-09-05 17:50:14,575   INFO  Plane equation: 0.0142x + -0.0075y + 0.9999z + 1.7685 = 0
+2022-09-05 17:50:14,646   INFO  Dataset sample index:	2420:	1616535526200
+2022-09-05 17:50:15,361   INFO  Plane equation: 0.0066x + -0.0025y + 1.0000z + 1.7692 = 0
+2022-09-05 17:50:15,431   INFO  Dataset sample index:	2430:	1616535536200
+2022-09-05 17:50:16,246   INFO  Plane equation: 0.0097x + -0.0039y + 0.9999z + 1.7440 = 0
+2022-09-05 17:50:16,321   INFO  Dataset sample index:	2440:	1616535546200
+2022-09-05 17:50:17,076   INFO  Plane equation: 0.0095x + -0.0060y + 0.9999z + 1.7476 = 0
+2022-09-05 17:50:17,136   INFO  Dataset sample index:	2450:	1616535556200
+2022-09-05 17:50:17,871   INFO  Plane equation: 0.9943x + -0.0077y + 0.1064z + 5.4195 = 0
+2022-09-05 17:50:17,947   INFO  Dataset sample index:	2460:	1616535566200
+2022-09-05 17:50:18,747   INFO  Plane equation: 0.0043x + -0.0007y + 1.0000z + 1.7242 = 0
+2022-09-05 17:50:18,814   INFO  Dataset sample index:	2470:	1616535576199
+2022-09-05 17:50:19,595   INFO  Plane equation: 0.0132x + -0.0054y + 0.9999z + 1.7322 = 0
+2022-09-05 17:50:19,664   INFO  Dataset sample index:	2480:	1616535586200
+2022-09-05 17:50:20,479   INFO  Plane equation: 0.0043x + -0.0000y + 1.0000z + 1.7463 = 0
+2022-09-05 17:50:20,550   INFO  Dataset sample index:	2490:	1616535596200
+2022-09-05 17:50:21,378   INFO  Plane equation: -0.0281x + -0.0024y + 0.9996z + 0.8249 = 0
+2022-09-05 17:50:21,450   INFO  Dataset sample index:	2500:	1616535606200
+2022-09-05 17:50:22,281   INFO  Plane equation: -0.0057x + 0.0011y + 1.0000z + 1.7311 = 0
+2022-09-05 17:50:22,348   INFO  Dataset sample index:	2510:	1616535616199
+2022-09-05 17:50:23,174   INFO  Plane equation: -0.0051x + -0.0017y + 1.0000z + 1.7377 = 0
+2022-09-05 17:50:23,248   INFO  Dataset sample index:	2520:	1616535626199
+2022-09-05 17:50:24,076   INFO  Plane equation: -0.0029x + -0.0022y + 1.0000z + 1.7407 = 0
+2022-09-05 17:50:24,147   INFO  Dataset sample index:	2530:	1616535636199
+2022-09-05 17:50:24,947   INFO  Plane equation: 0.0097x + 0.0032y + 0.9999z + 1.7568 = 0
+2022-09-05 17:50:25,017   INFO  Dataset sample index:	2540:	1616535646200
+2022-09-05 17:50:25,828   INFO  Plane equation: 0.0043x + -0.0052y + 1.0000z + 1.7488 = 0
+2022-09-05 17:50:25,900   INFO  Dataset sample index:	2550:	1616535656200
+2022-09-05 17:50:26,716   INFO  Plane equation: 0.0102x + -0.0052y + 0.9999z + 1.7462 = 0
+2022-09-05 17:50:26,787   INFO  Dataset sample index:	2560:	1616535666200
+2022-09-05 17:50:27,552   INFO  Plane equation: -0.0010x + -0.0051y + 1.0000z + 1.6793 = 0
+2022-09-05 17:50:27,622   INFO  Dataset sample index:	2570:	1616535676200
+2022-09-05 17:50:28,408   INFO  Plane equation: 0.0086x + -0.0039y + 1.0000z + 1.7458 = 0
+2022-09-05 17:50:28,479   INFO  Dataset sample index:	2580:	1616535686699
+2022-09-05 17:50:29,264   INFO  Plane equation: 0.0110x + -0.0010y + 0.9999z + 1.7484 = 0
+2022-09-05 17:50:29,338   INFO  Dataset sample index:	2590:	1616535696700
+2022-09-05 17:50:30,152   INFO  Plane equation: -0.0012x + -0.0002y + 1.0000z + 0.6905 = 0
+2022-09-05 17:50:30,224   INFO  Dataset sample index:	2600:	1616535706700
+2022-09-05 17:50:30,984   INFO  Plane equation: 0.0231x + 0.0038y + 0.9997z + 1.7326 = 0
+2022-09-05 17:50:31,054   INFO  Dataset sample index:	2610:	1616535716700
+2022-09-05 17:50:31,861   INFO  Plane equation: 0.0076x + 0.0004y + 1.0000z + 1.7495 = 0
+2022-09-05 17:50:31,930   INFO  Dataset sample index:	2620:	1616535726700
+2022-09-05 17:50:32,734   INFO  Plane equation: 0.0225x + -0.0044y + 0.9997z + 1.7628 = 0
+2022-09-05 17:50:32,806   INFO  Dataset sample index:	2630:	1616535736699
+2022-09-05 17:50:33,604   INFO  Plane equation: 0.0039x + 0.0095y + 0.9999z + 1.7344 = 0
+2022-09-05 17:50:33,684   INFO  Dataset sample index:	2640:	1616535746699
+2022-09-05 17:50:34,470   INFO  Plane equation: 0.0077x + -0.0042y + 1.0000z + 1.7379 = 0
+2022-09-05 17:50:34,548   INFO  Dataset sample index:	2650:	1616535756699
+2022-09-05 17:50:35,330   INFO  Plane equation: 0.0075x + -0.0012y + 1.0000z + 1.7726 = 0
+2022-09-05 17:50:35,405   INFO  Dataset sample index:	2660:	1616535766700
+2022-09-05 17:50:36,221   INFO  Plane equation: 0.0051x + -0.0030y + 1.0000z + 1.7519 = 0
+2022-09-05 17:50:36,290   INFO  Dataset sample index:	2670:	1616535776699
+2022-09-05 17:50:37,074   INFO  Plane equation: 0.0001x + 0.0043y + 1.0000z + 1.7842 = 0
+2022-09-05 17:50:37,145   INFO  Dataset sample index:	2680:	1616535786699
+2022-09-05 17:50:37,953   INFO  Plane equation: 0.0022x + 0.0005y + 1.0000z + 1.7578 = 0
+2022-09-05 17:50:38,025   INFO  Dataset sample index:	2690:	1616535796700
+2022-09-05 17:50:38,815   INFO  Plane equation: -0.0044x + -0.0008y + 1.0000z + 1.7341 = 0
+2022-09-05 17:50:38,886   INFO  Dataset sample index:	2700:	1616535807199
+2022-09-05 17:50:39,679   INFO  Plane equation: 0.0103x + -0.0041y + 0.9999z + 1.7186 = 0
+2022-09-05 17:50:39,746   INFO  Dataset sample index:	2710:	1616535817200
+2022-09-05 17:50:40,535   INFO  Plane equation: 0.9993x + 0.0371y + -0.0041z + -4.1357 = 0
+2022-09-05 17:50:40,612   INFO  Dataset sample index:	2720:	1616535827699
+2022-09-05 17:50:41,375   INFO  Plane equation: 0.0130x + 0.0058y + 0.9999z + 1.7359 = 0
+2022-09-05 17:50:41,443   INFO  Dataset sample index:	2730:	1616535837700
+2022-09-05 17:50:42,256   INFO  Plane equation: 0.0165x + -0.0070y + 0.9998z + 1.7536 = 0
+2022-09-05 17:50:42,331   INFO  Dataset sample index:	2740:	1616535847700
+2022-09-05 17:50:43,145   INFO  Plane equation: 0.0146x + -0.0028y + 0.9999z + 1.7068 = 0
+2022-09-05 17:50:43,220   INFO  Dataset sample index:	2750:	1616535858200
+2022-09-05 17:50:44,019   INFO  Plane equation: 0.0072x + -0.0072y + 0.9999z + 1.7339 = 0
+2022-09-05 17:50:44,092   INFO  Dataset sample index:	2760:	1616535868199
+2022-09-05 17:50:44,926   INFO  Plane equation: 0.0160x + -0.0010y + 0.9999z + 1.7811 = 0
+2022-09-05 17:50:44,996   INFO  Dataset sample index:	2770:	1616535878200
+2022-09-05 17:50:45,803   INFO  Plane equation: 0.0150x + -0.0024y + 0.9999z + 1.7619 = 0
+2022-09-05 17:50:45,870   INFO  Dataset sample index:	2780:	1616535888199
+2022-09-05 17:50:46,651   INFO  Plane equation: 0.0118x + 0.0012y + 0.9999z + 1.7441 = 0
+2022-09-05 17:50:46,720   INFO  Dataset sample index:	2790:	1616535898200
+2022-09-05 17:50:47,506   INFO  Plane equation: 0.0106x + -0.0012y + 0.9999z + 1.7362 = 0
+2022-09-05 17:50:47,574   INFO  Dataset sample index:	2800:	1616535908200
+2022-09-05 17:50:48,360   INFO  Plane equation: 0.0120x + -0.0009y + 0.9999z + 1.7468 = 0
+2022-09-05 17:50:48,427   INFO  Dataset sample index:	2810:	1616535918199
+2022-09-05 17:50:49,211   INFO  Plane equation: 0.0113x + -0.0012y + 0.9999z + 1.7369 = 0
+2022-09-05 17:50:49,280   INFO  Dataset sample index:	2820:	1616535928199
+2022-09-05 17:50:50,062   INFO  Plane equation: 0.0132x + -0.0013y + 0.9999z + 1.7502 = 0
+2022-09-05 17:50:50,130   INFO  Dataset sample index:	2830:	1616535938200
+2022-09-05 17:50:50,914   INFO  Plane equation: 0.0103x + -0.0013y + 0.9999z + 1.7339 = 0
+2022-09-05 17:50:50,983   INFO  Dataset sample index:	2840:	1616535948199
+2022-09-05 17:50:51,766   INFO  Plane equation: 0.0110x + -0.0013y + 0.9999z + 1.7700 = 0
+2022-09-05 17:50:51,836   INFO  Dataset sample index:	2850:	1616535958200
+2022-09-05 17:50:52,593   INFO  Plane equation: 0.0092x + -0.0083y + 0.9999z + 1.7630 = 0
+2022-09-05 17:50:52,661   INFO  Dataset sample index:	2860:	1618798403099
+2022-09-05 17:50:53,480   INFO  Plane equation: -0.0423x + -0.0017y + 0.9991z + 0.2333 = 0
+2022-09-05 17:50:53,551   INFO  Dataset sample index:	2870:	1618798413101
+2022-09-05 17:50:54,336   INFO  Plane equation: -0.0030x + 0.0011y + 1.0000z + 1.7546 = 0
+2022-09-05 17:50:54,408   INFO  Dataset sample index:	2880:	1618798423600
+2022-09-05 17:50:55,193   INFO  Plane equation: 0.0274x + -0.0060y + 0.9996z + 1.6873 = 0
+2022-09-05 17:50:55,264   INFO  Dataset sample index:	2890:	1618798434099
+2022-09-05 17:50:56,065   INFO  Plane equation: 0.0162x + 0.0028y + 0.9999z + 1.7620 = 0
+2022-09-05 17:50:56,139   INFO  Dataset sample index:	2900:	1618798444600
+2022-09-05 17:50:56,928   INFO  Plane equation: 0.9978x + -0.0359y + -0.0551z + -3.5209 = 0
+2022-09-05 17:50:56,999   INFO  Dataset sample index:	2910:	1618798455099
+2022-09-05 17:50:57,808   INFO  Plane equation: 0.0079x + 0.0021y + 1.0000z + 1.7639 = 0
+2022-09-05 17:50:57,880   INFO  Dataset sample index:	2920:	1618798465600
+2022-09-05 17:50:58,682   INFO  Plane equation: 0.0191x + 0.0030y + 0.9998z + 1.7527 = 0
+2022-09-05 17:50:58,754   INFO  Dataset sample index:	2930:	1618798475599
+2022-09-05 17:50:59,543   INFO  Plane equation: 0.0323x + -0.0034y + 0.9995z + 1.7318 = 0
+2022-09-05 17:50:59,615   INFO  Dataset sample index:	2940:	1618798485598
+2022-09-05 17:51:00,420   INFO  Plane equation: 0.0099x + 0.0006y + 1.0000z + 1.7702 = 0
+2022-09-05 17:51:00,493   INFO  Dataset sample index:	2950:	1618798495600
+2022-09-05 17:51:01,300   INFO  Plane equation: 0.0081x + 0.0011y + 1.0000z + 1.7646 = 0
+2022-09-05 17:51:01,372   INFO  Dataset sample index:	2960:	1618798505599
+2022-09-05 17:51:02,154   INFO  Plane equation: 0.0009x + -0.0016y + 1.0000z + 1.7766 = 0
+2022-09-05 17:51:02,224   INFO  Dataset sample index:	2970:	1618798515600
+2022-09-05 17:51:03,035   INFO  Plane equation: 0.0078x + 0.0039y + 1.0000z + 1.7546 = 0
+2022-09-05 17:51:03,109   INFO  Dataset sample index:	2980:	1618798525599
+2022-09-05 17:51:03,900   INFO  Plane equation: 0.0147x + -0.0041y + 0.9999z + 1.7352 = 0
+2022-09-05 17:51:03,970   INFO  Dataset sample index:	2990:	1618798535600
+2022-09-05 17:51:04,728   INFO  Plane equation: 0.0229x + -0.0036y + 0.9997z + 1.7098 = 0
+2022-09-05 17:51:04,797   INFO  Dataset sample index:	3000:	1618798545599
+2022-09-05 17:51:05,562   INFO  Plane equation: 0.0051x + -0.0039y + 1.0000z + 1.7115 = 0
+2022-09-05 17:51:05,631   INFO  Dataset sample index:	3010:	1618798555600
+2022-09-05 17:51:06,440   INFO  Plane equation: -0.0012x + -0.0002y + 1.0000z + 1.7557 = 0
+2022-09-05 17:51:06,511   INFO  Dataset sample index:	3020:	1618798566600
+2022-09-05 17:51:07,307   INFO  Plane equation: 0.0205x + -0.0015y + 0.9998z + 1.7281 = 0
+2022-09-05 17:51:07,376   INFO  Dataset sample index:	3030:	1618798576600
+2022-09-05 17:51:08,145   INFO  Plane equation: 0.0054x + 0.0098y + 0.9999z + 1.7469 = 0
+2022-09-05 17:51:08,211   INFO  Dataset sample index:	3040:	1618798586600
+2022-09-05 17:51:08,980   INFO  Plane equation: 0.0024x + -0.0011y + 1.0000z + 1.7720 = 0
+2022-09-05 17:51:09,051   INFO  Dataset sample index:	3050:	1618798597599
+2022-09-05 17:51:09,860   INFO  Plane equation: 0.0235x + -0.0008y + 0.9997z + 1.7362 = 0
+2022-09-05 17:51:09,930   INFO  Dataset sample index:	3060:	1618798607600
+2022-09-05 17:51:10,730   INFO  Plane equation: 0.0094x + 0.0024y + 1.0000z + 1.7500 = 0
+2022-09-05 17:51:10,800   INFO  Dataset sample index:	3070:	1618798629599
+2022-09-05 17:51:11,556   INFO  Plane equation: 0.0048x + 0.0004y + 1.0000z + 1.7560 = 0
+2022-09-05 17:51:11,629   INFO  Dataset sample index:	3080:	1618798639599
+2022-09-05 17:51:12,386   INFO  Plane equation: 0.0058x + -0.0011y + 1.0000z + 1.7570 = 0
+2022-09-05 17:51:12,461   INFO  Dataset sample index:	3090:	1618798649600
+2022-09-05 17:51:13,258   INFO  Plane equation: 0.0133x + -0.0035y + 0.9999z + 1.7721 = 0
+2022-09-05 17:51:13,331   INFO  Dataset sample index:	3100:	1618798659600
+2022-09-05 17:51:14,137   INFO  Plane equation: 0.0093x + 0.0036y + 1.0000z + 1.7748 = 0
+2022-09-05 17:51:14,231   INFO  Dataset sample index:	3110:	1618798669600
+2022-09-05 17:51:15,031   INFO  Plane equation: 0.0041x + 0.0017y + 1.0000z + 1.7526 = 0
+2022-09-05 17:51:15,109   INFO  Dataset sample index:	3120:	1618798679600
+2022-09-05 17:51:15,908   INFO  Plane equation: 0.0015x + 0.0044y + 1.0000z + 1.7643 = 0
+2022-09-05 17:51:15,982   INFO  Dataset sample index:	3130:	1618798689600
+2022-09-05 17:51:16,779   INFO  Plane equation: -0.0029x + 0.0041y + 1.0000z + 1.7861 = 0
+2022-09-05 17:51:16,853   INFO  Dataset sample index:	3140:	1618798700100
+2022-09-05 17:51:17,648   INFO  Plane equation: 0.0042x + -0.0037y + 1.0000z + 1.7591 = 0
+2022-09-05 17:51:17,722   INFO  Dataset sample index:	3150:	1618798710099
+2022-09-05 17:51:18,518   INFO  Plane equation: 0.0084x + 0.0018y + 1.0000z + 1.7742 = 0
+2022-09-05 17:51:18,591   INFO  Dataset sample index:	3160:	1618798720099
+2022-09-05 17:51:19,389   INFO  Plane equation: 0.0412x + 0.0041y + 0.9991z + 1.6859 = 0
+2022-09-05 17:51:19,466   INFO  Dataset sample index:	3170:	1618798730099
+2022-09-05 17:51:20,256   INFO  Plane equation: 0.0203x + -0.0022y + 0.9998z + 1.7669 = 0
+2022-09-05 17:51:20,331   INFO  Dataset sample index:	3180:	1618798741099
+2022-09-05 17:51:21,134   INFO  Plane equation: -0.0039x + -0.0016y + 1.0000z + 1.7392 = 0
+2022-09-05 17:51:21,208   INFO  Dataset sample index:	3190:	1618798751600
+2022-09-05 17:51:22,002   INFO  Plane equation: 0.0189x + 0.0026y + 0.9998z + 1.7537 = 0
+2022-09-05 17:51:22,074   INFO  Dataset sample index:	3200:	1618798761599
+2022-09-05 17:51:22,875   INFO  Plane equation: 0.0164x + 0.0022y + 0.9999z + 1.7415 = 0
+2022-09-05 17:51:22,947   INFO  Dataset sample index:	3210:	1618798772099
+2022-09-05 17:51:23,750   INFO  Plane equation: 0.0123x + 0.0024y + 0.9999z + 1.7627 = 0
+2022-09-05 17:51:23,823   INFO  Dataset sample index:	3220:	1618798782600
+2022-09-05 17:51:24,623   INFO  Plane equation: 0.0110x + 0.0022y + 0.9999z + 1.7740 = 0
+2022-09-05 17:51:24,696   INFO  Dataset sample index:	3230:	1618798801599
+2022-09-05 17:51:25,500   INFO  Plane equation: 0.0089x + 0.0024y + 1.0000z + 1.7882 = 0
+2022-09-05 17:51:25,570   INFO  Dataset sample index:	3240:	1618798811599
+2022-09-05 17:51:26,376   INFO  Plane equation: 0.0060x + -0.0012y + 1.0000z + 1.7804 = 0
+2022-09-05 17:51:26,447   INFO  Dataset sample index:	3250:	1618798836600
+2022-09-05 17:51:27,253   INFO  Plane equation: 0.0218x + 0.0075y + 0.9997z + 1.6714 = 0
+2022-09-05 17:51:27,323   INFO  Dataset sample index:	3260:	1618798847101
+2022-09-05 17:51:28,107   INFO  Plane equation: 0.0255x + 0.0018y + 0.9997z + 1.7170 = 0
+2022-09-05 17:51:28,178   INFO  Dataset sample index:	3270:	1618798858100
+2022-09-05 17:51:28,939   INFO  Plane equation: 0.0051x + 0.0034y + 1.0000z + 1.7178 = 0
+2022-09-05 17:51:29,009   INFO  Dataset sample index:	3280:	1618798868599
+2022-09-05 17:51:29,756   INFO  Plane equation: 0.0069x + 0.0002y + 1.0000z + 1.7482 = 0
+2022-09-05 17:51:29,825   INFO  Dataset sample index:	3290:	1618798878600
+2022-09-05 17:51:30,591   INFO  Plane equation: 0.0093x + -0.0009y + 1.0000z + 1.7368 = 0
+2022-09-05 17:51:30,662   INFO  Dataset sample index:	3300:	1618798889099
+2022-09-05 17:51:31,423   INFO  Plane equation: 0.0089x + 0.0012y + 1.0000z + 1.7717 = 0
+2022-09-05 17:51:31,494   INFO  Dataset sample index:	3310:	1618798899100
+2022-09-05 17:51:32,217   INFO  Plane equation: 0.0021x + 0.0004y + 1.0000z + 1.7528 = 0
+2022-09-05 17:51:32,285   INFO  Dataset sample index:	3320:	1618798909600
+2022-09-05 17:51:32,990   INFO  Plane equation: 0.0059x + 0.0012y + 1.0000z + 1.7444 = 0
+2022-09-05 17:51:32,990   INFO  Scenes with relevant planes: (311 / 332) [idx % 10]
+2022-09-05 17:51:32,990   INFO  Plane D min:    	 0.14049089940206136
+2022-09-05 17:51:32,991   INFO  Plane D max:    	 1.814319428721537
+2022-09-05 17:51:32,991   INFO  Plane D mean:   	 1.6726722756027796
+2022-09-05 17:51:32,991   INFO  Plane D median: 	 1.7455943421744071
+2022-09-05 17:51:32,991   INFO  Demo done.
