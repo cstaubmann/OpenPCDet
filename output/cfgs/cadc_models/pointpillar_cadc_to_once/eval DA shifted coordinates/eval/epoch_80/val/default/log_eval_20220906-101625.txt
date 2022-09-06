@@ -1,0 +1,164 @@
+2022-09-06 10:16:25,593   INFO  **********************Start logging**********************
+2022-09-06 10:16:25,593   INFO  CUDA_VISIBLE_DEVICES=ALL
+2022-09-06 10:16:25,593   INFO  cfg_file         ./cfgs/cadc_models/pointpillar_cadc_to_once.yaml
+2022-09-06 10:16:25,593   INFO  batch_size       4
+2022-09-06 10:16:25,593   INFO  workers          0
+2022-09-06 10:16:25,594   INFO  extra_tag        eval DA shifted coordinates
+2022-09-06 10:16:25,594   INFO  ckpt             ../output/cfgs/cadc_models/pointpillar/default/ckpt/checkpoint_epoch_80.pth
+2022-09-06 10:16:25,594   INFO  launcher         none
+2022-09-06 10:16:25,594   INFO  tcp_port         18888
+2022-09-06 10:16:25,594   INFO  local_rank       0
+2022-09-06 10:16:25,594   INFO  set_cfgs         None
+2022-09-06 10:16:25,594   INFO  max_waiting_mins 30
+2022-09-06 10:16:25,594   INFO  start_epoch      0
+2022-09-06 10:16:25,594   INFO  eval_tag         default
+2022-09-06 10:16:25,594   INFO  eval_all         False
+2022-09-06 10:16:25,594   INFO  ckpt_dir         None
+2022-09-06 10:16:25,594   INFO  save_to_file     False
+2022-09-06 10:16:25,594   INFO  runs_on          server
+2022-09-06 10:16:25,594   INFO  for_test         False
+2022-09-06 10:16:25,594   INFO  random_seed      None
+2022-09-06 10:16:25,594   INFO  cfg.ROOT_DIR: /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet
+2022-09-06 10:16:25,594   INFO  cfg.LOCAL_RANK: 0
+2022-09-06 10:16:25,594   INFO  cfg.CLASS_NAMES: ['Car', 'Pedestrian', 'Pickup_Truck']
+2022-09-06 10:16:25,594   INFO  
+cfg.DATA_CONFIG = edict()
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.DATASET: ONCEDataset
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/once
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.CLOUD_DATA_PATH: /cache/once
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-51.2, -51.2, -3, 51.2, 51.2, 3]
+2022-09-06 10:16:25,594   INFO  
+cfg.DATA_CONFIG.INFO_PATH = edict()
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['once_infos_train.pkl']
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.INFO_PATH.val: ['once_infos_val.pkl']
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['once_infos_test.pkl']
+2022-09-06 10:16:25,594   INFO  
+cfg.DATA_CONFIG.DATA_SPLIT = edict()
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2022-09-06 10:16:25,594   INFO  
+cfg.DATA_CONFIG.DATA_AUGMENTOR = edict()
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2022-09-06 10:16:25,594   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['once_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Car:5', 'Bus:5', 'Truck:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Car:1', 'Bus:4', 'Truck:3', 'Pedestrian:2', 'Cyclist:2'], 'NUM_POINT_FEATURES': 4, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2022-09-06 10:16:25,595   INFO  
+cfg.DATA_CONFIG.POINT_FEATURE_ENCODING = edict()
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity']
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.2, 0.2, 6], 'MAX_POINTS_PER_VOXEL': 20, 'MAX_NUMBER_OF_VOXELS': {'train': 30000, 'test': 30000}}]
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/once_dataset.yaml
+2022-09-06 10:16:25,595   INFO  
+cfg.DATA_CONFIG.DOMAIN_ADAPTATION = edict()
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG.DOMAIN_ADAPTATION.TARGET_CLASS_NAMES: ['Car', 'Bus', 'Truck', 'Pedestrian', 'Cyclist']
+2022-09-06 10:16:25,595   INFO  
+cfg.DATA_CONFIG.DOMAIN_ADAPTATION.TARGET_CLASS_MAPPING = edict()
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG.DOMAIN_ADAPTATION.TARGET_CLASS_MAPPING.Car: Vehicle
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG.DOMAIN_ADAPTATION.TARGET_CLASS_MAPPING.Pedestrian: Pedestrian
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG.DOMAIN_ADAPTATION.TARGET_CLASS_MAPPING.Pickup_Truck: Vehicle
+2022-09-06 10:16:25,595   INFO  cfg.DATA_CONFIG.DOMAIN_ADAPTATION.SHIFT_COORDINATES: [0.0, 0.0, -0.53]
+2022-09-06 10:16:25,595   INFO  
+cfg.MODEL = edict()
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.NAME: PointPillar
+2022-09-06 10:16:25,595   INFO  
+cfg.MODEL.VFE = edict()
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.VFE.NAME: PillarVFE
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.VFE.USE_NORM: True
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64]
+2022-09-06 10:16:25,595   INFO  
+cfg.MODEL.MAP_TO_BEV = edict()
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2022-09-06 10:16:25,595   INFO  
+cfg.MODEL.BACKBONE_2D = edict()
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [2, 2, 2]
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [0.5, 1, 2]
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2022-09-06 10:16:25,595   INFO  
+cfg.MODEL.DENSE_HEAD = edict()
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.DENSE_HEAD.NAME: AnchorHeadSingle
+2022-09-06 10:16:25,595   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.USE_DIRECTION_CLASSIFIER: True
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.DIR_OFFSET: 0.78539
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.DIR_LIMIT_OFFSET: 0.0
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.NUM_DIR_BINS: 2
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.ANCHOR_GENERATOR_CONFIG: [{'class_name': 'Car', 'anchor_sizes': [[4.58, 1.88, 1.67]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-2.18], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.6, 'unmatched_threshold': 0.45}, {'class_name': 'Pedestrian', 'anchor_sizes': [[0.8, 0.75, 1.76]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-2.03], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}, {'class_name': 'Pickup_Truck', 'anchor_sizes': [[5.76, 2.09, 2.01]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-2.43], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.6, 'unmatched_threshold': 0.45}]
+2022-09-06 10:16:25,596   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG = edict()
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NAME: AxisAlignedTargetAssigner
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.POS_FRACTION: -1.0
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.SAMPLE_SIZE: 512
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NORM_BY_NUM_EXAMPLES: False
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MATCH_HEIGHT: False
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER: ResidualCoder
+2022-09-06 10:16:25,596   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG = edict()
+2022-09-06 10:16:25,596   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS = edict()
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.dir_weight: 0.2
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2022-09-06 10:16:25,596   INFO  
+cfg.MODEL.POST_PROCESSING = edict()
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.1
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: cadc
+2022-09-06 10:16:25,596   INFO  
+cfg.MODEL.POST_PROCESSING.NMS_CONFIG = edict()
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: False
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.01
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2022-09-06 10:16:25,596   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2022-09-06 10:16:25,596   INFO  
+cfg.OPTIMIZATION = edict()
+2022-09-06 10:16:25,596   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 4
+2022-09-06 10:16:25,596   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2022-09-06 10:16:25,596   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2022-09-06 10:16:25,596   INFO  cfg.OPTIMIZATION.LR: 0.003
+2022-09-06 10:16:25,596   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2022-09-06 10:16:25,597   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2022-09-06 10:16:25,597   INFO  cfg.TAG: pointpillar_cadc_to_once
+2022-09-06 10:16:25,597   INFO  cfg.EXP_GROUP_PATH: cfgs/cadc_models
+2022-09-06 10:16:25,597   INFO  Loading ONCE dataset
+2022-09-06 10:16:26,008   INFO  Total samples for ONCE dataset: 3321
+2022-09-06 10:16:27,740   INFO  ==> Loading parameters from checkpoint ../output/cfgs/cadc_models/pointpillar/default/ckpt/checkpoint_epoch_80.pth to GPU
+2022-09-06 10:16:27,807   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+pya764bf9
+2022-09-06 10:16:27,814   INFO  ==> Done (loaded 127/127)
+2022-09-06 10:16:27,819   INFO  *************** EPOCH 80 EVALUATION *****************
+2022-09-06 10:17:54,767   INFO  *************** Performance of EPOCH 80 *****************
+2022-09-06 10:17:54,769   INFO  Generate label finished(sec_per_example: 0.0262 second).
+2022-09-06 10:17:54,769   INFO  recall_roi_0.3: 0.000000
+2022-09-06 10:17:54,769   INFO  recall_rcnn_0.3: 0.193912
+2022-09-06 10:17:54,769   INFO  recall_roi_0.5: 0.000000
+2022-09-06 10:17:54,769   INFO  recall_rcnn_0.5: 0.121591
+2022-09-06 10:17:54,769   INFO  recall_roi_0.7: 0.000000
+2022-09-06 10:17:54,769   INFO  recall_rcnn_0.7: 0.030074
+2022-09-06 10:17:54,770   INFO  Average predicted number of objects(3321 samples): 72.152
+2022-09-06 10:17:56,430   INFO  Mapping class names for ONCE evaluation...
+2022-09-06 10:17:56,459   INFO  Getting evaluation results for classes ['Car', 'Bus', 'Truck', 'Pedestrian', 'Cyclist']...
+
+2022-09-06 10:18:14,329   INFO  
+|AP@50       |overall     |0-30m       |30-50m      |50m-inf     |
+|Vehicle     |0.37        |0.17        |0.90        |0.10        |
+|Pedestrian  |0.21        |0.10        |0.45        |0.07        |
+|Cyclist     |0.00        |0.00        |0.00        |0.00        |
+|mAP         |0.19        |0.09        |0.45        |0.06        |
+
+2022-09-06 10:18:14,331   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/cadc_models/pointpillar_cadc_to_once/eval DA shifted coordinates/eval/epoch_80/val/default
+2022-09-06 10:18:14,331   INFO  ****************Evaluation done.*****************
