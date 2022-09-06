@@ -14,6 +14,7 @@ DATA_CONFIG:
           Pedestrian: Pedestrian,
           Cyclist: DontCare,
         }
+        SHIFT_COORDINATES: [ 0.0, 0.0, 0.53 ]
 
     DATA_PROCESSOR:
         - NAME: mask_points_and_boxes_outside_range

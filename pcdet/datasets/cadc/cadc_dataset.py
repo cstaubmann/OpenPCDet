@@ -316,8 +316,7 @@ class CadcDataset(DatasetTemplate):
         with open(db_info_save_path, 'wb') as f:
             pickle.dump(all_db_infos, f)
 
-    @staticmethod
-    def generate_prediction_dicts(batch_dict, pred_dicts, class_names, output_path=None):
+    def generate_prediction_dicts(self, batch_dict, pred_dicts, class_names, output_path=None):
         """
         Args:
             batch_dict:
@@ -362,6 +361,10 @@ class CadcDataset(DatasetTemplate):
             pred_dict = get_template_prediction(pred_scores.shape[0])
             if pred_scores.shape[0] == 0:
                 return pred_dict
+
+            if self.da_parameters:
+                shift_coordinates = self.da_parameters.get('SHIFT_COORDINATES', [0.0, 0.0, 0.0])
+                pred_boxes[:, 0:3] -= shift_coordinates
 
             calib = batch_dict['calib'][batch_index]
             image_shape = batch_dict['image_shape'][batch_index].cpu()
@@ -483,6 +486,10 @@ class CadcDataset(DatasetTemplate):
             fov_flag = self.get_fov_flag(pts_rect, img_shape, calib)
             points = points[fov_flag]
 
+        if self.da_parameters:
+            shift_coordinates = self.da_parameters.get('SHIFT_COORDINATES', [0.0, 0.0, 0.0])
+            points[:, 0:3] += np.array(shift_coordinates, dtype=np.float32)
+
         input_dict = {
             'points': points,
             'sample_idx': sample_idx,
@@ -513,10 +520,14 @@ class CadcDataset(DatasetTemplate):
                 'gt_boxes': gt_boxes_lidar
             })
 
+            if self.da_parameters:
+                shift_coordinates = self.da_parameters.get('SHIFT_COORDINATES', [0.0, 0.0, 0.0])
+                input_dict['gt_boxes'][:, 0:3] += shift_coordinates
+
         data_dict = self.prepare_data(data_dict=input_dict)
 
         data_dict['image_shape'] = img_shape
-        return data_dict 
+        return data_dict
 
 def create_cadc_infos(dataset_cfg, class_names, data_path, save_path, workers=8):
     dataset = CadcDataset(dataset_cfg=dataset_cfg, class_names=class_names, root_path=data_path, training=False)
