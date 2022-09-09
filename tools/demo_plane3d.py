@@ -74,6 +74,8 @@ def parse_config():
                         help='draw groundtruth boxes in scene')
     parser.add_argument('--fit_plane', dest='fit_plane', action='store_true', default=False,
                         help='draw best fitting plane for points pointcloud')
+    parser.add_argument('--calc_gt_dims', dest='calc_gt_dims', action='store_true', default=False,
+                        help='calculate average dimensions of groundtruth bounding boxes for each class')
     parser.add_argument('--log_file', type=str, default='', help='filename (without ext) to save logger output to disk')
 
     args = parser.parse_args()
@@ -119,10 +121,12 @@ def main():
     with torch.no_grad():
         # ? numpy array for plane fitting
         np_plane_models = np.array([])
+        # ? numpy array for gt box-size calculation
+        np_gt_box_sizes = np.array([])
 
         for idx, data_dict in enumerate(demo_dataset):
             if cfg.DATA_CONFIG.DATASET == 'CadcDataset':
-                gt_boxes = data_dict['gt_boxes'] if args.draw_gt_boxes else None
+                gt_boxes = data_dict['gt_boxes']
                 sample_idx = data_dict['sample_idx']
                 sample_date = sample_idx[0]
                 sample_sequence = sample_idx[1]
@@ -130,7 +134,7 @@ def main():
                 logger.info(f'Dataset sample index:\t{idx}:'
                             f'\t{sample_date} \t{sample_sequence} \t{sample_timestamp}')
             elif cfg.DATA_CONFIG.DATASET == 'ONCEDataset':
-                gt_boxes = data_dict['gt_boxes'] if args.draw_gt_boxes else None
+                gt_boxes = data_dict['gt_boxes']
                 sample_frameid = data_dict['frame_id']
                 logger.info(f'Dataset sample index:\t{idx}:\t{sample_frameid}')
             else:
@@ -139,6 +143,11 @@ def main():
             data_dict = demo_dataset.collate_batch([data_dict])
             load_data_to_gpu(data_dict)
             pred_dicts, _ = model.forward(data_dict)
+
+            if args.calc_gt_dims:
+                for gt_box in gt_boxes:
+                    gt_box_dim_with_class = np.array([gt_box[3], gt_box[4], gt_box[5], gt_box[7]])
+                    np_gt_box_sizes = np.append(np_gt_box_sizes, gt_box_dim_with_class)
 
             pc_plane = None
             if args.fit_plane:
@@ -162,12 +171,24 @@ def main():
             if not args.draw_scenes:
                 continue
             V.draw_scenes(
-                points=data_dict['points'][:, 1:], ref_boxes=pred_dicts[0]['pred_boxes'], gt_boxes=gt_boxes,
-                ref_scores=pred_dicts[0]['pred_scores'], ref_labels=pred_dicts[0]['pred_labels'],
+                points=data_dict['points'][:, 1:],
+                ref_boxes=pred_dicts[0]['pred_boxes'],
+                gt_boxes=(gt_boxes if args.draw_gt_boxes else None),
+                ref_scores=pred_dicts[0]['pred_scores'],
+                ref_labels=pred_dicts[0]['pred_labels'],
                 pc_plane=pc_plane
             )
             if not OPEN3D_FLAG:
                 mlab.show(stop=True)
+
+    if args.calc_gt_dims:
+        np_gt_box_sizes = np_gt_box_sizes.reshape((-1, 4))
+        logger.info(f"Calculated average dimensions (l, w, h) of groundthruth bounding boxes for each class:")
+        for class_id, class_name in enumerate(cfg.CLASS_NAMES, start=1):
+            gt_sizes_cur_class = np_gt_box_sizes[np_gt_box_sizes[:, -1] == class_id][:, :-1]
+            gt_mean_sizes = np.mean(gt_sizes_cur_class, axis=0) if len(gt_sizes_cur_class) else None
+            gt_median_sizes = np.median(gt_sizes_cur_class, axis=0) if len(gt_sizes_cur_class) else None
+            logger.info(f"{class_name}: mean={gt_mean_sizes} median={gt_median_sizes}")
 
     if args.fit_plane:
         np_plane_models = np_plane_models.reshape((-1, 4))

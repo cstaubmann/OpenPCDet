@@ -1,0 +1,12 @@
+2022-09-09 12:41:46,617   INFO  -----------------Quick Demo of OpenPCDet-------------------------
+2022-09-09 12:41:46,618   INFO  Loading CADC dataset
+2022-09-09 12:41:46,665   INFO  Total samples for CADC dataset: 1400
+2022-09-09 12:41:46,665   INFO  Total number of samples: 	1400
+2022-09-09 12:41:48,290   INFO  ==> Loading parameters from checkpoint ../output/cfgs/cadc_models/second/default/ckpt/checkpoint_epoch_80.pth to CPU
+2022-09-09 12:41:48,320   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+pya764bf9
+2022-09-09 12:41:48,327   INFO  ==> Done (loaded 163/163)
+2022-09-09 12:43:25,596   INFO  Calculated average dimensions (l, w, h) of groundthruth bounding boxes for each class:
+2022-09-09 12:43:25,598   INFO  Car: mean=[4.57712162 1.87916758 1.68148469] median=[4.526 1.856 1.66 ]
+2022-09-09 12:43:25,599   INFO  Pedestrian: mean=[0.77808379 0.75249863 1.84128901] median=[0.786 0.73  1.849]
+2022-09-09 12:43:25,600   INFO  Pickup_Truck: mean=[5.61581211 2.12289322 1.98878542] median=[5.727  2.124  1.9735]
+2022-09-09 12:43:25,600   INFO  Demo done.

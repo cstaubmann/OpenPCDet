@@ -1,0 +1,14 @@
+2022-09-09 12:45:05,852   INFO  -----------------Quick Demo of OpenPCDet-------------------------
+2022-09-09 12:45:05,852   INFO  Loading ONCE dataset
+2022-09-09 12:45:06,191   INFO  Total samples for ONCE dataset: 3321
+2022-09-09 12:45:06,201   INFO  Total number of samples: 	3321
+2022-09-09 12:45:07,838   INFO  ==> Loading parameters from checkpoint ../output/cfgs/once_models/sup_models/second/default/ckpt/checkpoint_epoch_80.pth to CPU
+2022-09-09 12:45:07,868   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+pya764bf9
+2022-09-09 12:45:07,875   INFO  ==> Done (loaded 163/163)
+2022-09-09 12:47:25,383   INFO  Calculated average dimensions (l, w, h) of groundthruth bounding boxes for each class:
+2022-09-09 12:47:25,387   INFO  Car: mean=[4.4017476  1.8449613  1.58730208] median=[4.44612122 1.80216787 1.56955194]
+2022-09-09 12:47:25,388   INFO  Bus: mean=[10.7149028   2.89770131  3.30036379] median=[10.97436285  2.89303291  3.29130745]
+2022-09-09 12:47:25,389   INFO  Truck: mean=[6.39430229 2.35515898 2.51962029] median=[5.77611828 2.28820419 2.32066202]
+2022-09-09 12:47:25,391   INFO  Pedestrian: mean=[0.78927738 0.78537118 1.68635646] median=[0.78412539 0.78288513 1.68027151]
+2022-09-09 12:47:25,392   INFO  Cyclist: mean=[2.20393316 0.82230265 1.38379274] median=[2.29999995 0.80000001 1.41400206]
+2022-09-09 12:47:25,393   INFO  Demo done.
