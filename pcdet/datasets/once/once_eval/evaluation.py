@@ -45,7 +45,8 @@ def get_evaluation_results(gt_annos, pred_annos, classes,
         if ('Car' in classes) or ('Bus' in classes) or ('Truck' in classes):
             assert ('Car' in classes) and ('Bus' in classes) and ('Truck' in classes), "Car/Bus/Truck must all exist for vehicle detection"
         classes = [cls_name for cls_name in classes if cls_name not in ['Car', 'Bus', 'Truck']]
-        classes.insert(0, 'Vehicle')
+        if 'Vehicle' not in classes:
+            classes.insert(0, 'Vehicle')
 
     num_samples = len(gt_annos)
     split_parts = compute_split_parts(num_samples, num_parts)

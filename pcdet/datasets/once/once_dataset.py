@@ -390,25 +390,80 @@ class ONCEDataset(DatasetTemplate):
         return annos
 
     def evaluation(self, det_annos, class_names, **kwargs):
-        from .once_eval.evaluation import get_evaluation_results
+
+        def once_eval(eval_det_annos, eval_gt_annos, eval_class_names):
+            from .once_eval.evaluation import get_evaluation_results
+            if self.da_parameters:
+                # ? Mapping of predicted class names for DA
+                for det_anno in eval_det_annos[:]:
+                    anno = det_anno['name']
+                    if len(anno) != 0:
+                        for source_class, target_class in eval_det_class_mapping.items():
+                            # anno[anno == source_class] = 'Vehicle' if target_class == 'Car' else target_class
+                            anno[anno == source_class] = target_class
+                # ? Mapping of groundtruth class names for DA
+                for gt_anno in eval_gt_annos[:]:
+                    anno = gt_anno['name']
+                    if len(anno) != 0:
+                        for source_class, target_class in eval_gt_class_mapping.items():
+                            # anno[anno == source_class] = 'Vehicle' if target_class == 'Car' else target_class
+                            anno[anno == source_class] = target_class
+                # ? Set class names for ONCE evaluation
+                once_class_names = list(set([eval_det_class_mapping[x] for x in eval_class_names]))
+                once_class_names.sort(key=eval_class_names.index)
+                eval_class_names = ['Vehicle' if anno == 'Car' else anno for anno in once_class_names]
+            self.logger.info(f"Getting ONCE evaluation results for classes {eval_class_names}...\n")
+            ap_result_str, ap_dict = get_evaluation_results(
+                gt_annos=eval_gt_annos, pred_annos=eval_det_annos, classes=eval_class_names)
+            return ap_result_str, ap_dict
+
+        def kitti_eval(eval_det_annos, eval_gt_annos, eval_class_names):
+            from ..kitti.kitti_object_eval_python import eval as kitti_eval
+            from ..kitti import kitti_utils
+            det_map_class_to_kitti = eval_det_class_mapping or {
+                # ? Mapping of default ONCE class names to KITTI
+                'Car': 'Car',
+                'Bus': 'Car',
+                'Truck': 'Car',
+                'Pedestrian': 'Pedestrian',
+                'Cyclist': 'Cyclist',
+            }
+            gt_map_class_to_kitti = eval_gt_class_mapping or det_map_class_to_kitti
+            kitti_utils.transform_annotations_to_kitti_format(
+                annos=eval_det_annos, map_name_to_kitti=det_map_class_to_kitti)
+            kitti_utils.transform_annotations_to_kitti_format(
+                annos=eval_gt_annos, map_name_to_kitti=gt_map_class_to_kitti)
+            kitti_class_names = list(set([det_map_class_to_kitti[x] for x in eval_class_names]))
+            kitti_class_names.sort(key=eval_class_names.index)
+            self.logger.info(f"Getting KITTI evaluation results for classes {kitti_class_names}...\n")
+            ap_result_str, ap_dict = kitti_eval.get_official_eval_result(
+                gt_annos=eval_gt_annos, dt_annos=eval_det_annos, current_classes=kitti_class_names)
+            return ap_result_str, ap_dict
 
         eval_det_annos = copy.deepcopy(det_annos)
         eval_gt_annos = [copy.deepcopy(info['annos']) for info in self.once_infos]
         eval_class_names = copy.deepcopy(class_names)
+        eval_det_class_mapping = None
+        eval_gt_class_mapping = None
 
+        # ? Check DA parameters for mapping of class names and evaluation
         if self.da_parameters:
-            self.logger.info("Mapping class names for ONCE evaluation...")
-            # ? Mapping of predicted class names for DA
-            for det_anno in eval_det_annos[:]:
-                anno = det_anno['name']
-                if len(anno) != 0:
-                    for source_class, target_class in self.da_parameters.TARGET_CLASS_MAPPING.items():
-                        anno[anno == source_class] = target_class
-            # ? Corresponding class names for ONCE evaluation
-            eval_class_names = self.da_parameters.TARGET_CLASS_NAMES
+            eval_det_class_mapping = self.da_parameters.DET_CLASS_MAPPING
+            eval_gt_class_mapping = self.da_parameters.GT_CLASS_MAPPING
+            # ? Validate class mappings
+            assert [source_class in eval_class_names and target_class in self.class_names
+                    for source_class, target_class in eval_det_class_mapping.items()], 'invalid det class mappings!'
+            assert [source_class in self.class_names and target_class in self.class_names
+                    for source_class, target_class in eval_gt_class_mapping.items()], 'invalid gt class mappings!'
 
-        self.logger.info(f"Getting evaluation results for classes {eval_class_names}...\n")
-        ap_result_str, ap_dict = get_evaluation_results(eval_gt_annos, eval_det_annos, eval_class_names)
+        eval_metric = kwargs.get('eval_metric')
+        if eval_metric == 'once':
+            ap_result_str, ap_dict = once_eval(eval_det_annos, eval_gt_annos, eval_class_names)
+        elif eval_metric == 'kitti':
+            ap_result_str, ap_dict = kitti_eval(eval_det_annos, eval_gt_annos, eval_class_names)
+        else:
+            self.logger.info(f"Unsupported eval metric: {eval_metric}")
+            raise NotImplementedError
 
         return ap_result_str, ap_dict
 

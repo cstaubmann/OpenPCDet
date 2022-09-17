@@ -26,6 +26,8 @@ def transform_annotations_to_kitti_format(annos, map_name_to_kitti=None, info_wi
         anno['occluded'] = np.zeros(len(anno['name']))
         if 'boxes_lidar' in anno:
             gt_boxes_lidar = anno['boxes_lidar'].copy()
+        elif 'boxes_3d' in anno:
+            gt_boxes_lidar = anno['boxes_3d'].copy()
         else:
             gt_boxes_lidar = anno['gt_boxes_lidar'].copy()
 
