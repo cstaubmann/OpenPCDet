@@ -409,7 +409,8 @@ class ONCEDataset(DatasetTemplate):
                             # anno[anno == source_class] = 'Vehicle' if target_class == 'Car' else target_class
                             anno[anno == source_class] = target_class
                 # ? Set class names for ONCE evaluation
-                once_class_names = list(set([eval_det_class_mapping[x] for x in eval_class_names]))
+                once_class_names = list(set([eval_det_class_mapping[x] for x in eval_class_names
+                                             if eval_det_class_mapping[x] != 'DontCare']))
                 once_class_names.sort(key=eval_class_names.index)
                 eval_class_names = ['Vehicle' if anno == 'Car' else anno for anno in once_class_names]
             self.logger.info(f"Getting ONCE evaluation results for classes {eval_class_names}...\n")
@@ -433,7 +434,8 @@ class ONCEDataset(DatasetTemplate):
                 annos=eval_det_annos, map_name_to_kitti=det_map_class_to_kitti)
             kitti_utils.transform_annotations_to_kitti_format(
                 annos=eval_gt_annos, map_name_to_kitti=gt_map_class_to_kitti)
-            kitti_class_names = list(set([det_map_class_to_kitti[x] for x in eval_class_names]))
+            kitti_class_names = list(set([det_map_class_to_kitti[x] for x in eval_class_names
+                                          if det_map_class_to_kitti[x] != 'DontCare']))
             kitti_class_names.sort(key=eval_class_names.index)
             self.logger.info(f"Getting KITTI evaluation results for classes {kitti_class_names}...\n")
             ap_result_str, ap_dict = kitti_eval.get_official_eval_result(
@@ -451,10 +453,11 @@ class ONCEDataset(DatasetTemplate):
             eval_det_class_mapping = self.da_parameters.DET_CLASS_MAPPING
             eval_gt_class_mapping = self.da_parameters.GT_CLASS_MAPPING
             # ? Validate class mappings
-            assert [source_class in eval_class_names and target_class in self.class_names
-                    for source_class, target_class in eval_det_class_mapping.items()], 'invalid det class mappings!'
-            assert [source_class in self.class_names and target_class in self.class_names
-                    for source_class, target_class in eval_gt_class_mapping.items()], 'invalid gt class mappings!'
+            assert all(source_class in eval_class_names
+                       and (target_class in self.class_names or target_class == 'DontCare')
+                       for source_class, target_class in eval_det_class_mapping.items()), 'invalid det class mappings!'
+            assert all(target_class in self.class_names or target_class == 'DontCare'
+                       for _, target_class in eval_gt_class_mapping.items()), 'invalid gt class mappings!'
 
         eval_metric = kwargs.get('eval_metric')
         if eval_metric == 'once':

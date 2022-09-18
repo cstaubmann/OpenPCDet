@@ -412,59 +412,109 @@ class CadcDataset(DatasetTemplate):
 
     def evaluation(self, det_annos, class_names, **kwargs):
         assert 'annos' in self.cadc_infos[0].keys()
-        import pcdet.datasets.kitti.kitti_object_eval_python.eval as kitti_eval
 
         if 'annos' not in self.cadc_infos[0]:
             return 'None', {}
 
+        def cadc_eval(eval_det_annos, eval_gt_annos, eval_class_names):
+            import pcdet.datasets.kitti.kitti_object_eval_python.eval as kitti_eval
+            if self.da_parameters:
+                # ? Mapping of predicted class names for DA
+                for det_anno in eval_det_annos[:]:
+                    anno = det_anno['name']
+                    if len(anno) != 0:
+                        for source_class, target_class in eval_det_class_mapping.items():
+                            anno[anno == source_class] = target_class
+                # ? Mapping of groundtruth class names for DA
+                for gt_anno in eval_gt_annos[:]:
+                    anno = gt_anno['name']
+                    if len(anno) != 0:
+                        for source_class, target_class in eval_gt_class_mapping.items():
+                            anno[anno == source_class] = target_class
+                # ? Set class names for CADC evaluation
+                cadc_class_names = list(set([eval_det_class_mapping[x] for x in eval_class_names
+                                             if eval_det_class_mapping[x] != 'DontCare']))
+                cadc_class_names.sort(key=eval_class_names.index)
+                eval_class_names = cadc_class_names
+            self.logger.info(f"Getting CADC evaluation results for classes {eval_class_names}...\n")
+            for i in range(len(eval_gt_annos)):
+                boxes3d_lidar = np.array(eval_gt_annos[i]['gt_boxes_lidar'])
+                # Original get_official_eval_result is for kitti or nuscenes depending on the setting
+                # Convert cadc lidar data to in the same axes as the nuscenes
+                boxes3d_lidar = boxes3d_lidar[:,[1,0,2,3,4,5,6]]
+                boxes3d_lidar[:,0] *= -1
+                eval_gt_annos[i]['location'] = boxes3d_lidar[:,:3]
+                eval_gt_annos[i]['dimensions'] = boxes3d_lidar[:,3:6]
+                eval_gt_annos[i]['rotation_y'] = boxes3d_lidar[:,6]
+                # Arbituarily set bbox as it's not applicable in cadc
+                # Note you need to make sure the height of the box > 40 or it will be filtered out
+                bbox = []
+                for j in range(len(eval_gt_annos[i]['bbox'])):
+                    bbox.append(np.array([0,0,50,50]))
+                eval_gt_annos[i]['bbox'] = bbox
+            for i in range(len(eval_det_annos)):
+                boxes3d_lidar = np.array(eval_det_annos[i]['boxes_lidar'])
+                boxes3d_lidar = boxes3d_lidar[:,[1,0,2,3,4,5,6]]
+                boxes3d_lidar[:,0] *= -1
+                eval_det_annos[i]['location'] = boxes3d_lidar[:,:3]
+                eval_det_annos[i]['dimensions'] = boxes3d_lidar[:,3:6]
+                eval_det_annos[i]['rotation_y'] = boxes3d_lidar[:,6]
+                bbox = []
+                for j in range(len(eval_det_annos[i]['bbox'])):
+                    bbox.append(np.array([0,0,50,50]))
+                eval_det_annos[i]['bbox'] = np.array(bbox)
+            ap_result_str, ap_dict = kitti_eval.get_official_eval_result(
+                gt_annos=eval_gt_annos, dt_annos=eval_det_annos, current_classes=eval_class_names,
+                z_axis=2, z_center=0.5)
+            return ap_result_str, ap_dict
+
+        def kitti_eval(eval_det_annos, eval_gt_annos, eval_class_names):
+            from ..kitti.kitti_object_eval_python import eval as kitti_eval
+            from ..kitti import kitti_utils
+            det_map_class_to_kitti = eval_det_class_mapping or {
+                # ? Mapping of default CADC class names to KITTI
+                'Car': 'Car',
+                'Pedestrian': 'Pedestrian',
+                'Pickup_Truck': 'Car',
+            }
+            gt_map_class_to_kitti = eval_gt_class_mapping or det_map_class_to_kitti
+            kitti_utils.transform_annotations_to_kitti_format(
+                annos=eval_det_annos, map_name_to_kitti=det_map_class_to_kitti)
+            kitti_utils.transform_annotations_to_kitti_format(
+                annos=eval_gt_annos, map_name_to_kitti=gt_map_class_to_kitti)
+            kitti_class_names = list(set([det_map_class_to_kitti[x] for x in eval_class_names
+                                          if det_map_class_to_kitti[x] != 'DontCare']))
+            kitti_class_names.sort(key=eval_class_names.index)
+            self.logger.info(f"Getting KITTI evaluation results for classes {kitti_class_names}...\n")
+            ap_result_str, ap_dict = kitti_eval.get_official_eval_result(
+                gt_annos=eval_gt_annos, dt_annos=eval_det_annos, current_classes=kitti_class_names)
+            return ap_result_str, ap_dict
+
         eval_det_annos = copy.deepcopy(det_annos)
         eval_gt_annos = [copy.deepcopy(info['annos']) for info in self.cadc_infos]
         eval_class_names = copy.deepcopy(class_names)
+        eval_det_class_mapping = None
+        eval_gt_class_mapping = None
 
+        # ? Check DA parameters for mapping of class names and evaluation
         if self.da_parameters:
-            self.logger.info("Mapping class names for CADC evaluation...")
-            # ? Mapping of predicted class names for DA
-            for det_anno in eval_det_annos[:]:
-                anno = det_anno['name']
-                if len(anno) != 0:
-                    for source_class, target_class in self.da_parameters.TARGET_CLASS_MAPPING.items():
-                        anno[anno == source_class] = target_class
-            # ? Corresponding class names for CADC evaluation
-            eval_class_names = self.da_parameters.TARGET_CLASS_NAMES
+            eval_det_class_mapping = self.da_parameters.DET_CLASS_MAPPING
+            eval_gt_class_mapping = self.da_parameters.GT_CLASS_MAPPING
+            # ? Validate class mappings
+            assert all(source_class in eval_class_names
+                       and (target_class in self.class_names or target_class == 'DontCare')
+                       for source_class, target_class in eval_det_class_mapping.items()), 'invalid det class mappings!'
+            assert all(target_class in self.class_names or target_class == 'DontCare'
+                       for _, target_class in eval_gt_class_mapping.items()), 'invalid gt class mappings!'
 
-        self.logger.info(f"Getting evaluation results for classes {eval_class_names}...\n")
-
-        for i in range(len(eval_gt_annos)):
-            boxes3d_lidar = np.array(eval_gt_annos[i]['gt_boxes_lidar'])
-            # Original get_official_eval_result is for kitti or nuscenes depending on the setting
-            # Convert cadc lidar data to in the same axes as the nuscenes
-            boxes3d_lidar = boxes3d_lidar[:,[1,0,2,3,4,5,6]]
-            boxes3d_lidar[:,0] *= -1
-            eval_gt_annos[i]['location'] = boxes3d_lidar[:,:3]
-            eval_gt_annos[i]['dimensions'] = boxes3d_lidar[:,3:6]
-            eval_gt_annos[i]['rotation_y'] = boxes3d_lidar[:,6]
-            
-            # Arbituarily set bbox as it's not applicable in cadc
-            # Note you need to make sure the height of the box > 40 or it will be filtered out
-            bbox = []
-            for j in range(len(eval_gt_annos[i]['bbox'])):
-                bbox.append(np.array([0,0,50,50]))
-            eval_gt_annos[i]['bbox'] = bbox
-
-        for i in range(len(eval_det_annos)):
-            boxes3d_lidar = np.array(eval_det_annos[i]['boxes_lidar'])
-            boxes3d_lidar = boxes3d_lidar[:,[1,0,2,3,4,5,6]]
-            boxes3d_lidar[:,0] *= -1
-            eval_det_annos[i]['location'] = boxes3d_lidar[:,:3]
-            eval_det_annos[i]['dimensions'] = boxes3d_lidar[:,3:6]
-            eval_det_annos[i]['rotation_y'] = boxes3d_lidar[:,6]
-            bbox = []
-            for j in range(len(eval_det_annos[i]['bbox'])):
-                bbox.append(np.array([0,0,50,50]))
-            eval_det_annos[i]['bbox'] = np.array(bbox)
-
-        ap_result_str, ap_dict = kitti_eval.get_official_eval_result(eval_gt_annos, eval_det_annos, eval_class_names,
-            z_axis=2, z_center=0.5)
+        eval_metric = kwargs.get('eval_metric')
+        if eval_metric == 'cadc':
+            ap_result_str, ap_dict = cadc_eval(eval_det_annos, eval_gt_annos, eval_class_names)
+        elif eval_metric == 'kitti':
+            ap_result_str, ap_dict = kitti_eval(eval_det_annos, eval_gt_annos, eval_class_names)
+        else:
+            self.logger.info(f"Unsupported eval metric: {eval_metric}")
+            raise NotImplementedError
 
         return ap_result_str, ap_dict
 
