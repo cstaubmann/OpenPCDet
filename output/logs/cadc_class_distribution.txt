@@ -1,0 +1,31 @@
+"/home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/venv/bin/python" -m pcdet.datasets.cadc.cadc_dataset create_cadc_infos ./cfgs/dataset_configs/cadc_dataset.yaml
+
+/usr/lib/python3.7/runpy.py:125: RuntimeWarning: 'pcdet.datasets.cadc.cadc_dataset' found in sys.modules after import of package 'pcdet.datasets.cadc', but prior to execution of 'pcdet.datasets.cadc.cadc_dataset'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+  
+---------------Start to generate data infos---------------
+train
+split: train: 5600 scenes
+
+        num scenes w/ annos:  5600
+        num scenes w/o annos: 0
+        num annotations: 114155
+        annotation balance: {'Car': 80423, 'Pickup_Truck': 4385, 'Pedestrian': 29347}
+val
+split: val: 1400 scenes
+
+        num scenes w/ annos:  1400
+        num scenes w/o annos: 0
+        num annotations: 30321
+        annotation balance: {'Car': 22759, 'Pickup_Truck': 974, 'Pedestrian': 6588}
+test
+split: test: 0 scenes
+
+        num scenes w/ annos:  0
+        num scenes w/o annos: 0
+        num annotations: 0
+        annotation balance: {'Car': 0, 'Pickup_Truck': 0, 'Pedestrian': 0}
+---------------Data preparation Done---------------
+
+Process finished with exit code 0
+

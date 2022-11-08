@@ -1,0 +1,48 @@
+"/home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/venv/bin/python" -m pcdet.datasets.once.once_dataset --func create_once_infos --cfg_file ./cfgs/dataset_configs/once_dataset.yaml
+
+/usr/lib/python3.7/runpy.py:125: RuntimeWarning: 'pcdet.datasets.once.once_dataset' found in sys.modules after import of package 'pcdet.datasets.once', but prior to execution of 'pcdet.datasets.once.once_dataset'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+  
+---------------Start to generate data infos---------------
+train seq_idx: 000076
+train seq_idx: 000080
+train seq_idx: 000092
+train seq_idx: 000104
+train seq_idx: 000113
+train seq_idx: 000121
+split: train: 9977 scenes
+
+        num scenes w/ annos:  4961
+        num scenes w/o annos: 5016
+        num annotations: 151157
+        annotation balance: {'Car': 98140, 'Bus': 2263, 'Truck': 5048, 'Pedestrian': 14320, 'Cyclist': 31386}
+val seq_idx: 000027
+val seq_idx: 000028
+val seq_idx: 000112
+val seq_idx: 000201
+split: val: 6648 scenes
+
+        num scenes w/ annos:  3321
+        num scenes w/o annos: 3327
+        num annotations: 90358
+        annotation balance: {'Car': 47953, 'Bus': 2118, 'Truck': 1907, 'Pedestrian': 23105, 'Cyclist': 15275}
+test seq_idx: 000034test seq_idx: 000077
+
+test seq_idx: 000168
+test seq_idx: 000200
+test seq_idx: 000273
+test seq_idx: 000275
+test seq_idx: 000303
+test seq_idx: 000318
+test seq_idx: 000322
+test seq_idx: 000334
+split: test: 15858 scenes
+
+        num scenes w/ annos:  0
+        num scenes w/o annos: 15858
+        num annotations: 0
+        annotation balance: {'Car': 0, 'Bus': 0, 'Truck': 0, 'Pedestrian': 0, 'Cyclist': 0}
+---------------Data preparation Done---------------
+
+Process finished with exit code 0
+
