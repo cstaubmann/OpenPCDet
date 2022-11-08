@@ -1,0 +1,1831 @@
+2022-11-05 20:47:22,193   INFO  **********************Start logging**********************
+2022-11-05 20:47:22,193   INFO  CUDA_VISIBLE_DEVICES=ALL
+2022-11-05 20:47:22,193   INFO  cfg_file         ./cfgs/once_models/sup_models/centerpoints.yaml
+2022-11-05 20:47:22,194   INFO  batch_size       4
+2022-11-05 20:47:22,194   INFO  workers          4
+2022-11-05 20:47:22,194   INFO  extra_tag        default
+2022-11-05 20:47:22,194   INFO  ckpt             None
+2022-11-05 20:47:22,194   INFO  launcher         none
+2022-11-05 20:47:22,194   INFO  tcp_port         18888
+2022-11-05 20:47:22,194   INFO  local_rank       0
+2022-11-05 20:47:22,194   INFO  set_cfgs         None
+2022-11-05 20:47:22,194   INFO  max_waiting_mins 30
+2022-11-05 20:47:22,194   INFO  start_epoch      60
+2022-11-05 20:47:22,194   INFO  eval_tag         kitti_evaluation
+2022-11-05 20:47:22,194   INFO  eval_all         True
+2022-11-05 20:47:22,194   INFO  ckpt_dir         None
+2022-11-05 20:47:22,194   INFO  save_to_file     False
+2022-11-05 20:47:22,194   INFO  runs_on          server
+2022-11-05 20:47:22,194   INFO  for_test         False
+2022-11-05 20:47:22,194   INFO  random_seed      None
+2022-11-05 20:47:22,194   INFO  cfg.ROOT_DIR: /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet
+2022-11-05 20:47:22,194   INFO  cfg.LOCAL_RANK: 0
+2022-11-05 20:47:22,194   INFO  cfg.CLASS_NAMES: ['Car', 'Bus', 'Truck', 'Pedestrian', 'Cyclist']
+2022-11-05 20:47:22,194   INFO  
+cfg.DATA_CONFIG = edict()
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.DATASET: ONCEDataset
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.DATA_PATH: ../data/once
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.CLOUD_DATA_PATH: /cache/once
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-75.2, -75.2, -5.0, 75.2, 75.2, 3.0]
+2022-11-05 20:47:22,195   INFO  
+cfg.DATA_CONFIG.INFO_PATH = edict()
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['once_infos_train.pkl']
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.INFO_PATH.val: ['once_infos_val.pkl']
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['once_infos_test.pkl']
+2022-11-05 20:47:22,195   INFO  
+cfg.DATA_CONFIG.DATA_SPLIT = edict()
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2022-11-05 20:47:22,195   INFO  
+cfg.DATA_CONFIG.DATA_AUGMENTOR = edict()
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': False, 'DB_INFO_PATH': ['once_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Car:5', 'Bus:5', 'Truck:5', 'Pedestrian:5', 'Cyclist:5']}, 'SAMPLE_GROUPS': ['Car:1', 'Bus:4', 'Truck:3', 'Pedestrian:2', 'Cyclist:2'], 'NUM_POINT_FEATURES': 4, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2022-11-05 20:47:22,195   INFO  
+cfg.DATA_CONFIG.POINT_FEATURE_ENCODING = edict()
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity']
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity']
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': False}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.1, 0.1, 0.2], 'MAX_POINTS_PER_VOXEL': 5, 'MAX_NUMBER_OF_VOXELS': {'train': 60000, 'test': 60000}}]
+2022-11-05 20:47:22,195   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: cfgs/dataset_configs/once_dataset.yaml
+2022-11-05 20:47:22,196   INFO  
+cfg.MODEL = edict()
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.NAME: CenterPoints
+2022-11-05 20:47:22,196   INFO  
+cfg.MODEL.VFE = edict()
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.VFE.NAME: MeanVFE
+2022-11-05 20:47:22,196   INFO  
+cfg.MODEL.BACKBONE_3D = edict()
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.BACKBONE_3D.NAME: VoxelResBackBone8x
+2022-11-05 20:47:22,196   INFO  
+cfg.MODEL.MAP_TO_BEV = edict()
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.MAP_TO_BEV.NAME: HeightCompression
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 256
+2022-11-05 20:47:22,196   INFO  
+cfg.MODEL.BACKBONE_2D = edict()
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [5, 5]
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2]
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [128, 256]
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2]
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [256, 256]
+2022-11-05 20:47:22,196   INFO  
+cfg.MODEL.DENSE_HEAD = edict()
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.DENSE_HEAD.NAME: CenterHead_
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.DENSE_HEAD.DATASET: once
+2022-11-05 20:47:22,196   INFO  cfg.MODEL.DENSE_HEAD.MODE: 3d
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.USE_DCN: False
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.TASKS: [{'num_class': 1, 'class_names': ['Car']}, {'num_class': 1, 'class_names': ['Bus']}, {'num_class': 1, 'class_names': ['Truck']}, {'num_class': 1, 'class_names': ['Pedestrian']}, {'num_class': 1, 'class_names': ['Cyclist']}]
+2022-11-05 20:47:22,197   INFO  
+cfg.MODEL.DENSE_HEAD.PARAMETERS = edict()
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.PARAMETERS.share_conv_channel: 64
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.PARAMETERS.init_bias: -2.19
+2022-11-05 20:47:22,197   INFO  
+cfg.MODEL.DENSE_HEAD.PARAMETERS.common_heads = edict()
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.PARAMETERS.common_heads.reg: [2, 2]
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.PARAMETERS.common_heads.height: [1, 2]
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.PARAMETERS.common_heads.dim: [3, 2]
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.PARAMETERS.common_heads.rot: [2, 2]
+2022-11-05 20:47:22,197   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG = edict()
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.weight: 0.25
+2022-11-05 20:47:22,197   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG = edict()
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.tasks: [{'num_class': 1, 'class_names': ['Car']}, {'num_class': 1, 'class_names': ['Bus']}, {'num_class': 1, 'class_names': ['Truck']}, {'num_class': 1, 'class_names': ['Pedestrian']}, {'num_class': 1, 'class_names': ['Cyclist']}]
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.out_size_factor: 8
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.dense_reg: 1
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.gaussian_overlap: 0.1
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.max_objs: 500
+2022-11-05 20:47:22,197   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.min_radius: 2
+2022-11-05 20:47:22,198   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.mapping = edict()
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.mapping.Car: 1
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.mapping.Bus: 2
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.mapping.Truck: 3
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.mapping.Pedestrian: 4
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.mapping.Cyclist: 5
+2022-11-05 20:47:22,198   INFO  
+cfg.MODEL.DENSE_HEAD.TEST_CONFIG = edict()
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.post_center_limit_range: [-75.2, -75.2, -5.0, 75.2, 75.2, 3.0]
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.max_per_img: 500
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.score_threshold: 0.1
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.pc_range: [-75.2, -75.2]
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.out_size_factor: 8
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.voxel_size: [0.1, 0.1]
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.double_flip: False
+2022-11-05 20:47:22,198   INFO  
+cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms = edict()
+2022-11-05 20:47:22,198   INFO  
+cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.train = edict()
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.train.use_iou_3d_nms: True
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.train.use_rotate_nms: False
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.train.use_maxpool_nms: False
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.train.use_circle_nms: False
+2022-11-05 20:47:22,198   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.train.min_radius: [4, 10, 12, 0.175, 0.85]
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.train.nms_iou_threshold: 0.8
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.train.nms_pre_max_size: 1500
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.train.nms_post_max_size: 80
+2022-11-05 20:47:22,199   INFO  
+cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.test = edict()
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.test.use_iou_3d_nms: True
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.test.use_rotate_nms: False
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.test.use_maxpool_nms: False
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.test.use_circle_nms: False
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.test.min_radius: [4, 10, 12, 0.175, 0.85]
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.test.nms_iou_threshold: 0.01
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.test.nms_pre_max_size: 500
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.DENSE_HEAD.TEST_CONFIG.nms.test.nms_post_max_size: 83
+2022-11-05 20:47:22,199   INFO  
+cfg.MODEL.POST_PROCESSING = edict()
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.1
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: kitti
+2022-11-05 20:47:22,199   INFO  
+cfg.MODEL.POST_PROCESSING.NMS_CONFIG = edict()
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: False
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.01
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2022-11-05 20:47:22,199   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2022-11-05 20:47:22,200   INFO  
+cfg.OPTIMIZATION = edict()
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 4
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.LR: 0.003
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2022-11-05 20:47:22,200   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 35
+2022-11-05 20:47:22,200   INFO  cfg.TAG: centerpoints
+2022-11-05 20:47:22,200   INFO  cfg.EXP_GROUP_PATH: cfgs/once_models/sup_models
+2022-11-05 20:47:22,201   INFO  Loading ONCE dataset
+2022-11-05 20:47:22,606   INFO  Total samples for ONCE dataset: 3321
+2022-11-05 20:47:22,707   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_60.pth to GPU
+2022-11-05 20:47:25,392   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 20:47:25,423   INFO  ==> Done (loaded 459/459)
+2022-11-05 20:47:25,438   INFO  *************** EPOCH 60 EVALUATION *****************
+2022-11-05 20:50:47,051   INFO  *************** Performance of EPOCH 60 *****************
+2022-11-05 20:50:47,056   INFO  Generate label finished(sec_per_example: 0.0607 second).
+2022-11-05 20:50:47,056   INFO  recall_roi_0.3: 0.917528
+2022-11-05 20:50:47,056   INFO  recall_rcnn_0.3: 0.917528
+2022-11-05 20:50:47,056   INFO  recall_roi_0.5: 0.801025
+2022-11-05 20:50:47,056   INFO  recall_rcnn_0.5: 0.801025
+2022-11-05 20:50:47,056   INFO  recall_roi_0.7: 0.490991
+2022-11-05 20:50:47,056   INFO  recall_rcnn_0.7: 0.490991
+2022-11-05 20:50:47,057   INFO  Average predicted number of objects(3321 samples): 74.172
+2022-11-05 20:50:50,773   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 20:51:31,602   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.7097, 96.7097, 96.7097
+bev  AP:83.9779, 83.9779, 83.9779
+3d   AP:63.6256, 63.6256, 63.6256
+aos  AP:66.70, 66.70, 66.70
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7216, 98.7216, 98.7216
+bev  AP:84.7627, 84.7627, 84.7627
+3d   AP:62.6753, 62.6753, 62.6753
+aos  AP:65.43, 65.43, 65.43
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.7097, 96.7097, 96.7097
+bev  AP:89.3089, 89.3089, 89.3089
+3d   AP:88.0940, 88.0940, 88.0940
+aos  AP:66.70, 66.70, 66.70
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7216, 98.7216, 98.7216
+bev  AP:92.0300, 92.0300, 92.0300
+3d   AP:89.3013, 89.3013, 89.3013
+aos  AP:65.43, 65.43, 65.43
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.7676, 89.7676, 89.7676
+bev  AP:44.2564, 44.2564, 44.2564
+3d   AP:33.9274, 33.9274, 33.9274
+aos  AP:56.14, 56.14, 56.14
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:92.2351, 92.2351, 92.2351
+bev  AP:44.7257, 44.7257, 44.7257
+3d   AP:33.5526, 33.5526, 33.5526
+aos  AP:57.28, 57.28, 57.28
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.7676, 89.7676, 89.7676
+bev  AP:67.3358, 67.3358, 67.3358
+3d   AP:65.8962, 65.8962, 65.8962
+aos  AP:56.14, 56.14, 56.14
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:92.2351, 92.2351, 92.2351
+bev  AP:67.2577, 67.2577, 67.2577
+3d   AP:65.8516, 65.8516, 65.8516
+aos  AP:57.28, 57.28, 57.28
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.1596, 91.1596, 91.1596
+bev  AP:73.9109, 73.9109, 73.9109
+3d   AP:64.1760, 64.1760, 64.1760
+aos  AP:68.39, 68.39, 68.39
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.5614, 94.5614, 94.5614
+bev  AP:75.2764, 75.2764, 75.2764
+3d   AP:63.7562, 63.7562, 63.7562
+aos  AP:68.80, 68.80, 68.80
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.1596, 91.1596, 91.1596
+bev  AP:83.6480, 83.6480, 83.6480
+3d   AP:82.9639, 82.9639, 82.9639
+aos  AP:68.39, 68.39, 68.39
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.5614, 94.5614, 94.5614
+bev  AP:86.1823, 86.1823, 86.1823
+3d   AP:84.7873, 84.7873, 84.7873
+aos  AP:68.80, 68.80, 68.80
+
+2022-11-05 20:51:31,603   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_60/val
+2022-11-05 20:51:31,603   INFO  ****************Evaluation done.*****************
+2022-11-05 20:51:31,618   INFO  Epoch 60 has been evaluated
+2022-11-05 20:51:31,619   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_61.pth to GPU
+2022-11-05 20:51:31,797   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 20:51:31,821   INFO  ==> Done (loaded 459/459)
+2022-11-05 20:51:31,826   INFO  *************** EPOCH 61 EVALUATION *****************
+2022-11-05 20:54:48,358   INFO  *************** Performance of EPOCH 61 *****************
+2022-11-05 20:54:48,358   INFO  Generate label finished(sec_per_example: 0.0592 second).
+2022-11-05 20:54:48,358   INFO  recall_roi_0.3: 0.909040
+2022-11-05 20:54:48,358   INFO  recall_rcnn_0.3: 0.909040
+2022-11-05 20:54:48,358   INFO  recall_roi_0.5: 0.768001
+2022-11-05 20:54:48,358   INFO  recall_rcnn_0.5: 0.768001
+2022-11-05 20:54:48,358   INFO  recall_roi_0.7: 0.441710
+2022-11-05 20:54:48,358   INFO  recall_rcnn_0.7: 0.441710
+2022-11-05 20:54:48,360   INFO  Average predicted number of objects(3321 samples): 75.477
+2022-11-05 20:54:48,920   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 20:55:25,273   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.6292, 96.6292, 96.6292
+bev  AP:79.4522, 79.4522, 79.4522
+3d   AP:55.3951, 55.3951, 55.3951
+aos  AP:67.41, 67.41, 67.41
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7371, 98.7371, 98.7371
+bev  AP:82.7453, 82.7453, 82.7453
+3d   AP:54.5945, 54.5945, 54.5945
+aos  AP:66.37, 66.37, 66.37
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.6292, 96.6292, 96.6292
+bev  AP:89.2791, 89.2791, 89.2791
+3d   AP:86.2305, 86.2305, 86.2305
+aos  AP:67.41, 67.41, 67.41
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7371, 98.7371, 98.7371
+bev  AP:92.0715, 92.0715, 92.0715
+3d   AP:88.6651, 88.6651, 88.6651
+aos  AP:66.37, 66.37, 66.37
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:88.2056, 88.2056, 88.2056
+bev  AP:47.6598, 47.6598, 47.6598
+3d   AP:30.1590, 30.1590, 30.1590
+aos  AP:56.92, 56.92, 56.92
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:90.9360, 90.9360, 90.9360
+bev  AP:44.7355, 44.7355, 44.7355
+3d   AP:26.2723, 26.2723, 26.2723
+aos  AP:55.55, 55.55, 55.55
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:88.2056, 88.2056, 88.2056
+bev  AP:66.0581, 66.0581, 66.0581
+3d   AP:63.8390, 63.8390, 63.8390
+aos  AP:56.92, 56.92, 56.92
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:90.9360, 90.9360, 90.9360
+bev  AP:66.4777, 66.4777, 66.4777
+3d   AP:63.8188, 63.8188, 63.8188
+aos  AP:55.55, 55.55, 55.55
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.2874, 91.2874, 91.2874
+bev  AP:73.8671, 73.8671, 73.8671
+3d   AP:64.0559, 64.0559, 64.0559
+aos  AP:66.39, 66.39, 66.39
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.6058, 94.6058, 94.6058
+bev  AP:75.0368, 75.0368, 75.0368
+3d   AP:63.7000, 63.7000, 63.7000
+aos  AP:68.12, 68.12, 68.12
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.2874, 91.2874, 91.2874
+bev  AP:83.6457, 83.6457, 83.6457
+3d   AP:82.9158, 82.9158, 82.9158
+aos  AP:66.39, 66.39, 66.39
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.6058, 94.6058, 94.6058
+bev  AP:86.1506, 86.1506, 86.1506
+3d   AP:84.7116, 84.7116, 84.7116
+aos  AP:68.12, 68.12, 68.12
+
+2022-11-05 20:55:25,275   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_61/val
+2022-11-05 20:55:25,275   INFO  ****************Evaluation done.*****************
+2022-11-05 20:55:25,286   INFO  Epoch 61 has been evaluated
+2022-11-05 20:55:25,287   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_62.pth to GPU
+2022-11-05 20:55:25,459   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 20:55:25,485   INFO  ==> Done (loaded 459/459)
+2022-11-05 20:55:25,490   INFO  *************** EPOCH 62 EVALUATION *****************
+2022-11-05 20:58:36,206   INFO  *************** Performance of EPOCH 62 *****************
+2022-11-05 20:58:36,206   INFO  Generate label finished(sec_per_example: 0.0574 second).
+2022-11-05 20:58:36,206   INFO  recall_roi_0.3: 0.919476
+2022-11-05 20:58:36,206   INFO  recall_rcnn_0.3: 0.919476
+2022-11-05 20:58:36,206   INFO  recall_roi_0.5: 0.796200
+2022-11-05 20:58:36,206   INFO  recall_rcnn_0.5: 0.796200
+2022-11-05 20:58:36,206   INFO  recall_roi_0.7: 0.485757
+2022-11-05 20:58:36,206   INFO  recall_rcnn_0.7: 0.485757
+2022-11-05 20:58:36,208   INFO  Average predicted number of objects(3321 samples): 81.200
+2022-11-05 20:58:36,805   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 20:59:15,112   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.5761, 96.5761, 96.5761
+bev  AP:80.0826, 80.0826, 80.0826
+3d   AP:63.4620, 63.4620, 63.4620
+aos  AP:67.22, 67.22, 67.22
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7427, 98.7427, 98.7427
+bev  AP:83.8482, 83.8482, 83.8482
+3d   AP:63.1042, 63.1042, 63.1042
+aos  AP:66.30, 66.30, 66.30
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.5761, 96.5761, 96.5761
+bev  AP:89.6491, 89.6491, 89.6491
+3d   AP:88.6651, 88.6651, 88.6651
+aos  AP:67.22, 67.22, 67.22
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7427, 98.7427, 98.7427
+bev  AP:92.4297, 92.4297, 92.4297
+3d   AP:89.7085, 89.7085, 89.7085
+aos  AP:66.30, 66.30, 66.30
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:88.9537, 88.9537, 88.9537
+bev  AP:49.1387, 49.1387, 49.1387
+3d   AP:35.4788, 35.4788, 35.4788
+aos  AP:57.79, 57.79, 57.79
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.4207, 91.4207, 91.4207
+bev  AP:46.3887, 46.3887, 46.3887
+3d   AP:31.4851, 31.4851, 31.4851
+aos  AP:56.18, 56.18, 56.18
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:88.9537, 88.9537, 88.9537
+bev  AP:67.2332, 67.2332, 67.2332
+3d   AP:65.7377, 65.7377, 65.7377
+aos  AP:57.79, 57.79, 57.79
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.4207, 91.4207, 91.4207
+bev  AP:67.2394, 67.2394, 67.2394
+3d   AP:65.8215, 65.8215, 65.8215
+aos  AP:56.18, 56.18, 56.18
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:90.2918, 90.2918, 90.2918
+bev  AP:74.1313, 74.1313, 74.1313
+3d   AP:64.7685, 64.7685, 64.7685
+aos  AP:66.58, 66.58, 66.58
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.1539, 94.1539, 94.1539
+bev  AP:75.5860, 75.5860, 75.5860
+3d   AP:65.3955, 65.3955, 65.3955
+aos  AP:66.99, 66.99, 66.99
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:90.2918, 90.2918, 90.2918
+bev  AP:83.1222, 83.1222, 83.1222
+3d   AP:82.5512, 82.5512, 82.5512
+aos  AP:66.58, 66.58, 66.58
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.1539, 94.1539, 94.1539
+bev  AP:85.4644, 85.4644, 85.4644
+3d   AP:84.2941, 84.2941, 84.2941
+aos  AP:66.99, 66.99, 66.99
+
+2022-11-05 20:59:15,114   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_62/val
+2022-11-05 20:59:15,114   INFO  ****************Evaluation done.*****************
+2022-11-05 20:59:15,127   INFO  Epoch 62 has been evaluated
+2022-11-05 20:59:15,128   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_63.pth to GPU
+2022-11-05 20:59:15,349   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 20:59:15,373   INFO  ==> Done (loaded 459/459)
+2022-11-05 20:59:15,377   INFO  *************** EPOCH 63 EVALUATION *****************
+2022-11-05 21:02:23,477   INFO  *************** Performance of EPOCH 63 *****************
+2022-11-05 21:02:23,478   INFO  Generate label finished(sec_per_example: 0.0566 second).
+2022-11-05 21:02:23,478   INFO  recall_roi_0.3: 0.916930
+2022-11-05 21:02:23,478   INFO  recall_rcnn_0.3: 0.916930
+2022-11-05 21:02:23,478   INFO  recall_roi_0.5: 0.775770
+2022-11-05 21:02:23,478   INFO  recall_rcnn_0.5: 0.775770
+2022-11-05 21:02:23,478   INFO  recall_roi_0.7: 0.464773
+2022-11-05 21:02:23,478   INFO  recall_rcnn_0.7: 0.464773
+2022-11-05 21:02:23,479   INFO  Average predicted number of objects(3321 samples): 83.089
+2022-11-05 21:02:24,068   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:03:02,715   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.7189, 96.7189, 96.7189
+bev  AP:80.0750, 80.0750, 80.0750
+3d   AP:59.4224, 59.4224, 59.4224
+aos  AP:67.84, 67.84, 67.84
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8020, 98.8020, 98.8020
+bev  AP:83.6530, 83.6530, 83.6530
+3d   AP:59.1253, 59.1253, 59.1253
+aos  AP:66.73, 66.73, 66.73
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.7189, 96.7189, 96.7189
+bev  AP:89.6676, 89.6676, 89.6676
+3d   AP:88.1449, 88.1449, 88.1449
+aos  AP:67.84, 67.84, 67.84
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8020, 98.8020, 98.8020
+bev  AP:92.2000, 92.2000, 92.2000
+3d   AP:89.1996, 89.1996, 89.1996
+aos  AP:66.73, 66.73, 66.73
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:88.8468, 88.8468, 88.8468
+bev  AP:49.1681, 49.1681, 49.1681
+3d   AP:30.0209, 30.0209, 30.0209
+aos  AP:57.78, 57.78, 57.78
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.6730, 91.6730, 91.6730
+bev  AP:46.6403, 46.6403, 46.6403
+3d   AP:26.0269, 26.0269, 26.0269
+aos  AP:56.58, 56.58, 56.58
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:88.8468, 88.8468, 88.8468
+bev  AP:67.9774, 67.9774, 67.9774
+3d   AP:65.4725, 65.4725, 65.4725
+aos  AP:57.78, 57.78, 57.78
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.6730, 91.6730, 91.6730
+bev  AP:68.5081, 68.5081, 68.5081
+3d   AP:65.3851, 65.3851, 65.3851
+aos  AP:56.58, 56.58, 56.58
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.1723, 91.1723, 91.1723
+bev  AP:74.0442, 74.0442, 74.0442
+3d   AP:64.1981, 64.1981, 64.1981
+aos  AP:64.34, 64.34, 64.34
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.5975, 94.5975, 94.5975
+bev  AP:74.8489, 74.8489, 74.8489
+3d   AP:63.8185, 63.8185, 63.8185
+aos  AP:66.53, 66.53, 66.53
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.1723, 91.1723, 91.1723
+bev  AP:83.6304, 83.6304, 83.6304
+3d   AP:82.9283, 82.9283, 82.9283
+aos  AP:64.34, 64.34, 64.34
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.5975, 94.5975, 94.5975
+bev  AP:86.2369, 86.2369, 86.2369
+3d   AP:84.8259, 84.8259, 84.8259
+aos  AP:66.53, 66.53, 66.53
+
+2022-11-05 21:03:02,716   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_63/val
+2022-11-05 21:03:02,716   INFO  ****************Evaluation done.*****************
+2022-11-05 21:03:02,731   INFO  Epoch 63 has been evaluated
+2022-11-05 21:03:02,732   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_64.pth to GPU
+2022-11-05 21:03:02,897   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:03:02,921   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:03:02,925   INFO  *************** EPOCH 64 EVALUATION *****************
+2022-11-05 21:06:11,077   INFO  *************** Performance of EPOCH 64 *****************
+2022-11-05 21:06:11,078   INFO  Generate label finished(sec_per_example: 0.0567 second).
+2022-11-05 21:06:11,078   INFO  recall_roi_0.3: 0.917152
+2022-11-05 21:06:11,078   INFO  recall_rcnn_0.3: 0.917152
+2022-11-05 21:06:11,078   INFO  recall_roi_0.5: 0.798977
+2022-11-05 21:06:11,078   INFO  recall_rcnn_0.5: 0.798977
+2022-11-05 21:06:11,079   INFO  recall_roi_0.7: 0.494455
+2022-11-05 21:06:11,079   INFO  recall_rcnn_0.7: 0.494455
+2022-11-05 21:06:11,080   INFO  Average predicted number of objects(3321 samples): 69.398
+2022-11-05 21:06:11,664   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:06:45,757   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.2644, 97.2644, 97.2644
+bev  AP:79.9847, 79.9847, 79.9847
+3d   AP:63.5784, 63.5784, 63.5784
+aos  AP:67.10, 67.10, 67.10
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.9216, 98.9216, 98.9216
+bev  AP:83.6423, 83.6423, 83.6423
+3d   AP:62.7730, 62.7730, 62.7730
+aos  AP:65.84, 65.84, 65.84
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.2644, 97.2644, 97.2644
+bev  AP:89.5405, 89.5405, 89.5405
+3d   AP:88.1496, 88.1496, 88.1496
+aos  AP:67.10, 67.10, 67.10
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.9216, 98.9216, 98.9216
+bev  AP:92.2815, 92.2815, 92.2815
+3d   AP:89.4616, 89.4616, 89.4616
+aos  AP:65.84, 65.84, 65.84
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.0356, 89.0356, 89.0356
+bev  AP:45.8679, 45.8679, 45.8679
+3d   AP:32.4794, 32.4794, 32.4794
+aos  AP:57.54, 57.54, 57.54
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.4938, 91.4938, 91.4938
+bev  AP:44.9250, 44.9250, 44.9250
+3d   AP:31.4200, 31.4200, 31.4200
+aos  AP:55.91, 55.91, 55.91
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.0356, 89.0356, 89.0356
+bev  AP:66.7617, 66.7617, 66.7617
+3d   AP:65.2675, 65.2675, 65.2675
+aos  AP:57.54, 57.54, 57.54
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.4938, 91.4938, 91.4938
+bev  AP:67.3137, 67.3137, 67.3137
+3d   AP:65.1349, 65.1349, 65.1349
+aos  AP:55.91, 55.91, 55.91
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:90.9224, 90.9224, 90.9224
+bev  AP:74.8454, 74.8454, 74.8454
+3d   AP:65.2342, 65.2342, 65.2342
+aos  AP:68.09, 68.09, 68.09
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.4955, 94.4955, 94.4955
+bev  AP:76.6220, 76.6220, 76.6220
+3d   AP:65.9830, 65.9830, 65.9830
+aos  AP:68.49, 68.49, 68.49
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:90.9224, 90.9224, 90.9224
+bev  AP:83.7603, 83.7603, 83.7603
+3d   AP:83.0225, 83.0225, 83.0225
+aos  AP:68.09, 68.09, 68.09
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.4955, 94.4955, 94.4955
+bev  AP:86.4362, 86.4362, 86.4362
+3d   AP:85.0286, 85.0286, 85.0286
+aos  AP:68.49, 68.49, 68.49
+
+2022-11-05 21:06:45,758   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_64/val
+2022-11-05 21:06:45,758   INFO  ****************Evaluation done.*****************
+2022-11-05 21:06:45,779   INFO  Epoch 64 has been evaluated
+2022-11-05 21:06:45,780   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_65.pth to GPU
+2022-11-05 21:06:45,948   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:06:45,971   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:06:45,975   INFO  *************** EPOCH 65 EVALUATION *****************
+2022-11-05 21:09:55,683   INFO  *************** Performance of EPOCH 65 *****************
+2022-11-05 21:09:55,691   INFO  Generate label finished(sec_per_example: 0.0571 second).
+2022-11-05 21:09:55,691   INFO  recall_roi_0.3: 0.922209
+2022-11-05 21:09:55,691   INFO  recall_rcnn_0.3: 0.922209
+2022-11-05 21:09:55,691   INFO  recall_roi_0.5: 0.795702
+2022-11-05 21:09:55,691   INFO  recall_rcnn_0.5: 0.795702
+2022-11-05 21:09:55,691   INFO  recall_roi_0.7: 0.487727
+2022-11-05 21:09:55,691   INFO  recall_rcnn_0.7: 0.487727
+2022-11-05 21:09:55,693   INFO  Average predicted number of objects(3321 samples): 78.360
+2022-11-05 21:09:56,300   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:10:33,073   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.8847, 96.8847, 96.8847
+bev  AP:83.4089, 83.4089, 83.4089
+3d   AP:62.9859, 62.9859, 62.9859
+aos  AP:67.02, 67.02, 67.02
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8723, 98.8723, 98.8723
+bev  AP:85.0144, 85.0144, 85.0144
+3d   AP:61.7538, 61.7538, 61.7538
+aos  AP:65.86, 65.86, 65.86
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.8847, 96.8847, 96.8847
+bev  AP:89.7784, 89.7784, 89.7784
+3d   AP:88.7562, 88.7562, 88.7562
+aos  AP:67.02, 67.02, 67.02
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8723, 98.8723, 98.8723
+bev  AP:93.7147, 93.7147, 93.7147
+3d   AP:90.6197, 90.6197, 90.6197
+aos  AP:65.86, 65.86, 65.86
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.3454, 89.3454, 89.3454
+bev  AP:50.3266, 50.3266, 50.3266
+3d   AP:35.5455, 35.5455, 35.5455
+aos  AP:53.41, 53.41, 53.41
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.7475, 91.7475, 91.7475
+bev  AP:47.6813, 47.6813, 47.6813
+3d   AP:31.8230, 31.8230, 31.8230
+aos  AP:54.43, 54.43, 54.43
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.3454, 89.3454, 89.3454
+bev  AP:68.6407, 68.6407, 68.6407
+3d   AP:67.2034, 67.2034, 67.2034
+aos  AP:53.41, 53.41, 53.41
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.7475, 91.7475, 91.7475
+bev  AP:69.3804, 69.3804, 69.3804
+3d   AP:67.2381, 67.2381, 67.2381
+aos  AP:54.43, 54.43, 54.43
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.6424, 91.6424, 91.6424
+bev  AP:74.5997, 74.5997, 74.5997
+3d   AP:65.3303, 65.3303, 65.3303
+aos  AP:67.79, 67.79, 67.79
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.7605, 94.7605, 94.7605
+bev  AP:76.3112, 76.3112, 76.3112
+3d   AP:66.2000, 66.2000, 66.2000
+aos  AP:67.57, 67.57, 67.57
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.6424, 91.6424, 91.6424
+bev  AP:83.8812, 83.8812, 83.8812
+3d   AP:83.3147, 83.3147, 83.3147
+aos  AP:67.79, 67.79, 67.79
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.7605, 94.7605, 94.7605
+bev  AP:86.6345, 86.6345, 86.6345
+3d   AP:85.2888, 85.2888, 85.2888
+aos  AP:67.57, 67.57, 67.57
+
+2022-11-05 21:10:33,074   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_65/val
+2022-11-05 21:10:33,074   INFO  ****************Evaluation done.*****************
+2022-11-05 21:10:33,093   INFO  Epoch 65 has been evaluated
+2022-11-05 21:10:33,094   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_66.pth to GPU
+2022-11-05 21:10:33,260   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:10:33,284   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:10:33,288   INFO  *************** EPOCH 66 EVALUATION *****************
+2022-11-05 21:13:50,664   INFO  *************** Performance of EPOCH 66 *****************
+2022-11-05 21:13:50,666   INFO  Generate label finished(sec_per_example: 0.0594 second).
+2022-11-05 21:13:50,666   INFO  recall_roi_0.3: 0.917871
+2022-11-05 21:13:50,666   INFO  recall_rcnn_0.3: 0.917871
+2022-11-05 21:13:50,666   INFO  recall_roi_0.5: 0.799453
+2022-11-05 21:13:50,666   INFO  recall_rcnn_0.5: 0.799453
+2022-11-05 21:13:50,666   INFO  recall_roi_0.7: 0.494898
+2022-11-05 21:13:50,666   INFO  recall_rcnn_0.7: 0.494898
+2022-11-05 21:13:50,667   INFO  Average predicted number of objects(3321 samples): 66.348
+2022-11-05 21:13:51,228   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:14:25,654   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.3205, 97.3205, 97.3205
+bev  AP:84.2142, 84.2142, 84.2142
+3d   AP:64.3008, 64.3008, 64.3008
+aos  AP:65.93, 65.93, 65.93
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:99.0010, 99.0010, 99.0010
+bev  AP:85.6473, 85.6473, 85.6473
+3d   AP:62.8826, 62.8826, 62.8826
+aos  AP:66.33, 66.33, 66.33
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.3205, 97.3205, 97.3205
+bev  AP:89.9103, 89.9103, 89.9103
+3d   AP:89.0508, 89.0508, 89.0508
+aos  AP:65.93, 65.93, 65.93
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:99.0010, 99.0010, 99.0010
+bev  AP:94.1767, 94.1767, 94.1767
+3d   AP:91.3729, 91.3729, 91.3729
+aos  AP:66.33, 66.33, 66.33
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.8012, 89.8012, 89.8012
+bev  AP:50.0097, 50.0097, 50.0097
+3d   AP:35.9129, 35.9129, 35.9129
+aos  AP:57.48, 57.48, 57.48
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.8567, 91.8567, 91.8567
+bev  AP:47.0212, 47.0212, 47.0212
+3d   AP:32.3551, 32.3551, 32.3551
+aos  AP:55.37, 55.37, 55.37
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.8012, 89.8012, 89.8012
+bev  AP:67.8209, 67.8209, 67.8209
+3d   AP:66.2541, 66.2541, 66.2541
+aos  AP:57.48, 57.48, 57.48
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.8567, 91.8567, 91.8567
+bev  AP:67.9220, 67.9220, 67.9220
+3d   AP:66.4000, 66.4000, 66.4000
+aos  AP:55.37, 55.37, 55.37
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.3622, 91.3622, 91.3622
+bev  AP:74.6257, 74.6257, 74.6257
+3d   AP:65.4926, 65.4926, 65.4926
+aos  AP:67.40, 67.40, 67.40
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.6997, 94.6997, 94.6997
+bev  AP:76.3242, 76.3242, 76.3242
+3d   AP:66.2781, 66.2781, 66.2781
+aos  AP:67.32, 67.32, 67.32
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.3622, 91.3622, 91.3622
+bev  AP:83.7055, 83.7055, 83.7055
+3d   AP:83.1187, 83.1187, 83.1187
+aos  AP:67.40, 67.40, 67.40
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.6997, 94.6997, 94.6997
+bev  AP:85.7721, 85.7721, 85.7721
+3d   AP:85.1443, 85.1443, 85.1443
+aos  AP:67.32, 67.32, 67.32
+
+2022-11-05 21:14:25,655   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_66/val
+2022-11-05 21:14:25,655   INFO  ****************Evaluation done.*****************
+2022-11-05 21:14:25,676   INFO  Epoch 66 has been evaluated
+2022-11-05 21:14:25,678   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_67.pth to GPU
+2022-11-05 21:14:25,860   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:14:25,885   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:14:25,890   INFO  *************** EPOCH 67 EVALUATION *****************
+2022-11-05 21:17:45,065   INFO  *************** Performance of EPOCH 67 *****************
+2022-11-05 21:17:45,066   INFO  Generate label finished(sec_per_example: 0.0600 second).
+2022-11-05 21:17:45,066   INFO  recall_roi_0.3: 0.922973
+2022-11-05 21:17:45,067   INFO  recall_rcnn_0.3: 0.922973
+2022-11-05 21:17:45,067   INFO  recall_roi_0.5: 0.809646
+2022-11-05 21:17:45,067   INFO  recall_rcnn_0.5: 0.809646
+2022-11-05 21:17:45,067   INFO  recall_roi_0.7: 0.502833
+2022-11-05 21:17:45,067   INFO  recall_rcnn_0.7: 0.502833
+2022-11-05 21:17:45,068   INFO  Average predicted number of objects(3321 samples): 71.416
+2022-11-05 21:17:45,766   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:18:20,744   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.9550, 96.9550, 96.9550
+bev  AP:84.3688, 84.3688, 84.3688
+3d   AP:65.4528, 65.4528, 65.4528
+aos  AP:68.24, 68.24, 68.24
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8982, 98.8982, 98.8982
+bev  AP:86.1566, 86.1566, 86.1566
+3d   AP:65.2127, 65.2127, 65.2127
+aos  AP:67.37, 67.37, 67.37
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.9550, 96.9550, 96.9550
+bev  AP:89.9558, 89.9558, 89.9558
+3d   AP:89.2318, 89.2318, 89.2318
+aos  AP:68.24, 68.24, 68.24
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8982, 98.8982, 98.8982
+bev  AP:94.2699, 94.2699, 94.2699
+3d   AP:91.6894, 91.6894, 91.6894
+aos  AP:67.37, 67.37, 67.37
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.1576, 89.1576, 89.1576
+bev  AP:44.1396, 44.1396, 44.1396
+3d   AP:33.0165, 33.0165, 33.0165
+aos  AP:56.46, 56.46, 56.46
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.5138, 91.5138, 91.5138
+bev  AP:44.4072, 44.4072, 44.4072
+3d   AP:31.7927, 31.7927, 31.7927
+aos  AP:57.43, 57.43, 57.43
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.1576, 89.1576, 89.1576
+bev  AP:66.6950, 66.6950, 66.6950
+3d   AP:65.2407, 65.2407, 65.2407
+aos  AP:56.46, 56.46, 56.46
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.5138, 91.5138, 91.5138
+bev  AP:66.6794, 66.6794, 66.6794
+3d   AP:65.2088, 65.2088, 65.2088
+aos  AP:57.43, 57.43, 57.43
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.0282, 91.0282, 91.0282
+bev  AP:75.1394, 75.1394, 75.1394
+3d   AP:67.7859, 67.7859, 67.7859
+aos  AP:68.23, 68.23, 68.23
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.7281, 94.7281, 94.7281
+bev  AP:77.0533, 77.0533, 77.0533
+3d   AP:68.1275, 68.1275, 68.1275
+aos  AP:68.78, 68.78, 68.78
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.0282, 91.0282, 91.0282
+bev  AP:84.4011, 84.4011, 84.4011
+3d   AP:83.9078, 83.9078, 83.9078
+aos  AP:68.23, 68.23, 68.23
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.7281, 94.7281, 94.7281
+bev  AP:87.2072, 87.2072, 87.2072
+3d   AP:85.9149, 85.9149, 85.9149
+aos  AP:68.78, 68.78, 68.78
+
+2022-11-05 21:18:20,745   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_67/val
+2022-11-05 21:18:20,746   INFO  ****************Evaluation done.*****************
+2022-11-05 21:18:20,761   INFO  Epoch 67 has been evaluated
+2022-11-05 21:18:20,762   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_68.pth to GPU
+2022-11-05 21:18:20,931   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:18:20,955   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:18:20,960   INFO  *************** EPOCH 68 EVALUATION *****************
+2022-11-05 21:21:30,036   INFO  *************** Performance of EPOCH 68 *****************
+2022-11-05 21:21:30,037   INFO  Generate label finished(sec_per_example: 0.0569 second).
+2022-11-05 21:21:30,037   INFO  recall_roi_0.3: 0.922021
+2022-11-05 21:21:30,037   INFO  recall_rcnn_0.3: 0.922021
+2022-11-05 21:21:30,037   INFO  recall_roi_0.5: 0.802419
+2022-11-05 21:21:30,037   INFO  recall_rcnn_0.5: 0.802419
+2022-11-05 21:21:30,037   INFO  recall_roi_0.7: 0.499292
+2022-11-05 21:21:30,037   INFO  recall_rcnn_0.7: 0.499292
+2022-11-05 21:21:30,038   INFO  Average predicted number of objects(3321 samples): 66.817
+2022-11-05 21:21:30,638   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:22:04,732   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.8031, 96.8031, 96.8031
+bev  AP:84.8546, 84.8546, 84.8546
+3d   AP:65.1269, 65.1269, 65.1269
+aos  AP:67.56, 67.56, 67.56
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8416, 98.8416, 98.8416
+bev  AP:85.8489, 85.8489, 85.8489
+3d   AP:65.0197, 65.0197, 65.0197
+aos  AP:66.58, 66.58, 66.58
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.8031, 96.8031, 96.8031
+bev  AP:89.7996, 89.7996, 89.7996
+3d   AP:88.9764, 88.9764, 88.9764
+aos  AP:67.56, 67.56, 67.56
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8416, 98.8416, 98.8416
+bev  AP:94.1667, 94.1667, 94.1667
+3d   AP:91.5823, 91.5823, 91.5823
+aos  AP:66.58, 66.58, 66.58
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.1036, 89.1036, 89.1036
+bev  AP:49.4171, 49.4171, 49.4171
+3d   AP:35.3624, 35.3624, 35.3624
+aos  AP:56.00, 56.00, 56.00
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.6599, 91.6599, 91.6599
+bev  AP:47.0401, 47.0401, 47.0401
+3d   AP:31.9416, 31.9416, 31.9416
+aos  AP:57.01, 57.01, 57.01
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.1036, 89.1036, 89.1036
+bev  AP:67.5723, 67.5723, 67.5723
+3d   AP:66.0836, 66.0836, 66.0836
+aos  AP:56.00, 56.00, 56.00
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.6599, 91.6599, 91.6599
+bev  AP:68.1841, 68.1841, 68.1841
+3d   AP:66.0091, 66.0091, 66.0091
+aos  AP:57.01, 57.01, 57.01
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.0296, 91.0296, 91.0296
+bev  AP:75.0130, 75.0130, 75.0130
+3d   AP:67.8109, 67.8109, 67.8109
+aos  AP:65.27, 65.27, 65.27
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.6301, 94.6301, 94.6301
+bev  AP:76.9419, 76.9419, 76.9419
+3d   AP:67.9387, 67.9387, 67.9387
+aos  AP:67.48, 67.48, 67.48
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.0296, 91.0296, 91.0296
+bev  AP:84.1298, 84.1298, 84.1298
+3d   AP:83.7126, 83.7126, 83.7126
+aos  AP:65.27, 65.27, 65.27
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.6301, 94.6301, 94.6301
+bev  AP:86.9885, 86.9885, 86.9885
+3d   AP:85.7202, 85.7202, 85.7202
+aos  AP:67.48, 67.48, 67.48
+
+2022-11-05 21:22:04,734   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_68/val
+2022-11-05 21:22:04,734   INFO  ****************Evaluation done.*****************
+2022-11-05 21:22:04,746   INFO  Epoch 68 has been evaluated
+2022-11-05 21:22:04,748   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_69.pth to GPU
+2022-11-05 21:22:04,911   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:22:04,935   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:22:04,941   INFO  *************** EPOCH 69 EVALUATION *****************
+2022-11-05 21:25:15,884   INFO  *************** Performance of EPOCH 69 *****************
+2022-11-05 21:25:15,884   INFO  Generate label finished(sec_per_example: 0.0575 second).
+2022-11-05 21:25:15,884   INFO  recall_roi_0.3: 0.923715
+2022-11-05 21:25:15,884   INFO  recall_rcnn_0.3: 0.923715
+2022-11-05 21:25:15,884   INFO  recall_roi_0.5: 0.810941
+2022-11-05 21:25:15,884   INFO  recall_rcnn_0.5: 0.810941
+2022-11-05 21:25:15,884   INFO  recall_roi_0.7: 0.515715
+2022-11-05 21:25:15,884   INFO  recall_rcnn_0.7: 0.515715
+2022-11-05 21:25:15,886   INFO  Average predicted number of objects(3321 samples): 65.175
+2022-11-05 21:25:16,436   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:25:49,688   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.0319, 97.0319, 97.0319
+bev  AP:84.8544, 84.8544, 84.8544
+3d   AP:65.9939, 65.9939, 65.9939
+aos  AP:66.11, 66.11, 66.11
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.9203, 98.9203, 98.9203
+bev  AP:86.3239, 86.3239, 86.3239
+3d   AP:66.2789, 66.2789, 66.2789
+aos  AP:66.77, 66.77, 66.77
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.0319, 97.0319, 97.0319
+bev  AP:89.9511, 89.9511, 89.9511
+3d   AP:89.1801, 89.1801, 89.1801
+aos  AP:66.11, 66.11, 66.11
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.9203, 98.9203, 98.9203
+bev  AP:94.4880, 94.4880, 94.4880
+3d   AP:91.7786, 91.7786, 91.7786
+aos  AP:66.77, 66.77, 66.77
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.1312, 89.1312, 89.1312
+bev  AP:48.4001, 48.4001, 48.4001
+3d   AP:35.6709, 35.6709, 35.6709
+aos  AP:56.15, 56.15, 56.15
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.6886, 91.6886, 91.6886
+bev  AP:45.6891, 45.6891, 45.6891
+3d   AP:31.8224, 31.8224, 31.8224
+aos  AP:57.23, 57.23, 57.23
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.1312, 89.1312, 89.1312
+bev  AP:67.0690, 67.0690, 67.0690
+3d   AP:65.5613, 65.5613, 65.5613
+aos  AP:56.15, 56.15, 56.15
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.6886, 91.6886, 91.6886
+bev  AP:67.5174, 67.5174, 67.5174
+3d   AP:65.3597, 65.3597, 65.3597
+aos  AP:57.23, 57.23, 57.23
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:92.1909, 92.1909, 92.1909
+bev  AP:75.5506, 75.5506, 75.5506
+3d   AP:69.2063, 69.2063, 69.2063
+aos  AP:69.35, 69.35, 69.35
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:95.0948, 95.0948, 95.0948
+bev  AP:77.8760, 77.8760, 77.8760
+3d   AP:69.3440, 69.3440, 69.3440
+aos  AP:69.34, 69.34, 69.34
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:92.1909, 92.1909, 92.1909
+bev  AP:84.7839, 84.7839, 84.7839
+3d   AP:84.2499, 84.2499, 84.2499
+aos  AP:69.35, 69.35, 69.35
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:95.0948, 95.0948, 95.0948
+bev  AP:87.0646, 87.0646, 87.0646
+3d   AP:86.5099, 86.5099, 86.5099
+aos  AP:69.34, 69.34, 69.34
+
+2022-11-05 21:25:49,689   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_69/val
+2022-11-05 21:25:49,689   INFO  ****************Evaluation done.*****************
+2022-11-05 21:25:49,709   INFO  Epoch 69 has been evaluated
+2022-11-05 21:25:49,711   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_70.pth to GPU
+2022-11-05 21:25:49,888   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:25:49,911   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:25:49,915   INFO  *************** EPOCH 70 EVALUATION *****************
+2022-11-05 21:29:02,068   INFO  *************** Performance of EPOCH 70 *****************
+2022-11-05 21:29:02,069   INFO  Generate label finished(sec_per_example: 0.0579 second).
+2022-11-05 21:29:02,069   INFO  recall_roi_0.3: 0.923449
+2022-11-05 21:29:02,069   INFO  recall_rcnn_0.3: 0.923449
+2022-11-05 21:29:02,069   INFO  recall_roi_0.5: 0.811029
+2022-11-05 21:29:02,069   INFO  recall_rcnn_0.5: 0.811029
+2022-11-05 21:29:02,069   INFO  recall_roi_0.7: 0.523252
+2022-11-05 21:29:02,069   INFO  recall_rcnn_0.7: 0.523252
+2022-11-05 21:29:02,070   INFO  Average predicted number of objects(3321 samples): 65.177
+2022-11-05 21:29:02,613   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:29:35,901   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.7690, 96.7690, 96.7690
+bev  AP:84.5057, 84.5057, 84.5057
+3d   AP:66.2957, 66.2957, 66.2957
+aos  AP:67.46, 67.46, 67.46
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8458, 98.8458, 98.8458
+bev  AP:86.3008, 86.3008, 86.3008
+3d   AP:67.9144, 67.9144, 67.9144
+aos  AP:66.55, 66.55, 66.55
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.7690, 96.7690, 96.7690
+bev  AP:89.9249, 89.9249, 89.9249
+3d   AP:89.3068, 89.3068, 89.3068
+aos  AP:67.46, 67.46, 67.46
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8458, 98.8458, 98.8458
+bev  AP:94.3785, 94.3785, 94.3785
+3d   AP:91.9264, 91.9264, 91.9264
+aos  AP:66.55, 66.55, 66.55
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.0174, 89.0174, 89.0174
+bev  AP:49.6999, 49.6999, 49.6999
+3d   AP:35.8853, 35.8853, 35.8853
+aos  AP:55.65, 55.65, 55.65
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.3984, 91.3984, 91.3984
+bev  AP:47.0690, 47.0690, 47.0690
+3d   AP:32.3995, 32.3995, 32.3995
+aos  AP:56.73, 56.73, 56.73
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.0174, 89.0174, 89.0174
+bev  AP:67.1981, 67.1981, 67.1981
+3d   AP:65.6971, 65.6971, 65.6971
+aos  AP:55.65, 55.65, 55.65
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.3984, 91.3984, 91.3984
+bev  AP:67.7994, 67.7994, 67.7994
+3d   AP:65.6394, 65.6394, 65.6394
+aos  AP:56.73, 56.73, 56.73
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.7989, 91.7989, 91.7989
+bev  AP:75.8645, 75.8645, 75.8645
+3d   AP:68.7960, 68.7960, 68.7960
+aos  AP:67.68, 67.68, 67.68
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.9760, 94.9760, 94.9760
+bev  AP:78.2101, 78.2101, 78.2101
+3d   AP:69.3162, 69.3162, 69.3162
+aos  AP:67.63, 67.63, 67.63
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.7989, 91.7989, 91.7989
+bev  AP:84.7623, 84.7623, 84.7623
+3d   AP:84.2946, 84.2946, 84.2946
+aos  AP:67.68, 67.68, 67.68
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.9760, 94.9760, 94.9760
+bev  AP:87.8441, 87.8441, 87.8441
+3d   AP:86.5103, 86.5103, 86.5103
+aos  AP:67.63, 67.63, 67.63
+
+2022-11-05 21:29:35,902   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_70/val
+2022-11-05 21:29:35,902   INFO  ****************Evaluation done.*****************
+2022-11-05 21:29:35,927   INFO  Epoch 70 has been evaluated
+2022-11-05 21:29:35,928   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_71.pth to GPU
+2022-11-05 21:29:36,100   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:29:36,124   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:29:36,128   INFO  *************** EPOCH 71 EVALUATION *****************
+2022-11-05 21:32:46,119   INFO  *************** Performance of EPOCH 71 *****************
+2022-11-05 21:32:46,120   INFO  Generate label finished(sec_per_example: 0.0572 second).
+2022-11-05 21:32:46,120   INFO  recall_roi_0.3: 0.928009
+2022-11-05 21:32:46,120   INFO  recall_rcnn_0.3: 0.928009
+2022-11-05 21:32:46,120   INFO  recall_roi_0.5: 0.812966
+2022-11-05 21:32:46,120   INFO  recall_rcnn_0.5: 0.812966
+2022-11-05 21:32:46,120   INFO  recall_roi_0.7: 0.516202
+2022-11-05 21:32:46,120   INFO  recall_rcnn_0.7: 0.516202
+2022-11-05 21:32:46,122   INFO  Average predicted number of objects(3321 samples): 77.428
+2022-11-05 21:32:46,716   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:33:24,250   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.9831, 96.9831, 96.9831
+bev  AP:83.9442, 83.9442, 83.9442
+3d   AP:65.9151, 65.9151, 65.9151
+aos  AP:68.00, 68.00, 68.00
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.9134, 98.9134, 98.9134
+bev  AP:85.9864, 85.9864, 85.9864
+3d   AP:66.0114, 66.0114, 66.0114
+aos  AP:66.96, 66.96, 66.96
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.9831, 96.9831, 96.9831
+bev  AP:89.9711, 89.9711, 89.9711
+3d   AP:89.3249, 89.3249, 89.3249
+aos  AP:68.00, 68.00, 68.00
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.9134, 98.9134, 98.9134
+bev  AP:94.3183, 94.3183, 94.3183
+3d   AP:91.7679, 91.7679, 91.7679
+aos  AP:66.96, 66.96, 66.96
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:88.9392, 88.9392, 88.9392
+bev  AP:48.8998, 48.8998, 48.8998
+3d   AP:36.1343, 36.1343, 36.1343
+aos  AP:55.66, 55.66, 55.66
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.4417, 91.4417, 91.4417
+bev  AP:46.0557, 46.0557, 46.0557
+3d   AP:32.4223, 32.4223, 32.4223
+aos  AP:56.76, 56.76, 56.76
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:88.9392, 88.9392, 88.9392
+bev  AP:67.2530, 67.2530, 67.2530
+3d   AP:65.8713, 65.8713, 65.8713
+aos  AP:55.66, 55.66, 55.66
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.4417, 91.4417, 91.4417
+bev  AP:67.8974, 67.8974, 67.8974
+3d   AP:65.8184, 65.8184, 65.8184
+aos  AP:56.76, 56.76, 56.76
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.5415, 91.5415, 91.5415
+bev  AP:77.5038, 77.5038, 77.5038
+3d   AP:68.0691, 68.0691, 68.0691
+aos  AP:68.10, 68.10, 68.10
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.9214, 94.9214, 94.9214
+bev  AP:78.5106, 78.5106, 78.5106
+3d   AP:69.0038, 69.0038, 69.0038
+aos  AP:68.21, 68.21, 68.21
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.5415, 91.5415, 91.5415
+bev  AP:84.6118, 84.6118, 84.6118
+3d   AP:84.2084, 84.2084, 84.2084
+aos  AP:68.10, 68.10, 68.10
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.9214, 94.9214, 94.9214
+bev  AP:87.5140, 87.5140, 87.5140
+3d   AP:86.9013, 86.9013, 86.9013
+aos  AP:68.21, 68.21, 68.21
+
+2022-11-05 21:33:24,251   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_71/val
+2022-11-05 21:33:24,251   INFO  ****************Evaluation done.*****************
+2022-11-05 21:33:24,272   INFO  Epoch 71 has been evaluated
+2022-11-05 21:33:24,274   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_72.pth to GPU
+2022-11-05 21:33:24,444   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:33:24,472   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:33:24,477   INFO  *************** EPOCH 72 EVALUATION *****************
+2022-11-05 21:36:33,062   INFO  *************** Performance of EPOCH 72 *****************
+2022-11-05 21:36:33,063   INFO  Generate label finished(sec_per_example: 0.0568 second).
+2022-11-05 21:36:33,063   INFO  recall_roi_0.3: 0.921424
+2022-11-05 21:36:33,063   INFO  recall_rcnn_0.3: 0.921424
+2022-11-05 21:36:33,063   INFO  recall_roi_0.5: 0.810410
+2022-11-05 21:36:33,063   INFO  recall_rcnn_0.5: 0.810410
+2022-11-05 21:36:33,063   INFO  recall_roi_0.7: 0.518371
+2022-11-05 21:36:33,063   INFO  recall_rcnn_0.7: 0.518371
+2022-11-05 21:36:33,064   INFO  Average predicted number of objects(3321 samples): 64.068
+2022-11-05 21:36:33,615   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:37:06,586   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.4622, 96.4622, 96.4622
+bev  AP:84.8133, 84.8133, 84.8133
+3d   AP:66.1240, 66.1240, 66.1240
+aos  AP:67.66, 67.66, 67.66
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7884, 98.7884, 98.7884
+bev  AP:86.3127, 86.3127, 86.3127
+3d   AP:66.4517, 66.4517, 66.4517
+aos  AP:66.85, 66.85, 66.85
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.4622, 96.4622, 96.4622
+bev  AP:90.0207, 90.0207, 90.0207
+3d   AP:89.4141, 89.4141, 89.4141
+aos  AP:67.66, 67.66, 67.66
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7884, 98.7884, 98.7884
+bev  AP:94.5790, 94.5790, 94.5790
+3d   AP:92.1117, 92.1117, 92.1117
+aos  AP:66.85, 66.85, 66.85
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.2240, 89.2240, 89.2240
+bev  AP:44.3965, 44.3965, 44.3965
+3d   AP:32.9185, 32.9185, 32.9185
+aos  AP:55.39, 55.39, 55.39
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.3011, 91.3011, 91.3011
+bev  AP:44.8151, 44.8151, 44.8151
+3d   AP:31.6856, 31.6856, 31.6856
+aos  AP:56.21, 56.21, 56.21
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.2240, 89.2240, 89.2240
+bev  AP:66.3054, 66.3054, 66.3054
+3d   AP:64.8889, 64.8889, 64.8889
+aos  AP:55.39, 55.39, 55.39
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.3011, 91.3011, 91.3011
+bev  AP:66.2392, 66.2392, 66.2392
+3d   AP:64.8735, 64.8735, 64.8735
+aos  AP:56.21, 56.21, 56.21
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.5735, 91.5735, 91.5735
+bev  AP:75.5460, 75.5460, 75.5460
+3d   AP:68.2522, 68.2522, 68.2522
+aos  AP:68.26, 68.26, 68.26
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.8143, 94.8143, 94.8143
+bev  AP:77.6899, 77.6899, 77.6899
+3d   AP:68.7649, 68.7649, 68.7649
+aos  AP:68.32, 68.32, 68.32
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.5735, 91.5735, 91.5735
+bev  AP:84.4663, 84.4663, 84.4663
+3d   AP:84.0791, 84.0791, 84.0791
+aos  AP:68.26, 68.26, 68.26
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.8143, 94.8143, 94.8143
+bev  AP:87.3788, 87.3788, 87.3788
+3d   AP:86.0996, 86.0996, 86.0996
+aos  AP:68.32, 68.32, 68.32
+
+2022-11-05 21:37:06,587   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_72/val
+2022-11-05 21:37:06,587   INFO  ****************Evaluation done.*****************
+2022-11-05 21:37:06,610   INFO  Epoch 72 has been evaluated
+2022-11-05 21:37:06,612   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_73.pth to GPU
+2022-11-05 21:37:06,782   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:37:06,806   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:37:06,811   INFO  *************** EPOCH 73 EVALUATION *****************
+2022-11-05 21:40:16,446   INFO  *************** Performance of EPOCH 73 *****************
+2022-11-05 21:40:16,447   INFO  Generate label finished(sec_per_example: 0.0571 second).
+2022-11-05 21:40:16,447   INFO  recall_roi_0.3: 0.925153
+2022-11-05 21:40:16,447   INFO  recall_rcnn_0.3: 0.925153
+2022-11-05 21:40:16,448   INFO  recall_roi_0.5: 0.815888
+2022-11-05 21:40:16,448   INFO  recall_rcnn_0.5: 0.815888
+2022-11-05 21:40:16,448   INFO  recall_roi_0.7: 0.523031
+2022-11-05 21:40:16,448   INFO  recall_rcnn_0.7: 0.523031
+2022-11-05 21:40:16,450   INFO  Average predicted number of objects(3321 samples): 68.292
+2022-11-05 21:40:16,997   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:40:50,911   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.9988, 96.9988, 96.9988
+bev  AP:84.5270, 84.5270, 84.5270
+3d   AP:66.0278, 66.0278, 66.0278
+aos  AP:67.65, 67.65, 67.65
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.9250, 98.9250, 98.9250
+bev  AP:86.3861, 86.3861, 86.3861
+3d   AP:66.2389, 66.2389, 66.2389
+aos  AP:66.55, 66.55, 66.55
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.9988, 96.9988, 96.9988
+bev  AP:90.0494, 90.0494, 90.0494
+3d   AP:89.4874, 89.4874, 89.4874
+aos  AP:67.65, 67.65, 67.65
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.9250, 98.9250, 98.9250
+bev  AP:94.6146, 94.6146, 94.6146
+3d   AP:92.1014, 92.1014, 92.1014
+aos  AP:66.55, 66.55, 66.55
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.9086, 89.9086, 89.9086
+bev  AP:47.8859, 47.8859, 47.8859
+3d   AP:33.5747, 33.5747, 33.5747
+aos  AP:55.97, 55.97, 55.97
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.9701, 91.9701, 91.9701
+bev  AP:46.8569, 46.8569, 46.8569
+3d   AP:32.6274, 32.6274, 32.6274
+aos  AP:56.84, 56.84, 56.84
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.9086, 89.9086, 89.9086
+bev  AP:67.7163, 67.7163, 67.7163
+3d   AP:65.8499, 65.8499, 65.8499
+aos  AP:55.97, 55.97, 55.97
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.9701, 91.9701, 91.9701
+bev  AP:67.7418, 67.7418, 67.7418
+3d   AP:66.3814, 66.3814, 66.3814
+aos  AP:56.84, 56.84, 56.84
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.4690, 91.4690, 91.4690
+bev  AP:77.5838, 77.5838, 77.5838
+3d   AP:68.1766, 68.1766, 68.1766
+aos  AP:68.18, 68.18, 68.18
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.8425, 94.8425, 94.8425
+bev  AP:78.6390, 78.6390, 78.6390
+3d   AP:69.1522, 69.1522, 69.1522
+aos  AP:68.33, 68.33, 68.33
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.4690, 91.4690, 91.4690
+bev  AP:84.7059, 84.7059, 84.7059
+3d   AP:84.3549, 84.3549, 84.3549
+aos  AP:68.18, 68.18, 68.18
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.8425, 94.8425, 94.8425
+bev  AP:87.5969, 87.5969, 87.5969
+3d   AP:87.0495, 87.0495, 87.0495
+aos  AP:68.33, 68.33, 68.33
+
+2022-11-05 21:40:50,912   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_73/val
+2022-11-05 21:40:50,912   INFO  ****************Evaluation done.*****************
+2022-11-05 21:40:50,932   INFO  Epoch 73 has been evaluated
+2022-11-05 21:40:50,934   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_74.pth to GPU
+2022-11-05 21:40:51,101   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:40:51,125   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:40:51,129   INFO  *************** EPOCH 74 EVALUATION *****************
+2022-11-05 21:43:59,872   INFO  *************** Performance of EPOCH 74 *****************
+2022-11-05 21:43:59,874   INFO  Generate label finished(sec_per_example: 0.0568 second).
+2022-11-05 21:43:59,875   INFO  recall_roi_0.3: 0.925496
+2022-11-05 21:43:59,875   INFO  recall_rcnn_0.3: 0.925496
+2022-11-05 21:43:59,875   INFO  recall_roi_0.5: 0.813597
+2022-11-05 21:43:59,875   INFO  recall_rcnn_0.5: 0.813597
+2022-11-05 21:43:59,875   INFO  recall_roi_0.7: 0.528785
+2022-11-05 21:43:59,875   INFO  recall_rcnn_0.7: 0.528785
+2022-11-05 21:43:59,876   INFO  Average predicted number of objects(3321 samples): 68.053
+2022-11-05 21:44:00,426   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:44:34,337   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.8322, 96.8322, 96.8322
+bev  AP:84.7548, 84.7548, 84.7548
+3d   AP:66.8961, 66.8961, 66.8961
+aos  AP:68.06, 68.06, 68.06
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8849, 98.8849, 98.8849
+bev  AP:86.5785, 86.5785, 86.5785
+3d   AP:68.7924, 68.7924, 68.7924
+aos  AP:67.11, 67.11, 67.11
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.8322, 96.8322, 96.8322
+bev  AP:90.0751, 90.0751, 90.0751
+3d   AP:89.5499, 89.5499, 89.5499
+aos  AP:68.06, 68.06, 68.06
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8849, 98.8849, 98.8849
+bev  AP:94.6292, 94.6292, 94.6292
+3d   AP:92.1834, 92.1834, 92.1834
+aos  AP:67.11, 67.11, 67.11
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.8706, 89.8706, 89.8706
+bev  AP:50.2094, 50.2094, 50.2094
+3d   AP:36.0495, 36.0495, 36.0495
+aos  AP:56.74, 56.74, 56.74
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:92.0198, 92.0198, 92.0198
+bev  AP:47.4018, 47.4018, 47.4018
+3d   AP:32.4029, 32.4029, 32.4029
+aos  AP:57.62, 57.62, 57.62
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.8706, 89.8706, 89.8706
+bev  AP:67.8864, 67.8864, 67.8864
+3d   AP:66.5692, 66.5692, 66.5692
+aos  AP:56.74, 56.74, 56.74
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:92.0198, 92.0198, 92.0198
+bev  AP:67.9093, 67.9093, 67.9093
+3d   AP:66.6062, 66.6062, 66.6062
+aos  AP:57.62, 57.62, 57.62
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.5398, 91.5398, 91.5398
+bev  AP:77.8928, 77.8928, 77.8928
+3d   AP:69.1741, 69.1741, 69.1741
+aos  AP:68.21, 68.21, 68.21
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.8825, 94.8825, 94.8825
+bev  AP:78.9465, 78.9465, 78.9465
+3d   AP:70.2135, 70.2135, 70.2135
+aos  AP:68.25, 68.25, 68.25
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.5398, 91.5398, 91.5398
+bev  AP:84.7973, 84.7973, 84.7973
+3d   AP:84.4680, 84.4680, 84.4680
+aos  AP:68.21, 68.21, 68.21
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.8825, 94.8825, 94.8825
+bev  AP:87.7237, 87.7237, 87.7237
+3d   AP:87.1425, 87.1425, 87.1425
+aos  AP:68.25, 68.25, 68.25
+
+2022-11-05 21:44:34,339   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_74/val
+2022-11-05 21:44:34,339   INFO  ****************Evaluation done.*****************
+2022-11-05 21:44:34,362   INFO  Epoch 74 has been evaluated
+2022-11-05 21:44:34,364   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_75.pth to GPU
+2022-11-05 21:44:34,532   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:44:34,555   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:44:34,560   INFO  *************** EPOCH 75 EVALUATION *****************
+2022-11-05 21:47:41,277   INFO  *************** Performance of EPOCH 75 *****************
+2022-11-05 21:47:41,279   INFO  Generate label finished(sec_per_example: 0.0562 second).
+2022-11-05 21:47:41,279   INFO  recall_roi_0.3: 0.927422
+2022-11-05 21:47:41,279   INFO  recall_rcnn_0.3: 0.927422
+2022-11-05 21:47:41,279   INFO  recall_roi_0.5: 0.815788
+2022-11-05 21:47:41,279   INFO  recall_rcnn_0.5: 0.815788
+2022-11-05 21:47:41,279   INFO  recall_roi_0.7: 0.523839
+2022-11-05 21:47:41,279   INFO  recall_rcnn_0.7: 0.523839
+2022-11-05 21:47:41,281   INFO  Average predicted number of objects(3321 samples): 69.567
+2022-11-05 21:47:41,852   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:48:16,172   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.4433, 96.4433, 96.4433
+bev  AP:84.8393, 84.8393, 84.8393
+3d   AP:66.4768, 66.4768, 66.4768
+aos  AP:67.94, 67.94, 67.94
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7734, 98.7734, 98.7734
+bev  AP:86.6020, 86.6020, 86.6020
+3d   AP:67.9833, 67.9833, 67.9833
+aos  AP:67.17, 67.17, 67.17
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.4433, 96.4433, 96.4433
+bev  AP:90.0599, 90.0599, 90.0599
+3d   AP:89.4810, 89.4810, 89.4810
+aos  AP:67.94, 67.94, 67.94
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7734, 98.7734, 98.7734
+bev  AP:94.6719, 94.6719, 94.6719
+3d   AP:92.1475, 92.1475, 92.1475
+aos  AP:67.17, 67.17, 67.17
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.1644, 89.1644, 89.1644
+bev  AP:49.4821, 49.4821, 49.4821
+3d   AP:36.1796, 36.1796, 36.1796
+aos  AP:55.84, 55.84, 55.84
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.6067, 91.6067, 91.6067
+bev  AP:46.7781, 46.7781, 46.7781
+3d   AP:32.5249, 32.5249, 32.5249
+aos  AP:56.84, 56.84, 56.84
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.1644, 89.1644, 89.1644
+bev  AP:67.5065, 67.5065, 67.5065
+3d   AP:66.0923, 66.0923, 66.0923
+aos  AP:55.84, 55.84, 55.84
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.6067, 91.6067, 91.6067
+bev  AP:68.1663, 68.1663, 68.1663
+3d   AP:66.0507, 66.0507, 66.0507
+aos  AP:56.84, 56.84, 56.84
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.5173, 91.5173, 91.5173
+bev  AP:77.7745, 77.7745, 77.7745
+3d   AP:68.4204, 68.4204, 68.4204
+aos  AP:68.51, 68.51, 68.51
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.9018, 94.9018, 94.9018
+bev  AP:78.7614, 78.7614, 78.7614
+3d   AP:69.3724, 69.3724, 69.3724
+aos  AP:68.71, 68.71, 68.71
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.5173, 91.5173, 91.5173
+bev  AP:84.7308, 84.7308, 84.7308
+3d   AP:84.3826, 84.3826, 84.3826
+aos  AP:68.51, 68.51, 68.51
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.9018, 94.9018, 94.9018
+bev  AP:87.7318, 87.7318, 87.7318
+3d   AP:87.0737, 87.0737, 87.0737
+aos  AP:68.71, 68.71, 68.71
+
+2022-11-05 21:48:16,173   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_75/val
+2022-11-05 21:48:16,173   INFO  ****************Evaluation done.*****************
+2022-11-05 21:48:16,196   INFO  Epoch 75 has been evaluated
+2022-11-05 21:48:16,198   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_76.pth to GPU
+2022-11-05 21:48:16,374   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:48:16,398   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:48:16,403   INFO  *************** EPOCH 76 EVALUATION *****************
+2022-11-05 21:51:45,765   INFO  *************** Performance of EPOCH 76 *****************
+2022-11-05 21:51:45,768   INFO  Generate label finished(sec_per_example: 0.0630 second).
+2022-11-05 21:51:45,768   INFO  recall_roi_0.3: 0.929160
+2022-11-05 21:51:45,768   INFO  recall_rcnn_0.3: 0.929160
+2022-11-05 21:51:45,768   INFO  recall_roi_0.5: 0.822761
+2022-11-05 21:51:45,768   INFO  recall_rcnn_0.5: 0.822761
+2022-11-05 21:51:45,768   INFO  recall_roi_0.7: 0.533478
+2022-11-05 21:51:45,768   INFO  recall_rcnn_0.7: 0.533478
+2022-11-05 21:51:45,769   INFO  Average predicted number of objects(3321 samples): 68.593
+2022-11-05 21:51:46,338   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:52:21,456   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.0405, 96.0405, 96.0405
+bev  AP:84.9593, 84.9593, 84.9593
+3d   AP:66.8673, 66.8673, 66.8673
+aos  AP:67.56, 67.56, 67.56
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.6714, 98.6714, 98.6714
+bev  AP:86.6967, 86.6967, 86.6967
+3d   AP:68.8930, 68.8930, 68.8930
+aos  AP:66.96, 66.96, 66.96
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.0405, 96.0405, 96.0405
+bev  AP:90.1173, 90.1173, 90.1173
+3d   AP:89.5933, 89.5933, 89.5933
+aos  AP:67.56, 67.56, 67.56
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.6714, 98.6714, 98.6714
+bev  AP:94.7989, 94.7989, 94.7989
+3d   AP:92.3152, 92.3152, 92.3152
+aos  AP:66.96, 66.96, 66.96
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.1208, 89.1208, 89.1208
+bev  AP:49.5865, 49.5865, 49.5865
+3d   AP:37.2340, 37.2340, 37.2340
+aos  AP:57.97, 57.97, 57.97
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.6732, 91.6732, 91.6732
+bev  AP:46.9361, 46.9361, 46.9361
+3d   AP:34.2639, 34.2639, 34.2639
+aos  AP:56.85, 56.85, 56.85
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.1208, 89.1208, 89.1208
+bev  AP:67.6276, 67.6276, 67.6276
+3d   AP:66.4856, 66.4856, 66.4856
+aos  AP:57.97, 57.97, 57.97
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.6732, 91.6732, 91.6732
+bev  AP:68.2161, 68.2161, 68.2161
+3d   AP:66.4094, 66.4094, 66.4094
+aos  AP:56.85, 56.85, 56.85
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.4099, 91.4099, 91.4099
+bev  AP:78.0862, 78.0862, 78.0862
+3d   AP:69.8899, 69.8899, 69.8899
+aos  AP:69.05, 69.05, 69.05
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.9042, 94.9042, 94.9042
+bev  AP:79.1477, 79.1477, 79.1477
+3d   AP:70.7585, 70.7585, 70.7585
+aos  AP:69.48, 69.48, 69.48
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.4099, 91.4099, 91.4099
+bev  AP:84.9371, 84.9371, 84.9371
+3d   AP:84.6001, 84.6001, 84.6001
+aos  AP:69.05, 69.05, 69.05
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.9042, 94.9042, 94.9042
+bev  AP:87.9716, 87.9716, 87.9716
+3d   AP:87.4133, 87.4133, 87.4133
+aos  AP:69.48, 69.48, 69.48
+
+2022-11-05 21:52:21,457   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_76/val
+2022-11-05 21:52:21,457   INFO  ****************Evaluation done.*****************
+2022-11-05 21:52:21,481   INFO  Epoch 76 has been evaluated
+2022-11-05 21:52:21,483   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_77.pth to GPU
+2022-11-05 21:52:21,806   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:52:21,833   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:52:21,838   INFO  *************** EPOCH 77 EVALUATION *****************
+2022-11-05 21:55:54,412   INFO  *************** Performance of EPOCH 77 *****************
+2022-11-05 21:55:54,414   INFO  Generate label finished(sec_per_example: 0.0640 second).
+2022-11-05 21:55:54,414   INFO  recall_roi_0.3: 0.925563
+2022-11-05 21:55:54,414   INFO  recall_rcnn_0.3: 0.925563
+2022-11-05 21:55:54,414   INFO  recall_roi_0.5: 0.817703
+2022-11-05 21:55:54,414   INFO  recall_rcnn_0.5: 0.817703
+2022-11-05 21:55:54,415   INFO  recall_roi_0.7: 0.535581
+2022-11-05 21:55:54,415   INFO  recall_rcnn_0.7: 0.535581
+2022-11-05 21:55:54,416   INFO  Average predicted number of objects(3321 samples): 64.785
+2022-11-05 21:55:55,002   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 21:56:29,411   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.4600, 96.4600, 96.4600
+bev  AP:85.1146, 85.1146, 85.1146
+3d   AP:67.1170, 67.1170, 67.1170
+aos  AP:67.75, 67.75, 67.75
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7766, 98.7766, 98.7766
+bev  AP:86.7682, 86.7682, 86.7682
+3d   AP:69.3247, 69.3247, 69.3247
+aos  AP:66.94, 66.94, 66.94
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.4600, 96.4600, 96.4600
+bev  AP:90.0788, 90.0788, 90.0788
+3d   AP:89.5906, 89.5906, 89.5906
+aos  AP:67.75, 67.75, 67.75
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7766, 98.7766, 98.7766
+bev  AP:94.7474, 94.7474, 94.7474
+3d   AP:92.3342, 92.3342, 92.3342
+aos  AP:66.94, 66.94, 66.94
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.6400, 89.6400, 89.6400
+bev  AP:50.0417, 50.0417, 50.0417
+3d   AP:36.3862, 36.3862, 36.3862
+aos  AP:56.37, 56.37, 56.37
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.8091, 91.8091, 91.8091
+bev  AP:47.2013, 47.2013, 47.2013
+3d   AP:32.8175, 32.8175, 32.8175
+aos  AP:57.07, 57.07, 57.07
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.6400, 89.6400, 89.6400
+bev  AP:67.7292, 67.7292, 67.7292
+3d   AP:66.3825, 66.3825, 66.3825
+aos  AP:56.37, 56.37, 56.37
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.8091, 91.8091, 91.8091
+bev  AP:67.7241, 67.7241, 67.7241
+3d   AP:66.3947, 66.3947, 66.3947
+aos  AP:57.07, 57.07, 57.07
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:92.0877, 92.0877, 92.0877
+bev  AP:78.2831, 78.2831, 78.2831
+3d   AP:70.2898, 70.2898, 70.2898
+aos  AP:69.57, 69.57, 69.57
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:95.1473, 95.1473, 95.1473
+bev  AP:79.4572, 79.4572, 79.4572
+3d   AP:70.9852, 70.9852, 70.9852
+aos  AP:69.58, 69.58, 69.58
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:92.0877, 92.0877, 92.0877
+bev  AP:85.0842, 85.0842, 85.0842
+3d   AP:84.6639, 84.6639, 84.6639
+aos  AP:69.57, 69.57, 69.57
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:95.1473, 95.1473, 95.1473
+bev  AP:88.1422, 88.1422, 88.1422
+3d   AP:87.4304, 87.4304, 87.4304
+aos  AP:69.58, 69.58, 69.58
+
+2022-11-05 21:56:29,412   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_77/val
+2022-11-05 21:56:29,412   INFO  ****************Evaluation done.*****************
+2022-11-05 21:56:29,435   INFO  Epoch 77 has been evaluated
+2022-11-05 21:56:29,437   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_78.pth to GPU
+2022-11-05 21:56:29,618   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 21:56:29,643   INFO  ==> Done (loaded 459/459)
+2022-11-05 21:56:29,648   INFO  *************** EPOCH 78 EVALUATION *****************
+2022-11-05 22:00:00,303   INFO  *************** Performance of EPOCH 78 *****************
+2022-11-05 22:00:00,306   INFO  Generate label finished(sec_per_example: 0.0634 second).
+2022-11-05 22:00:00,306   INFO  recall_roi_0.3: 0.924832
+2022-11-05 22:00:00,306   INFO  recall_rcnn_0.3: 0.924832
+2022-11-05 22:00:00,306   INFO  recall_roi_0.5: 0.815700
+2022-11-05 22:00:00,306   INFO  recall_rcnn_0.5: 0.815700
+2022-11-05 22:00:00,306   INFO  recall_roi_0.7: 0.533555
+2022-11-05 22:00:00,306   INFO  recall_rcnn_0.7: 0.533555
+2022-11-05 22:00:00,307   INFO  Average predicted number of objects(3321 samples): 64.710
+2022-11-05 22:00:00,891   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 22:00:35,695   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.3802, 96.3802, 96.3802
+bev  AP:84.9398, 84.9398, 84.9398
+3d   AP:66.8094, 66.8094, 66.8094
+aos  AP:67.66, 67.66, 67.66
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7619, 98.7619, 98.7619
+bev  AP:86.6979, 86.6979, 86.6979
+3d   AP:68.8402, 68.8402, 68.8402
+aos  AP:66.93, 66.93, 66.93
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.3802, 96.3802, 96.3802
+bev  AP:90.1133, 90.1133, 90.1133
+3d   AP:89.5839, 89.5839, 89.5839
+aos  AP:67.66, 67.66, 67.66
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7619, 98.7619, 98.7619
+bev  AP:94.7941, 94.7941, 94.7941
+3d   AP:92.3059, 92.3059, 92.3059
+aos  AP:66.93, 66.93, 66.93
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.7756, 89.7756, 89.7756
+bev  AP:48.1172, 48.1172, 48.1172
+3d   AP:33.3753, 33.3753, 33.3753
+aos  AP:59.00, 59.00, 59.00
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.8551, 91.8551, 91.8551
+bev  AP:47.1023, 47.1023, 47.1023
+3d   AP:32.3140, 32.3140, 32.3140
+aos  AP:57.37, 57.37, 57.37
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.7756, 89.7756, 89.7756
+bev  AP:67.3915, 67.3915, 67.3915
+3d   AP:65.7737, 65.7737, 65.7737
+aos  AP:59.00, 59.00, 59.00
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.8551, 91.8551, 91.8551
+bev  AP:67.6388, 67.6388, 67.6388
+3d   AP:66.1495, 66.1495, 66.1495
+aos  AP:57.37, 57.37, 57.37
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.4801, 91.4801, 91.4801
+bev  AP:78.1713, 78.1713, 78.1713
+3d   AP:70.3403, 70.3403, 70.3403
+aos  AP:68.92, 68.92, 68.92
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.9442, 94.9442, 94.9442
+bev  AP:79.3410, 79.3410, 79.3410
+3d   AP:71.0429, 71.0429, 71.0429
+aos  AP:69.22, 69.22, 69.22
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.4801, 91.4801, 91.4801
+bev  AP:85.0512, 85.0512, 85.0512
+3d   AP:84.6168, 84.6168, 84.6168
+aos  AP:68.92, 68.92, 68.92
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.9442, 94.9442, 94.9442
+bev  AP:88.0768, 88.0768, 88.0768
+3d   AP:87.3884, 87.3884, 87.3884
+aos  AP:69.22, 69.22, 69.22
+
+2022-11-05 22:00:35,696   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_78/val
+2022-11-05 22:00:35,696   INFO  ****************Evaluation done.*****************
+2022-11-05 22:00:35,711   INFO  Epoch 78 has been evaluated
+2022-11-05 22:00:35,713   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_79.pth to GPU
+2022-11-05 22:00:35,902   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 22:00:35,928   INFO  ==> Done (loaded 459/459)
+2022-11-05 22:00:35,933   INFO  *************** EPOCH 79 EVALUATION *****************
+2022-11-05 22:04:21,171   INFO  *************** Performance of EPOCH 79 *****************
+2022-11-05 22:04:21,173   INFO  Generate label finished(sec_per_example: 0.0678 second).
+2022-11-05 22:04:21,173   INFO  recall_roi_0.3: 0.926282
+2022-11-05 22:04:21,173   INFO  recall_rcnn_0.3: 0.926282
+2022-11-05 22:04:21,173   INFO  recall_roi_0.5: 0.817869
+2022-11-05 22:04:21,173   INFO  recall_rcnn_0.5: 0.817869
+2022-11-05 22:04:21,173   INFO  recall_roi_0.7: 0.535171
+2022-11-05 22:04:21,173   INFO  recall_rcnn_0.7: 0.535171
+2022-11-05 22:04:21,174   INFO  Average predicted number of objects(3321 samples): 66.115
+2022-11-05 22:04:21,805   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 22:04:57,663   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.2365, 96.2365, 96.2365
+bev  AP:84.9433, 84.9433, 84.9433
+3d   AP:66.9900, 66.9900, 66.9900
+aos  AP:67.57, 67.57, 67.57
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7172, 98.7172, 98.7172
+bev  AP:86.7586, 86.7586, 86.7586
+3d   AP:69.1064, 69.1064, 69.1064
+aos  AP:66.89, 66.89, 66.89
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.2365, 96.2365, 96.2365
+bev  AP:90.1113, 90.1113, 90.1113
+3d   AP:89.5859, 89.5859, 89.5859
+aos  AP:67.57, 67.57, 67.57
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7172, 98.7172, 98.7172
+bev  AP:94.7841, 94.7841, 94.7841
+3d   AP:92.3054, 92.3054, 92.3054
+aos  AP:66.89, 66.89, 66.89
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.5399, 89.5399, 89.5399
+bev  AP:50.0132, 50.0132, 50.0132
+3d   AP:36.2845, 36.2845, 36.2845
+aos  AP:56.63, 56.63, 56.63
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.8233, 91.8233, 91.8233
+bev  AP:47.2440, 47.2440, 47.2440
+3d   AP:32.6260, 32.6260, 32.6260
+aos  AP:57.43, 57.43, 57.43
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.5399, 89.5399, 89.5399
+bev  AP:67.7808, 67.7808, 67.7808
+3d   AP:66.3696, 66.3696, 66.3696
+aos  AP:56.63, 56.63, 56.63
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.8233, 91.8233, 91.8233
+bev  AP:68.5265, 68.5265, 68.5265
+3d   AP:66.3710, 66.3710, 66.3710
+aos  AP:57.43, 57.43, 57.43
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.6599, 91.6599, 91.6599
+bev  AP:78.2457, 78.2457, 78.2457
+3d   AP:70.3354, 70.3354, 70.3354
+aos  AP:69.04, 69.04, 69.04
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.9845, 94.9845, 94.9845
+bev  AP:79.3314, 79.3314, 79.3314
+3d   AP:71.0729, 71.0729, 71.0729
+aos  AP:69.22, 69.22, 69.22
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.6599, 91.6599, 91.6599
+bev  AP:84.9617, 84.9617, 84.9617
+3d   AP:84.6017, 84.6017, 84.6017
+aos  AP:69.04, 69.04, 69.04
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.9845, 94.9845, 94.9845
+bev  AP:88.0345, 88.0345, 88.0345
+3d   AP:87.4042, 87.4042, 87.4042
+aos  AP:69.22, 69.22, 69.22
+
+2022-11-05 22:04:57,664   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_79/val
+2022-11-05 22:04:57,664   INFO  ****************Evaluation done.*****************
+2022-11-05 22:04:57,686   INFO  Epoch 79 has been evaluated
+2022-11-05 22:04:57,689   INFO  ==> Loading parameters from checkpoint /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/ckpt/checkpoint_epoch_80.pth to GPU
+2022-11-05 22:04:57,859   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+846cf3e+py4f752d2
+2022-11-05 22:04:57,883   INFO  ==> Done (loaded 459/459)
+2022-11-05 22:04:57,887   INFO  *************** EPOCH 80 EVALUATION *****************
+2022-11-05 22:08:04,216   INFO  *************** Performance of EPOCH 80 *****************
+2022-11-05 22:08:04,217   INFO  Generate label finished(sec_per_example: 0.0561 second).
+2022-11-05 22:08:04,217   INFO  recall_roi_0.3: 0.926349
+2022-11-05 22:08:04,217   INFO  recall_rcnn_0.3: 0.926349
+2022-11-05 22:08:04,217   INFO  recall_roi_0.5: 0.817039
+2022-11-05 22:08:04,217   INFO  recall_rcnn_0.5: 0.817039
+2022-11-05 22:08:04,217   INFO  recall_roi_0.7: 0.533434
+2022-11-05 22:08:04,218   INFO  recall_rcnn_0.7: 0.533434
+2022-11-05 22:08:04,219   INFO  Average predicted number of objects(3321 samples): 66.116
+2022-11-05 22:08:04,777   INFO  Getting KITTI evaluation results for classes ['Car', 'Pedestrian', 'Cyclist']...
+
+2022-11-05 22:08:38,616   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.6103, 96.6103, 96.6103
+bev  AP:85.0102, 85.0102, 85.0102
+3d   AP:66.9190, 66.9190, 66.9190
+aos  AP:67.90, 67.90, 67.90
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8265, 98.8265, 98.8265
+bev  AP:86.7332, 86.7332, 86.7332
+3d   AP:68.9762, 68.9762, 68.9762
+aos  AP:67.05, 67.05, 67.05
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.6103, 96.6103, 96.6103
+bev  AP:90.0953, 90.0953, 90.0953
+3d   AP:89.5889, 89.5889, 89.5889
+aos  AP:67.90, 67.90, 67.90
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8265, 98.8265, 98.8265
+bev  AP:94.7640, 94.7640, 94.7640
+3d   AP:92.3133, 92.3133, 92.3133
+aos  AP:67.05, 67.05, 67.05
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:89.4090, 89.4090, 89.4090
+bev  AP:49.8185, 49.8185, 49.8185
+3d   AP:36.1761, 36.1761, 36.1761
+aos  AP:56.33, 56.33, 56.33
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:91.7402, 91.7402, 91.7402
+bev  AP:47.0726, 47.0726, 47.0726
+3d   AP:32.4881, 32.4881, 32.4881
+aos  AP:57.16, 57.16, 57.16
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:89.4090, 89.4090, 89.4090
+bev  AP:67.6454, 67.6454, 67.6454
+3d   AP:66.2585, 66.2585, 66.2585
+aos  AP:56.33, 56.33, 56.33
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:91.7402, 91.7402, 91.7402
+bev  AP:68.3761, 68.3761, 68.3761
+3d   AP:66.2183, 66.2183, 66.2183
+aos  AP:57.16, 57.16, 57.16
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:91.7005, 91.7005, 91.7005
+bev  AP:78.2303, 78.2303, 78.2303
+3d   AP:70.0981, 70.0981, 70.0981
+aos  AP:69.16, 69.16, 69.16
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.9780, 94.9780, 94.9780
+bev  AP:79.3071, 79.3071, 79.3071
+3d   AP:70.8837, 70.8837, 70.8837
+aos  AP:69.29, 69.29, 69.29
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:91.7005, 91.7005, 91.7005
+bev  AP:84.9422, 84.9422, 84.9422
+3d   AP:84.5429, 84.5429, 84.5429
+aos  AP:69.16, 69.16, 69.16
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.9780, 94.9780, 94.9780
+bev  AP:87.9344, 87.9344, 87.9344
+3d   AP:87.2854, 87.2854, 87.2854
+aos  AP:69.29, 69.29, 69.29
+
+2022-11-05 22:08:38,617   INFO  Result is save to /home/cstaubmann/Documents/TUGraz/Bachelor Thesis/OpenPCDet/output/cfgs/once_models/sup_models/centerpoints/default/eval/eval_all_default/kitti_evaluation/epoch_80/val
+2022-11-05 22:08:38,617   INFO  ****************Evaluation done.*****************
+2022-11-05 22:08:38,628   INFO  Epoch 80 has been evaluated
