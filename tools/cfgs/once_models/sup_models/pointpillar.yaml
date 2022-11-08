@@ -116,7 +116,7 @@ MODEL:
         SCORE_THRESH: 0.1
         OUTPUT_RAW_SCORE: False
 
-        EVAL_METRIC: once
+        EVAL_METRIC: kitti # once
 
         NMS_CONFIG:
             MULTI_CLASSES_NMS: False

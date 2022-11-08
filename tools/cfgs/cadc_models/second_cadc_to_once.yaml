@@ -6,11 +6,17 @@ DATA_CONFIG:
     POINT_CLOUD_RANGE: [-51.2, -51.2, -3, 51.2, 51.2, 3]  # Trained CADC point cloud range
 
     DOMAIN_ADAPTATION:
-        TARGET_CLASS_NAMES: [ 'Car', 'Bus', 'Truck', 'Pedestrian', 'Cyclist' ]  # ONCE classes
-        TARGET_CLASS_MAPPING: {
-          Car: Vehicle,
+        DET_CLASS_MAPPING: {  # Class mapping from CADC dataset for evaluation
+          Car: Car,
           Pedestrian: Pedestrian,
-          Pickup_Truck: Vehicle,
+          Pickup_Truck: Car
+        }
+        GT_CLASS_MAPPING: {   # Class mapping of ONCE gt annotations
+          Car: Car,
+          Bus: Car,
+          Truck: Car,
+          Pedestrian: Pedestrian,
+          Cyclist: DontCare
         }
         SHIFT_COORDINATES: [ 0.0, 0.0, -0.53 ]
 
@@ -119,7 +125,7 @@ MODEL:
         SCORE_THRESH: 0.1
         OUTPUT_RAW_SCORE: False
 
-        EVAL_METRIC: cadc
+        EVAL_METRIC: kitti # once
 
         NMS_CONFIG:
             MULTI_CLASSES_NMS: False

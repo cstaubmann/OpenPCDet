@@ -1,0 +1,48 @@
+ONCE
+Split: train
+	Average data points in gt (per class):
+		Car:	424.15
+		Bus:	1781.93
+		Truck:	1616.08
+		Pedestrian:	50.58
+		Cyclist:	71.97
+Average 3d bounding box sizes (per class) in "lwh" format:
+		Car:	 [4.36, 1.81, 1.56]
+		Bus:	 [11.01, 2.86, 3.22]
+		Truck:	 [7.65, 2.48, 2.68]
+		Pedestrian:	 [0.76, 0.75, 1.68]
+		Cyclist:	 [2.14, 0.79, 1.32]
+Split: val
+	Average data points in gt (per class):
+		Car:	409.53
+		Bus:	1962.01
+		Truck:	941.07
+		Pedestrian:	50.77
+		Cyclist:	99.73
+Average 3d bounding box sizes (per class) in "lwh" format:
+		Car:	 [4.40, 1.84, 1.59]
+		Bus:	 [10.71, 2.90, 3.30]
+		Truck:	 [6.39, 2.36, 2.52]
+		Pedestrian:	 [0.79, 0.79, 1.69]
+		Cyclist:	 [2.20, 0.82, 1.38]
+
+CADC
+Split: train
+	Average data points in gt (per class):
+		Car:	125.70
+		Pickup_Truck:	227.31
+		Pedestrian:	31.69
+Average 3d bounding box sizes (per class) in "lwh" format:
+		Car:	 [4.60, 1.89, 1.69]
+		Pickup_Truck:	 [5.78, 2.10, 2.01]
+		Pedestrian:	 [0.80, 0.75, 1.76]
+Split: val
+	Average data points in gt (per class):
+		Car:	134.17
+		Pickup_Truck:	273.85
+		Pedestrian:	38.04
+Average 3d bounding box sizes (per class) in "lwh" format:
+		Car:	 [4.58, 1.88, 1.68]
+		Pickup_Truck:	 [5.62, 2.12, 1.99]
+		Pedestrian:	 [0.78, 0.75, 1.84]
+

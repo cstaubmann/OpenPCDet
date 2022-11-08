@@ -17,8 +17,8 @@ DATA_CONFIG:
           VOXEL_SIZE: [0.2, 0.2, 6]
           MAX_POINTS_PER_VOXEL: 20
           MAX_NUMBER_OF_VOXELS: {
-            'train': 30000,
-            'test': 30000
+            'train': 60000,
+            'test': 60000
           }
 
 MODEL:
@@ -106,7 +106,7 @@ MODEL:
         SCORE_THRESH: 0.1
         OUTPUT_RAW_SCORE: False
 
-        EVAL_METRIC: cadc
+        EVAL_METRIC: kitti # cadc
 
         NMS_CONFIG:
             MULTI_CLASSES_NMS: False
