@@ -1,0 +1,9 @@
+Split: train
+	Average data points in gt (per class):
+		Car:	125.70
+		Pedestrian:	31.69
+		Pickup_Truck:	227.31
+Average 3d bounding box sizes (per class) in "lwh" format:
+		Car:	 [4.60, 1.89, 1.69]
+		Pedestrian:	 [0.80, 0.75, 1.76]
+		Pickup_Truck:	 [5.78, 2.10, 2.01]

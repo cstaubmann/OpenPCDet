@@ -1,0 +1,13 @@
+Split: val
+	Average data points in gt (per class):
+		Car:	409.53
+		Bus:	1962.01
+		Truck:	941.07
+		Pedestrian:	50.77
+		Cyclist:	99.73
+Average 3d bounding box sizes (per class) in "lwh" format:
+		Car:	 [4.40, 1.84, 1.59]
+		Bus:	 [10.71, 2.90, 3.30]
+		Truck:	 [6.39, 2.36, 2.52]
+		Pedestrian:	 [0.79, 0.79, 1.69]
+		Cyclist:	 [2.20, 0.82, 1.38]
