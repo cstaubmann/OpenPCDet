@@ -470,6 +470,22 @@ class ONCEDataset(DatasetTemplate):
 
         return ap_result_str, ap_dict
 
+
+def extract_split_infos(dataset_cfg, class_names, data_path, save_path):
+    dataset = ONCEDataset(dataset_cfg=dataset_cfg, class_names=class_names, root_path=data_path, training=False)
+    splits = ['train', 'val']
+
+    from tools.extract_split_infos import extract_split_info
+
+    for split in splits:
+        filename = 'once_infos_%s.pkl' % split
+        filename = save_path / Path(filename)
+        dataset.set_split(split)
+        with open(filename, 'rb') as f:
+            once_infos = pickle.load(f)
+        extract_split_info(once_infos, dataset_cfg['DATASET'], class_names, split, save_path)
+
+
 def create_once_infos(dataset_cfg, class_names, data_path, save_path, workers=4):
     dataset = ONCEDataset(dataset_cfg=dataset_cfg, class_names=class_names, root_path=data_path, training=False)
 
@@ -506,17 +522,18 @@ if __name__ == '__main__':
     parser.add_argument('--runs_on', type=str, default='server', help='')
     args = parser.parse_args()
 
+    import yaml
+    from pathlib import Path
+    from easydict import EasyDict
+
+    yaml_config = yaml.safe_load(open(args.cfg_file))
+    dataset_cfg = EasyDict(yaml_config)
+
+    ROOT_DIR = (Path(__file__).resolve().parent / '../../../').resolve()
+    once_data_path = ROOT_DIR / 'data' / 'once'
+    once_save_path = ROOT_DIR / 'data' / 'once'
+
     if args.func == 'create_once_infos':
-        import yaml
-        from pathlib import Path
-        from easydict import EasyDict
-        yaml_config = yaml.safe_load(open(args.cfg_file))
-        dataset_cfg = EasyDict(yaml_config)
-
-        ROOT_DIR = (Path(__file__).resolve().parent / '../../../').resolve()
-        once_data_path = ROOT_DIR / 'data' / 'once'
-        once_save_path = ROOT_DIR / 'data' / 'once'
-
         if args.runs_on == 'cloud':
             once_data_path = Path('/cache/once/')
             once_save_path = Path('/cache/once/')
@@ -525,6 +542,14 @@ if __name__ == '__main__':
         create_once_infos(
             dataset_cfg=dataset_cfg,
             class_names=['Car', 'Bus', 'Truck', 'Pedestrian', 'Bicycle'],
+            data_path=once_data_path,
+            save_path=once_save_path
+        )
+
+    if args.func == 'extract_split_infos':
+        extract_split_infos(
+            dataset_cfg=dataset_cfg,
+            class_names=['Car', 'Bus', 'Truck', 'Pedestrian', 'Cyclist'],
             data_path=once_data_path,
             save_path=once_save_path
         )
