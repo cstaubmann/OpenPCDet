@@ -38,7 +38,7 @@ def get_coor_colors(obj_labels):
 
 
 def draw_scenes(points, gt_boxes=None, ref_boxes=None, ref_labels=None, ref_scores=None, pc_plane=None,
-                point_colors=None, draw_origin=True):
+                point_colors=None, point_size=1.0, bg_color=None, draw_origin=True):
     if isinstance(points, torch.Tensor):
         points = points.cpu().numpy()
     if isinstance(gt_boxes, torch.Tensor):
@@ -49,8 +49,11 @@ def draw_scenes(points, gt_boxes=None, ref_boxes=None, ref_labels=None, ref_scor
     vis = open3d.visualization.Visualizer()
     vis.create_window()
 
-    vis.get_render_option().point_size = 1.0
-    vis.get_render_option().background_color = np.zeros(3)
+    vis.get_render_option().point_size = point_size
+    if bg_color is None:
+        vis.get_render_option().background_color = np.zeros(3)
+    else:
+        vis.get_render_option().background_color = bg_color
 
     # draw origin
     if draw_origin:
@@ -64,7 +67,8 @@ def draw_scenes(points, gt_boxes=None, ref_boxes=None, ref_labels=None, ref_scor
     if point_colors is None:
         pts.colors = open3d.utility.Vector3dVector(np.ones((points.shape[0], 3)))
     else:
-        pts.colors = open3d.utility.Vector3dVector(point_colors)
+        p_color = np.tile(point_colors, points.shape[0]).reshape(points.shape[0], 3)
+        pts.colors = open3d.utility.Vector3dVector(p_color)
 
     if gt_boxes is not None:
         vis = draw_box(vis, gt_boxes, (0, 0, 1))
@@ -122,21 +126,21 @@ def draw_box(vis, gt_boxes, color=(0, 1, 0), ref_labels=None, score=None):
     return vis
 
 
-def draw_plane(vis, pc_plane, color=(0.3, 0, 0)):
+def draw_plane(vis, pc_plane, color=(0.5, 0, 0)):
     [pcd, plane_model, inliers] = pc_plane
 
     [a, b, c, d] = plane_model
     inlier_cloud = pcd.select_by_index(inliers)
-    inlier_cloud.paint_uniform_color([1.0, 0, 0])
+    inlier_cloud.paint_uniform_color([0.7, 0, 0])
     outlier_cloud = pcd.select_by_index(inliers, invert=True)
     vis.add_geometry(inlier_cloud)
     # open3d.visualization.draw_geometries([inlier_cloud, outlier_cloud])
 
-    # TODO: draw plane using triangle meshes
+    # draw plane using triangle meshes
     plane_triangle_1 = open3d.geometry.TriangleMesh()
     plane_triangle_2 = open3d.geometry.TriangleMesh()
-    l_min = -20.0
-    l_max = +20.0
+    l_min = -3.0
+    l_max = +3.0
     vertices_1 = np.array([[l_min, l_min, -d],
                            [l_max, l_min, -d],
                            [l_max, l_max, -d]])
