@@ -15,7 +15,6 @@
 
 This file contains a brief overview of the most important commands we used in the bachelor's project 
 **Domain Adaptation for 3D Object Detectors**.
-
 **<span style="color:red">`Please refer to the paper for more information!`</span>**
 
 <br>
@@ -216,13 +215,13 @@ For example, for our few-shot training task **CADC -> ONCE**, we:
 
 After a short training time, we get the saved checkpoints for this model. In our case, the output is saved to **`output/cfgs/cadc_models/centerpoints/ONCE few-shot/`**. Using our DA dataset configuration files, i.e. **`centerpoints_cadc_to_once.yaml`** in this case, we can evaluate the performance of our few-shot trained model on ONCE:
 
-```
-python test.py
-  --cfg_file ./cfgs/cadc_models/centerpoints_cadc_to_once.yaml
-  --ckpt_dir ../output/cfgs/cadc_models/centerpoints/ONCE\ few-shot/100\ frames/ckpt/
-  --extra_tag "ONCE few-shot/100 frames" --eval_tag "eval on ONCE"
-  --eval_all
-```
+  ```
+  python test.py
+    --cfg_file ./cfgs/cadc_models/centerpoints_cadc_to_once.yaml
+    --ckpt_dir ../output/cfgs/cadc_models/centerpoints/ONCE\ few-shot/100\ frames/ckpt/
+    --extra_tag "ONCE few-shot/100 frames" --eval_tag "eval on ONCE"
+    --eval_all
+  ```
 
 
 
