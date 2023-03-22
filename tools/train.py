@@ -45,6 +45,7 @@ def parse_config():
     parser.add_argument('--num_epochs_to_eval', type=int, default=0, help='number of checkpoints to be evaluated')
     parser.add_argument('--save_to_file', action='store_true', default=False, help='')
     parser.add_argument('--runs_on', type=str, default='server', choices=['server', 'cloud'],help='runs on server or cloud')
+    parser.add_argument('--skip_eval', dest='skip_eval', action='store_true', default=False, help='skip evaluation after training')
 
     args = parser.parse_args()
 
@@ -192,6 +193,9 @@ def main():
 
     logger.info('**********************End training %s/%s(%s)**********************\n\n\n'
                 % (cfg.EXP_GROUP_PATH, cfg.TAG, args.extra_tag))
+
+    if args.skip_eval:
+        return
 
     logger.info('**********************Start evaluation %s/%s(%s)**********************' %
                 (cfg.EXP_GROUP_PATH, cfg.TAG, args.extra_tag))
