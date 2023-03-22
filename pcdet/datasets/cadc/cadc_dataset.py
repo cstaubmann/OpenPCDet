@@ -636,27 +636,36 @@ def create_cadc_infos(dataset_cfg, class_names, data_path, save_path, workers=8)
 
 
 if __name__ == '__main__':
-    import sys
-    if sys.argv.__len__() > 1:
-        import yaml
-        from pathlib import Path
-        from easydict import EasyDict
-        yaml_config = yaml.safe_load(open(sys.argv[2]))
-        dataset_cfg = EasyDict(yaml_config)
-        ROOT_DIR = (Path(__file__).resolve().parent / '../../../').resolve()
+    import argparse
 
-        if sys.argv[1] == 'create_cadc_infos':
-            create_cadc_infos(
-                dataset_cfg=dataset_cfg,
-                class_names=['Car', 'Pedestrian', 'Pickup_Truck'],
-                data_path=ROOT_DIR / 'data' / 'cadc',
-                save_path=Path(dataset_cfg.DATA_PATH)
-            )
+    parser = argparse.ArgumentParser(description='arg parser')
+    parser.add_argument('--cfg_file', type=str, default=None, help='specify the config of dataset')
+    parser.add_argument('--func', type=str, default='create_cadc_infos', help='')
+    args = parser.parse_args()
 
-        if sys.argv[1] == 'extract_split_infos':
-            extract_split_infos(
-                dataset_cfg=dataset_cfg,
-                class_names=['Car', 'Pedestrian', 'Pickup_Truck'],
-                data_path=ROOT_DIR / 'data' / 'cadc',
-                save_path=Path(dataset_cfg.DATA_PATH)
-            )
+    import yaml
+    from pathlib import Path
+    from easydict import EasyDict
+
+    yaml_config = yaml.safe_load(open(args.cfg_file))
+    dataset_cfg = EasyDict(yaml_config)
+
+    ROOT_DIR = (Path(__file__).resolve().parent / '../../../').resolve()
+    cadc_data_path = ROOT_DIR / 'data' / 'cadc'
+    cadc_save_path = Path(dataset_cfg.DATA_PATH)
+
+    if args.func == 'create_cadc_infos':
+        create_cadc_infos(
+            dataset_cfg=dataset_cfg,
+            class_names=['Car', 'Pedestrian', 'Pickup_Truck'],
+            data_path=cadc_data_path,
+            save_path=cadc_save_path
+        )
+
+    if args.func == 'extract_split_infos':
+        extract_split_infos(
+            dataset_cfg=dataset_cfg,
+            class_names=['Car', 'Pedestrian', 'Pickup_Truck'],
+            data_path=cadc_data_path,
+            save_path=cadc_save_path
+        )
