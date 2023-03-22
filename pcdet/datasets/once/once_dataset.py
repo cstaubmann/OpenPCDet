@@ -13,7 +13,7 @@ from ...utils import box_utils
 from .once_toolkits import Octopus
 
 class ONCEDataset(DatasetTemplate):
-    def __init__(self, dataset_cfg, class_names, training=True, root_path=None, logger=None):
+    def __init__(self, dataset_cfg, class_names, training=True, root_path=None, logger=None, few_shot_frames=None):
         """
         Args:
             root_path:
@@ -35,6 +35,7 @@ class ONCEDataset(DatasetTemplate):
         self.toolkits = Octopus(self.root_path)
 
         self.da_parameters = dataset_cfg.get('DOMAIN_ADAPTATION', None)
+        self.few_shot_frames = few_shot_frames
 
         self.once_infos = []
         self.include_once_data(self.split)
@@ -267,6 +268,13 @@ class ONCEDataset(DatasetTemplate):
 
                 if 'annos' in frame:
                     annos = frame['annos']
+                    # few-shot class-mapping: CADC training on ONCE
+                    if self.split == 'train' and self.few_shot_frames is not None:
+                        fewshot_annos = annos['names']
+                        fewshot_annos = list(map(lambda x: x.replace('Bus', 'Car'), fewshot_annos))
+                        fewshot_annos = list(map(lambda x: x.replace('Truck', 'Pickup_Truck'), fewshot_annos))
+                        fewshot_annos = list(map(lambda x: x.replace('Cyclist', 'DontCare'), fewshot_annos))
+                        annos['names'] = fewshot_annos
                     boxes_3d = np.array(annos['boxes_3d'])
                     if boxes_3d.shape[0] == 0:
                         print(frame_id)
@@ -486,8 +494,9 @@ def extract_split_infos(dataset_cfg, class_names, data_path, save_path):
         extract_split_info(once_infos, dataset_cfg['DATASET'], class_names, split, save_path)
 
 
-def create_once_infos(dataset_cfg, class_names, data_path, save_path, workers=4):
-    dataset = ONCEDataset(dataset_cfg=dataset_cfg, class_names=class_names, root_path=data_path, training=False)
+def create_once_infos(dataset_cfg, class_names, data_path, save_path, few_shot_frames, workers=4):
+    dataset = ONCEDataset(dataset_cfg=dataset_cfg, class_names=class_names, root_path=data_path, training=False,
+                          few_shot_frames=few_shot_frames)
 
     # splits = ['train', 'val', 'test', 'raw_small', 'raw_medium', 'raw_large']
     splits = ['train', 'val', 'test']
@@ -502,6 +511,16 @@ def create_once_infos(dataset_cfg, class_names, data_path, save_path, workers=4)
         filename = save_path / Path(filename)
         dataset.set_split(split)
         once_infos = dataset.get_infos(num_workers=workers)
+
+        def check_annos(info):
+            return 'annos' in info
+
+        # Generate small train split for few-shot training on ONCE dataset
+        if split == 'train' and few_shot_frames is not None:
+            once_infos = list(filter(check_annos, once_infos))
+            frame_step = int(len(once_infos) / few_shot_frames)
+            once_infos = once_infos[::frame_step][:few_shot_frames]
+
         with open(filename, 'wb') as f:
             pickle.dump(once_infos, f)
         print('ONCE info %s file is saved to %s' % (split, filename))
@@ -520,6 +539,7 @@ if __name__ == '__main__':
     parser.add_argument('--cfg_file', type=str, default=None, help='specify the config of dataset')
     parser.add_argument('--func', type=str, default='create_waymo_infos', help='')
     parser.add_argument('--runs_on', type=str, default='server', help='')
+    parser.add_argument('--few_shot_frames', help='number of frames to save in info file (few-shot)', type=int, nargs='?')
     args = parser.parse_args()
 
     import yaml
@@ -543,7 +563,8 @@ if __name__ == '__main__':
             dataset_cfg=dataset_cfg,
             class_names=['Car', 'Bus', 'Truck', 'Pedestrian', 'Bicycle'],
             data_path=once_data_path,
-            save_path=once_save_path
+            save_path=once_save_path,
+            few_shot_frames=args.few_shot_frames
         )
 
     if args.func == 'extract_split_infos':
