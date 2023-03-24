@@ -16,7 +16,7 @@
 This file contains a brief overview of the most important commands we used in the bachelor's project 
 **Domain Adaptation for 3D Object Detectors**. A `.pdf` version of this file can be found here: `OpenPCDet/docs/IMPORTANT_COMMANDS.pdf`.
 
-**<span style="color:red">`Please refer to the paper for more information!`</span>**
+**<span style="color:red">Please refer to the paper for more information!</span>** Also checkout out [OpenPCDet](https://github.com/Open-mmlab/OpenPCDet/) for more in-depth information!
 <br>
 
 
